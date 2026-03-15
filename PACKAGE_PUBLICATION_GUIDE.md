@@ -23,10 +23,10 @@ Your Unicorn Vue 3 Component Library is ready to be published! Here's your compl
 ```bash
 cd unicorn-lib
 # Edit these fields in package.json:
-# - name: "@your-org/unicorn"
-# - author: "Your Name <email@example.com>"
-# - repository.url: "https://github.com/your-org/unicorn-lib.git"
-# - homepage: "https://github.com/your-org/unicorn-lib"
+# - name: "@ManusGitchen/m3re-unicorn/unicorn"
+# - author: "M3re"
+# - repository.url: "https://github.com/ManusGitchen/m3re-unicorn/unicorn-lib.git"
+
 # - private: false (CRITICAL!)
 ```
 
@@ -43,7 +43,7 @@ cd unicorn-lib
 git init
 git add .
 git commit -m "Initial: Unicorn Vue 3 library"
-git remote add origin https://github.com/your-org/unicorn-lib.git
+git remote add origin https://github.com/ManusGitchen/m3re-unicorn/unicorn-lib.git
 git branch -M main
 git push -u origin main
 

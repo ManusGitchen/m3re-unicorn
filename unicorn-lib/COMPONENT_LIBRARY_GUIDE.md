@@ -149,10 +149,10 @@ When ready to publish:
 1. **Update metadata** in `package.json`:
    ```json
    {
-     "name": "@your-org/unicorn-lib",
+     "name": "@ManusGitchen/m3re-unicorn/unicorn-lib",
      "description": "Vue 3 component library",
-     "repository": "https://github.com/your-org/unicorn-lib",
-     "homepage": "https://your-org.github.io/unicorn-lib",
+     "repository": "https://github.com/ManusGitchen/m3re-unicorn/unicorn-lib",
+
      "private": false
    }
    ```

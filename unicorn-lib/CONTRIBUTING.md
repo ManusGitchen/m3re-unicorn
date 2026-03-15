@@ -5,7 +5,7 @@ Thank you for your interest in contributing! This document provides guidelines a
 ## Getting Started
 
 ### Prerequisites
-- Node.js 16+ 
+- Node.js 18+ (Node 18 LTS or later recommended)
 - npm, yarn, or pnpm
 - Git
 
@@ -13,7 +13,7 @@ Thank you for your interest in contributing! This document provides guidelines a
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/unicorn-lib.git
+git clone https://github.com/ManusGitchen/m3re-unicorn/unicorn-lib.git
 cd unicorn-lib
 
 # Install dependencies

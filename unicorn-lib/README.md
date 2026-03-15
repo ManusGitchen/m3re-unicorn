@@ -15,17 +15,17 @@ A modern, type-safe Vue 3 component library built with TypeScript and optimized 
 
 Using npm:
 ```bash
-npm install @your-org/unicorn vue@^3.5.30
+npm install @ManusGitchen/m3re-unicorn/unicorn vue@^3.5.30
 ```
 
 Using pnpm:
 ```bash
-pnpm add @your-org/unicorn vue@^3.5.30
+pnpm add @ManusGitchen/m3re-unicorn/unicorn vue@^3.5.30
 ```
 
 Using yarn:
 ```bash
-yarn add @your-org/unicorn vue@^3.5.30
+yarn add @ManusGitchen/m3re-unicorn/unicorn vue@^3.5.30
 ```
 
 ## 🚀 Quick Start
@@ -54,7 +54,7 @@ import { Button, Card } from '@your-org/unicorn'
 ### With TypeScript
 
 ```ts
-import { Button, type ButtonProps } from '@your-org/unicorn'
+import { Button, type ButtonProps } from '@ManusGitchen/m3re-unicorn/unicorn'
 
 const props: ButtonProps = {
   variant: 'primary',
@@ -166,7 +166,7 @@ Make sure your project has Vue 3.5.30+ installed:
 
 ## 🐛 Known Issues
 
-- None currently. Report issues on [GitHub Issues](https://github.com/your-org/unicorn-lib/issues)
+- None currently. Report issues on [GitHub Issues](https://github.com/ManusGitchen/m3re-unicorn/unicorn-lib/issues)
 
 ## 📝 Changelog
 
@@ -182,10 +182,10 @@ MIT License - see [LICENSE](./LICENSE) for details.
 
 ## 🔗 Links
 
-- **GitHub:** https://github.com/your-org/unicorn-lib
-- **npm:** https://www.npmjs.com/package/@your-org/unicorn
-- **Issues:** https://github.com/your-org/unicorn-lib/issues
-- **Discussions:** https://github.com/your-org/unicorn-lib/discussions
+- **GitHub:** https://github.com/ManusGitchen/m3re-unicorn/unicorn-lib
+- **npm:** https://www.npmjs.com/package/ManusGitchen/m3re-unicorn/unicorn
+- **Issues:** https://github.com/ManusGitchen/m3re-unicorn/unicorn-lib/issues
+- **Discussions:** https://github.com/ManusGitchen/m3re-unicorn/unicorn-lib/discussions
 
 ---
 
