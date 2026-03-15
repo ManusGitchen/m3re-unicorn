@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { Button } from '../components/Button'
+import { Button } from './components/button'
 
 const app = createApp({
     components: {
