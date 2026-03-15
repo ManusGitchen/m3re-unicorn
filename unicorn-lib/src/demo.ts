@@ -2,10 +2,10 @@ import { createApp } from 'vue'
 import { Button } from '../components/Button'
 
 const app = createApp({
-  components: {
-    Button,
-  },
-  template: `
+    components: {
+        Button,
+    },
+    template: `
     <div style="padding: 2rem;">
       <h1>Unicorn Component Library Demo</h1>
       

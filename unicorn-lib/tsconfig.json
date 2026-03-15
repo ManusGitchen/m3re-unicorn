@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
     "target": "esnext",
-    "lib": ["es2023", "dom"],
+    "lib": [
+      "es2023",
+      "dom"
+    ],
     "moduleDetection": "force",
     "module": "preserve",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "strict": true,
     "noUnusedLocals": true,
     "declaration": true,
@@ -18,10 +23,20 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ]
     }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "dist", "build", "src/**/*.spec.ts", "src/**/*.test.ts"],
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    "src/**/*.spec.ts",
+    "src/**/*.test.ts"
+  ],
   "vueCompilerOptions": {}
 }
