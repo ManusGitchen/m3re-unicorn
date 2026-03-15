@@ -1,0 +1,57 @@
+# Files to exclude from npm package
+
+# Version control
+.git/
+.gitignore
+.github/
+
+# Build artifacts (only dist/ should be published)
+src/
+tests/
+build/
+temp/
+
+# Configuration files (don't need to publish)
+.vscode/
+.eslintrc
+.prettierrc
+tsconfig.json
+tsconfig.build.json
+vite.config.ts
+tsdown.config.ts
+
+# Documentation not needed in package
+CONTRIBUTING.md
+PUBLISH_CHECKLIST.md
+*.md
+!README.md
+
+# Development dependencies lockfiles
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Node modules (don't publish)
+node_modules/
+
+# OS files
+.DS_Store
+*.swp
+*.swo
+*~
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-error.log*
+
+# IDE
+.idea/
+*.iml
+*.suo
+*.sln
+
+# Temporary
+.temp/
+*.tmp
