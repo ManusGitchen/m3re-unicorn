@@ -433,6 +433,118 @@
   );
 }
 
+/* ===== Card Glass Effect ===== */
+
+.card-glass {
+  background-color: var(--card-glass-bg, rgba(255, 255, 255, 0.15)) !important;
+  backdrop-filter: blur(var(--card-glass-blur, 10px)) saturate(var(--card-glass-saturate, 180%));
+  -webkit-backdrop-filter: blur(var(--card-glass-blur, 10px)) saturate(var(--card-glass-saturate, 180%));
+  border: var(--card-glass-border-width, 1px) solid var(--card-glass-border-color, rgba(255, 255, 255, 0.3));
+  box-shadow: var(--card-glass-shadow, 0 8px 32px 0 rgba(0, 0, 0, 0.1));
+}
+
+.card-glass:hover {
+  background-color: var(--card-glass-hover-bg, rgba(255, 255, 255, 0.2)) !important;
+  border-color: var(--card-glass-hover-border-color, rgba(255, 255, 255, 0.4));
+}
+
+/* Dark theme glass adjustments */
+[data-theme="dark"] .card-glass {
+  background-color: var(--card-glass-bg-dark, rgba(255, 255, 255, 0.1)) !important;
+  border-color: var(--card-glass-border-color-dark, rgba(255, 255, 255, 0.2));
+}
+
+[data-theme="dark"] .card-glass:hover {
+  background-color: var(--card-glass-hover-bg-dark, rgba(255, 255, 255, 0.15)) !important;
+  border-color: var(--card-glass-hover-border-color-dark, rgba(255, 255, 255, 0.3));
+}
+
+/* ===== Card Shiny Glass Effect ===== */
+
+.card-glass-shiny {
+  background: linear-gradient(
+    135deg,
+    var(--card-glass-shiny-gradient-start, rgba(255, 255, 255, 0.3)) 0%,
+    var(--card-glass-shiny-gradient-mid, rgba(255, 255, 255, 0.1)) 50%,
+    var(--card-glass-shiny-gradient-end, rgba(255, 255, 255, 0.25)) 100%
+  ) !important;
+  backdrop-filter: blur(var(--card-glass-shiny-blur, 12px)) saturate(var(--card-glass-shiny-saturate, 200%)) brightness(var(--card-glass-shiny-brightness, 1.1));
+  -webkit-backdrop-filter: blur(var(--card-glass-shiny-blur, 12px)) saturate(var(--card-glass-shiny-saturate, 200%)) brightness(var(--card-glass-shiny-brightness, 1.1));
+  border: var(--card-glass-shiny-border-width, 1px) solid var(--card-glass-shiny-border-color, rgba(255, 255, 255, 0.5));
+  box-shadow: var(--card-glass-shiny-shadow,
+    0 8px 32px 0 rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.1)
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.card-glass-shiny::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.2) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card-glass-shiny:hover::before {
+  opacity: 1;
+}
+
+.card-glass-shiny:hover {
+  background: linear-gradient(
+    135deg,
+    var(--card-glass-shiny-hover-gradient-start, rgba(255, 255, 255, 0.4)) 0%,
+    var(--card-glass-shiny-hover-gradient-mid, rgba(255, 255, 255, 0.15)) 50%,
+    var(--card-glass-shiny-hover-gradient-end, rgba(255, 255, 255, 0.35)) 100%
+  ) !important;
+  border-color: var(--card-glass-shiny-hover-border-color, rgba(255, 255, 255, 0.6));
+  box-shadow: var(--card-glass-shiny-hover-shadow,
+    0 12px 48px 0 rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.1)
+  );
+}
+
+/* Dark theme shiny glass adjustments */
+[data-theme="dark"] .card-glass-shiny {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.15) 100%
+  ) !important;
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .card-glass-shiny:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.2) 100%
+  ) !important;
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 12px 48px 0 rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
 /* ===== Card States ===== */
 
 /* Interactive Card */

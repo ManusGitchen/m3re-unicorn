@@ -73,6 +73,14 @@ const Button = defineComponent({
             type: String,
             default: undefined,
         },
+        glass: {
+            type: Boolean,
+            default: false,
+        },
+        glassShiny: {
+            type: Boolean,
+            default: false,
+        },
     },
     setup(props, { slots, attrs }) {
         const isRainbowBorder = props.variant === 'rainbow-border'
@@ -95,6 +103,8 @@ const Button = defineComponent({
             'btn-active': props.active,
             'btn-block': props.block,
             'btn-icon-only': isIconOnly.value,
+            'btn-glass': props.glass && !props.glassShiny,
+            'btn-glass-shiny': props.glassShiny,
         }))
 
         const wrapperClasses = computed(() => ({
@@ -222,6 +232,8 @@ export interface ButtonProps {
     iconLeft?: string
     iconRight?: string
     rainbowColors?: string
+    glass?: boolean
+    glassShiny?: boolean
 }
 
 export type { Variant, Color, Size, Rounded }

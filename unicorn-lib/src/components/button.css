@@ -374,6 +374,156 @@
   border-radius: var(--border-radius-full);
 }
 
+/* ===== Button Glass Effect ===== */
+
+.btn-glass {
+  background-color: var(--btn-glass-bg, rgba(255, 255, 255, 0.15));
+  backdrop-filter: blur(var(--btn-glass-blur, 10px)) saturate(var(--btn-glass-saturate, 180%));
+  -webkit-backdrop-filter: blur(var(--btn-glass-blur, 10px)) saturate(var(--btn-glass-saturate, 180%));
+  border: var(--btn-glass-border-width, 1px) solid var(--btn-glass-border-color, rgba(255, 255, 255, 0.3));
+  box-shadow: var(--btn-glass-shadow, 0 8px 32px 0 rgba(0, 0, 0, 0.1));
+}
+
+.btn-glass:hover:not(:disabled) {
+  background-color: var(--btn-glass-hover-bg, rgba(255, 255, 255, 0.25));
+  border-color: var(--btn-glass-hover-border-color, rgba(255, 255, 255, 0.4));
+  transform: var(--btn-hover-transform, translateY(-1px));
+}
+
+.btn-glass:active:not(:disabled) {
+  background-color: var(--btn-glass-active-bg, rgba(255, 255, 255, 0.2));
+  transform: var(--btn-active-transform, translateY(0));
+}
+
+/* Dark theme glass adjustments */
+[data-theme="dark"] .btn-glass {
+  background-color: var(--btn-glass-bg-dark, rgba(255, 255, 255, 0.1));
+  border-color: var(--btn-glass-border-color-dark, rgba(255, 255, 255, 0.2));
+}
+
+[data-theme="dark"] .btn-glass:hover:not(:disabled) {
+  background-color: var(--btn-glass-hover-bg-dark, rgba(255, 255, 255, 0.15));
+  border-color: var(--btn-glass-hover-border-color-dark, rgba(255, 255, 255, 0.3));
+}
+
+[data-theme="dark"] .btn-glass:active:not(:disabled) {
+  background-color: var(--btn-glass-active-bg-dark, rgba(255, 255, 255, 0.12));
+}
+
+/* ===== Button Shiny Glass Effect ===== */
+
+.btn-glass-shiny {
+  background: linear-gradient(
+    135deg,
+    var(--btn-glass-shiny-gradient-start, rgba(255, 255, 255, 0.3)) 0%,
+    var(--btn-glass-shiny-gradient-mid, rgba(255, 255, 255, 0.1)) 50%,
+    var(--btn-glass-shiny-gradient-end, rgba(255, 255, 255, 0.25)) 100%
+  );
+  backdrop-filter: blur(var(--btn-glass-shiny-blur, 12px)) saturate(var(--btn-glass-shiny-saturate, 200%)) brightness(var(--btn-glass-shiny-brightness, 1.1));
+  -webkit-backdrop-filter: blur(var(--btn-glass-shiny-blur, 12px)) saturate(var(--btn-glass-shiny-saturate, 200%)) brightness(var(--btn-glass-shiny-brightness, 1.1));
+  border: var(--btn-glass-shiny-border-width, 1px) solid var(--btn-glass-shiny-border-color, rgba(255, 255, 255, 0.5));
+  box-shadow: var(--btn-glass-shiny-shadow,
+    0 8px 32px 0 rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.1)
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glass-shiny::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  transition: left 0.5s ease;
+}
+
+.btn-glass-shiny:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.btn-glass-shiny:hover:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    var(--btn-glass-shiny-hover-gradient-start, rgba(255, 255, 255, 0.4)) 0%,
+    var(--btn-glass-shiny-hover-gradient-mid, rgba(255, 255, 255, 0.15)) 50%,
+    var(--btn-glass-shiny-hover-gradient-end, rgba(255, 255, 255, 0.35)) 100%
+  );
+  border-color: var(--btn-glass-shiny-hover-border-color, rgba(255, 255, 255, 0.6));
+  transform: var(--btn-hover-transform, translateY(-1px));
+  box-shadow: var(--btn-glass-shiny-hover-shadow,
+    0 12px 48px 0 rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.1)
+  );
+}
+
+.btn-glass-shiny:active:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    var(--btn-glass-shiny-active-gradient-start, rgba(255, 255, 255, 0.25)) 0%,
+    var(--btn-glass-shiny-active-gradient-mid, rgba(255, 255, 255, 0.08)) 50%,
+    var(--btn-glass-shiny-active-gradient-end, rgba(255, 255, 255, 0.2)) 100%
+  );
+  transform: var(--btn-active-transform, translateY(0));
+  box-shadow: var(--btn-glass-shiny-active-shadow,
+    0 4px 16px 0 rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+    inset 0 2px 4px 0 rgba(0, 0, 0, 0.15)
+  );
+}
+
+/* Dark theme shiny glass adjustments */
+[data-theme="dark"] .btn-glass-shiny {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 8px 32px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .btn-glass-shiny:hover:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.2) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 12px 48px 0 rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .btn-glass-shiny:active:not(:disabled) {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.03) 50%,
+    rgba(255, 255, 255, 0.12) 100%
+  );
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    inset 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
 /* ===== Button States ===== */
 
 /* Block Button */

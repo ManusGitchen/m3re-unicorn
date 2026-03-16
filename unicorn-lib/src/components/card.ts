@@ -39,12 +39,22 @@ const Card = defineComponent({
             type: String as () => RainbowAccent,
             default: undefined,
         },
+        glass: {
+            type: Boolean,
+            default: false,
+        },
+        glassShiny: {
+            type: Boolean,
+            default: false,
+        },
     },
     setup(props, { slots }) {
         const classes = {
             'card': true,
             [`card-${props.variant}`]: true,
             [`card-image-${props.imagePosition}`]: !!slots.image,
+            'card-glass': props.glass && !props.glassShiny,
+            'card-glass-shiny': props.glassShiny,
         }
 
         const wrapperClasses = {
@@ -98,6 +108,8 @@ export interface CardProps {
     rainbowBorder?: boolean
     rainbowColors?: string
     rainbowAccent?: RainbowAccent
+    glass?: boolean
+    glassShiny?: boolean
 }
 
 export type { Variant, ImagePosition, RainbowAccent }
