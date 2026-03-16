@@ -17,7 +17,7 @@
   background: linear-gradient(90deg, var(--rainbow-colors));
 
   /* Border radius matches the card */
-  border-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-radius: var(--card-border-radius, var(--border-radius-sm));
 
   /* Display */
   display: inline-block;
@@ -67,7 +67,7 @@
 
   /* Border */
   border: var(--card-border-width, var(--border-width-thin)) var(--border-style-solid) var(--card-border-color, var(--color-border));
-  border-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-radius: var(--card-border-radius, var(--border-radius-sm));
 
   /* Spacing */
   padding: var(--card-padding, 1.5rem);
@@ -467,8 +467,8 @@
 .card-image {
   margin: calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem)) 0 calc(-1 * var(--card-padding, 1.5rem));
   overflow: hidden;
-  border-top-left-radius: var(--card-border-radius, var(--border-radius-lg));
-  border-top-right-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-top-left-radius: var(--card-border-radius, var(--border-radius-sm));
+  border-top-right-radius: var(--card-border-radius, var(--border-radius-sm));
 }
 
 .card-image img,
@@ -482,8 +482,8 @@
 /* Image Position Variants */
 .card-image-top .card-image {
   margin: calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem)) 0 calc(-1 * var(--card-padding, 1.5rem));
-  border-top-left-radius: var(--card-border-radius, var(--border-radius-lg));
-  border-top-right-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-top-left-radius: var(--card-border-radius, var(--border-radius-sm));
+  border-top-right-radius: var(--card-border-radius, var(--border-radius-sm));
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -498,8 +498,8 @@
   margin: 0 calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem));
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  border-bottom-left-radius: var(--card-border-radius, var(--border-radius-lg));
-  border-bottom-right-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-bottom-left-radius: var(--card-border-radius, var(--border-radius-sm));
+  border-bottom-right-radius: var(--card-border-radius, var(--border-radius-sm));
 }
 
 .card-image-bottom .card-content {
@@ -517,8 +517,8 @@
 
 .card-image-left .card-image {
   margin: calc(-1 * var(--card-padding, 1.5rem)) 1rem calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem));
-  border-top-left-radius: var(--card-border-radius, var(--border-radius-lg));
-  border-bottom-left-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-top-left-radius: var(--card-border-radius, var(--border-radius-sm));
+  border-bottom-left-radius: var(--card-border-radius, var(--border-radius-sm));
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   flex-shrink: 0;
@@ -528,8 +528,8 @@
 .card-image-right .card-image {
   order: 2;
   margin: calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem)) 1rem;
-  border-top-right-radius: var(--card-border-radius, var(--border-radius-lg));
-  border-bottom-right-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-top-right-radius: var(--card-border-radius, var(--border-radius-sm));
+  border-bottom-right-radius: var(--card-border-radius, var(--border-radius-sm));
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   flex-shrink: 0;

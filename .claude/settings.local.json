@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(cd unicorn-lib:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "mcp__figma__get_design_context"
     ]
   }
 }

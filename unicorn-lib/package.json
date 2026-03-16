@@ -15,8 +15,8 @@
   },
   "exports": {
     ".": "./dist/index.mjs",
-    "./typography.css": "./src/tokens/typography.css",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./style.css": "./dist/style.css"
   },
   "types": "./dist/index.d.mts",
   "files": [
@@ -51,5 +51,8 @@
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
+  },
+  "dependencies": {
+    "@tsdown/css": "^0.21.3"
   }
 }

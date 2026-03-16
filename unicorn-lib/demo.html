@@ -75,20 +75,73 @@
     <section class="demo-section">
       <h2>Buttons</h2>
 
-      <h3 style="margin-bottom: 1rem;">Variants</h3>
+      <h3 style="margin-bottom: 1rem;">Variants (Style Types)</h3>
       <div class="demo-buttons">
-        <button class="btn btn-primary btn-md">Primary</button>
-        <button class="btn btn-secondary btn-md">Secondary</button>
-        <button class="btn btn-danger btn-md">Danger</button>
-        <button class="btn btn-primary btn-md" disabled>Disabled</button>
+        <button class="btn btn-primary btn-color-primary btn-md">Primary (Filled)</button>
+        <button class="btn btn-secondary btn-color-primary btn-md">Secondary (Outline)</button>
+        <button class="btn btn-tertiary btn-color-primary btn-md">Tertiary (Ghost)</button>
+        <button class="btn btn-link btn-color-primary btn-md">Link</button>
       </div>
 
-      <h3 style="margin-bottom: 1rem;">Sizes</h3>
+      <h3 style="margin-bottom: 1rem;">Colors (Semantic)</h3>
       <div class="demo-buttons">
+        <button class="btn btn-primary btn-color-primary btn-md">Primary</button>
+        <button class="btn btn-primary btn-color-secondary btn-md">Secondary</button>
+        <button class="btn btn-primary btn-color-error btn-md">Error</button>
+        <button class="btn btn-primary btn-color-success btn-md">Success</button>
+        <button class="btn btn-primary btn-color-warning btn-md">Warning</button>
+        <button class="btn btn-primary btn-color-info btn-md">Info</button>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Mixed Examples</h3>
+      <div class="demo-buttons">
+        <button class="btn btn-secondary btn-color-error btn-md">Outline Error</button>
+        <button class="btn btn-secondary btn-color-success btn-md">Outline Success</button>
+        <button class="btn btn-tertiary btn-color-warning btn-md">Ghost Warning</button>
+        <button class="btn btn-tertiary btn-color-info btn-md">Ghost Info</button>
+        <button class="btn btn-link btn-color-error btn-md">Link Error</button>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Rainbow Border</h3>
+      <div class="demo-buttons">
+        <div class="btn-rainbow-wrapper" style="--rainbow-colors: var(--color-primary) 50%, var(--color-secondary) 50%;">
+          <button class="btn btn-rainbow-border btn-md">Rainbow</button>
+        </div>
+        <div class="btn-rainbow-wrapper" style="--rainbow-colors: var(--color-success) 0%, var(--color-info) 50%, var(--color-warning) 100%;">
+          <button class="btn btn-rainbow-border btn-md">Custom Gradient</button>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">All Sizes</h3>
+      <div class="demo-buttons" style="align-items: center;">
+        <button class="btn btn-primary btn-xs">Extra Small</button>
         <button class="btn btn-primary btn-sm">Small</button>
         <button class="btn btn-primary btn-md">Medium</button>
         <button class="btn btn-primary btn-lg">Large</button>
+        <button class="btn btn-primary btn-xl">Extra Large</button>
       </div>
+
+      <h3 style="margin-bottom: 1rem;">Rounded Variants</h3>
+      <div class="demo-buttons">
+        <button class="btn btn-primary btn-md btn-rounded-none">None</button>
+        <button class="btn btn-primary btn-md btn-rounded-sm">Small</button>
+        <button class="btn btn-primary btn-md btn-rounded-md">Medium</button>
+        <button class="btn btn-primary btn-md btn-rounded-lg">Large</button>
+        <button class="btn btn-primary btn-md btn-rounded-full">Full</button>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">States</h3>
+      <div class="demo-buttons">
+        <button class="btn btn-primary btn-md">Normal</button>
+        <button class="btn btn-primary btn-md btn-active">Active</button>
+        <button class="btn btn-primary btn-md" disabled>Disabled</button>
+        <button class="btn btn-primary btn-md btn-loading">
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Block Button</h3>
+      <button class="btn btn-primary btn-md btn-block">Full Width Button</button>
     </section>
 
     <!-- Cards Section -->
