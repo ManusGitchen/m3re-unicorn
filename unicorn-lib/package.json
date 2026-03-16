@@ -53,6 +53,7 @@
     "npm": ">=9.0.0"
   },
   "dependencies": {
+    "@iconify/vue": "^5.0.0",
     "@tsdown/css": "^0.21.3"
   }
 }

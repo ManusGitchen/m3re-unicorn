@@ -4,8 +4,14 @@ import './styles.css'
 // Button Component
 export { Button, type ButtonProps } from './components/button'
 
+// Button Group Component
+export { ButtonGroup, type ButtonGroupProps } from './components/button-group'
+
 // Card Component
 export { Card, type CardProps } from './components/card'
+
+// Icon Component (from Iconify)
+export { Icon } from '@iconify/vue'
 
 // Typography Design Tokens
 export {

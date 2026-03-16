@@ -1,0 +1,253 @@
+/**
+ * Button Group Component Styles
+ * Provides grouped button layouts with merged borders
+ */
+
+/* ===== Button Group Base ===== */
+
+.btn-group {
+  display: inline-flex;
+  position: relative;
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+/* ===== Horizontal Layout (Default) ===== */
+
+.btn-group-horizontal {
+  flex-direction: row;
+}
+
+.btn-group-horizontal > .btn,
+.btn-group-horizontal > .btn-rainbow-wrapper {
+  flex-shrink: 0;
+}
+
+/* Remove border radius from middle buttons */
+.btn-group-horizontal > .btn:not(:first-child):not(:last-child),
+.btn-group-horizontal > .btn-rainbow-wrapper:not(:first-child):not(:last-child) .btn {
+  border-radius: 0;
+}
+
+/* First button - keep left radius */
+.btn-group-horizontal > .btn:first-child:not(:last-child),
+.btn-group-horizontal > .btn-rainbow-wrapper:first-child:not(:last-child) .btn {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Last button - keep right radius */
+.btn-group-horizontal > .btn:last-child:not(:first-child),
+.btn-group-horizontal > .btn-rainbow-wrapper:last-child:not(:first-child) .btn {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Merge borders - remove left border from buttons after the first */
+.btn-group-horizontal > .btn:not(:first-child),
+.btn-group-horizontal > .btn-rainbow-wrapper:not(:first-child) {
+  margin-left: calc(-1 * var(--border-width-thin));
+}
+
+/* Handle secondary (outline) buttons with thicker borders */
+.btn-group-horizontal > .btn-secondary:not(:first-child) {
+  margin-left: calc(-1 * var(--border-width-medium));
+}
+
+/* Ensure buttons appear above their neighbors on hover */
+.btn-group-horizontal > .btn:hover,
+.btn-group-horizontal > .btn:focus,
+.btn-group-horizontal > .btn:active,
+.btn-group-horizontal > .btn-rainbow-wrapper:hover .btn,
+.btn-group-horizontal > .btn-rainbow-wrapper:focus-within .btn {
+  position: relative;
+  z-index: 1;
+}
+
+/* Disable transform on buttons inside groups (no jumping) */
+.btn-group-horizontal > .btn:hover,
+.btn-group-horizontal > .btn:active,
+.btn-group-vertical > .btn:hover,
+.btn-group-vertical > .btn:active {
+  transform: none;
+}
+
+/* ===== Vertical Layout ===== */
+
+.btn-group-vertical {
+  flex-direction: column;
+}
+
+.btn-group-vertical > .btn,
+.btn-group-vertical > .btn-rainbow-wrapper {
+  width: 100%;
+}
+
+/* Remove border radius from middle buttons */
+.btn-group-vertical > .btn:not(:first-child):not(:last-child),
+.btn-group-vertical > .btn-rainbow-wrapper:not(:first-child):not(:last-child) .btn {
+  border-radius: 0;
+}
+
+/* First button - keep top radius */
+.btn-group-vertical > .btn:first-child:not(:last-child),
+.btn-group-vertical > .btn-rainbow-wrapper:first-child:not(:last-child) .btn {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Last button - keep bottom radius */
+.btn-group-vertical > .btn:last-child:not(:first-child),
+.btn-group-vertical > .btn-rainbow-wrapper:last-child:not(:first-child) .btn {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* Merge borders - remove top border from buttons after the first */
+.btn-group-vertical > .btn:not(:first-child),
+.btn-group-vertical > .btn-rainbow-wrapper:not(:first-child) {
+  margin-top: calc(-1 * var(--border-width-thin));
+}
+
+/* Handle secondary (outline) buttons with thicker borders */
+.btn-group-vertical > .btn-secondary:not(:first-child) {
+  margin-top: calc(-1 * var(--border-width-medium));
+}
+
+/* Ensure buttons appear above their neighbors on hover */
+.btn-group-vertical > .btn:hover,
+.btn-group-vertical > .btn:focus,
+.btn-group-vertical > .btn:active,
+.btn-group-vertical > .btn-rainbow-wrapper:hover .btn,
+.btn-group-vertical > .btn-rainbow-wrapper:focus-within .btn {
+  position: relative;
+  z-index: 1;
+}
+
+/* Icon-only buttons inside groups should be square, not circular */
+.btn-group > .btn.btn-icon-only,
+.btn-group > .btn-rainbow-wrapper > .btn.btn-icon-only {
+  border-radius: 0 !important;
+  aspect-ratio: auto;
+}
+
+/* Re-apply border radius for first and last icon-only buttons in horizontal groups */
+.btn-group-horizontal > .btn.btn-icon-only:first-child:not(:last-child) {
+  border-top-left-radius: var(--border-radius-sm) !important;
+  border-bottom-left-radius: var(--border-radius-sm) !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.btn-group-horizontal > .btn.btn-icon-only:last-child:not(:first-child) {
+  border-top-right-radius: var(--border-radius-sm) !important;
+  border-bottom-right-radius: var(--border-radius-sm) !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.btn-group-horizontal > .btn.btn-icon-only:first-child:last-child {
+  border-radius: var(--border-radius-sm) !important;
+}
+
+/* Re-apply border radius for first and last icon-only buttons in vertical groups */
+.btn-group-vertical > .btn.btn-icon-only:first-child:not(:last-child) {
+  border-top-left-radius: var(--border-radius-sm) !important;
+  border-top-right-radius: var(--border-radius-sm) !important;
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.btn-group-vertical > .btn.btn-icon-only:last-child:not(:first-child) {
+  border-bottom-left-radius: var(--border-radius-sm) !important;
+  border-bottom-right-radius: var(--border-radius-sm) !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.btn-group-vertical > .btn.btn-icon-only:first-child:last-child {
+  border-radius: var(--border-radius-sm) !important;
+}
+
+/* ===== Block Button Group ===== */
+
+.btn-group-block {
+  display: flex;
+  width: 100%;
+}
+
+.btn-group-block.btn-group-horizontal > .btn,
+.btn-group-block.btn-group-horizontal > .btn-rainbow-wrapper {
+  flex: 1 1 auto;
+}
+
+.btn-group-block.btn-group-vertical > .btn,
+.btn-group-block.btn-group-vertical > .btn-rainbow-wrapper {
+  width: 100%;
+}
+
+/* ===== Selected State for Toggle Groups ===== */
+
+.btn-group > .btn.btn-active {
+  z-index: 2;
+  position: relative;
+}
+
+/* Ensure active buttons stand out in groups */
+.btn-group > .btn-primary.btn-active {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.btn-group > .btn-secondary.btn-active,
+.btn-group > .btn-tertiary.btn-active {
+  background-color: var(--btn-bg, var(--color-primary));
+  color: var(--color-neutral-white);
+  border-color: var(--btn-border, var(--color-primary));
+}
+
+/* Dark theme active state */
+[data-theme="dark"] .btn-group > .btn-secondary.btn-active,
+[data-theme="dark"] .btn-group > .btn-tertiary.btn-active {
+  background-color: var(--btn-bg, var(--color-primary-light));
+  border-color: var(--btn-border, var(--color-primary-light));
+}
+
+/* ===== Rainbow Border Button Groups ===== */
+
+.btn-group-horizontal > .btn-rainbow-wrapper {
+  display: inline-flex;
+}
+
+.btn-group-vertical > .btn-rainbow-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+/* Adjust rainbow wrapper border radius */
+.btn-group-horizontal > .btn-rainbow-wrapper:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.btn-group-horizontal > .btn-rainbow-wrapper:first-child:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.btn-group-horizontal > .btn-rainbow-wrapper:last-child:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.btn-group-vertical > .btn-rainbow-wrapper:not(:first-child):not(:last-child) {
+  border-radius: 0;
+}
+
+.btn-group-vertical > .btn-rainbow-wrapper:first-child:not(:last-child) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.btn-group-vertical > .btn-rainbow-wrapper:last-child:not(:first-child) {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}

@@ -1,5 +1,6 @@
 import { defineComponent, computed } from 'vue'
 import type { PropType } from 'vue'
+import { Icon } from '@iconify/vue'
 
 type Variant = 'primary' | 'secondary' | 'tertiary' | 'link' | 'rainbow-border'
 type Color = 'primary' | 'secondary' | 'error' | 'success' | 'warning' | 'info'
@@ -8,6 +9,9 @@ type Rounded = 'none' | 'sm' | 'md' | 'lg' | 'full'
 
 const Button = defineComponent({
     name: 'Button',
+    components: {
+        Icon,
+    },
     props: {
         variant: {
             type: String as PropType<Variant>,
@@ -53,6 +57,18 @@ const Button = defineComponent({
             type: String as PropType<'button' | 'submit' | 'reset'>,
             default: 'button',
         },
+        icon: {
+            type: String,
+            default: undefined,
+        },
+        iconLeft: {
+            type: String,
+            default: undefined,
+        },
+        iconRight: {
+            type: String,
+            default: undefined,
+        },
         rainbowColors: {
             type: String,
             default: undefined,
@@ -60,6 +76,13 @@ const Button = defineComponent({
     },
     setup(props, { slots, attrs }) {
         const isRainbowBorder = props.variant === 'rainbow-border'
+
+        // Determine if button is icon-only
+        const isIconOnly = computed(() => {
+            const hasIcon = !!(props.icon || props.iconLeft || props.iconRight || slots['icon-left'] || slots['icon-right'])
+            const hasText = !!(slots.default)
+            return hasIcon && !hasText
+        })
 
         const classes = computed(() => ({
             'btn': true,
@@ -71,6 +94,7 @@ const Button = defineComponent({
             'btn-loading': props.loading,
             'btn-active': props.active,
             'btn-block': props.block,
+            'btn-icon-only': isIconOnly.value,
         }))
 
         const wrapperClasses = computed(() => ({
@@ -109,6 +133,18 @@ const Button = defineComponent({
             return baseProps
         })
 
+        // Icon size based on button size
+        const iconSize = computed(() => {
+            const sizes: Record<Size, string> = {
+                xs: '14px',
+                sm: '16px',
+                md: '20px',
+                lg: '24px',
+                xl: '28px',
+            }
+            return sizes[props.size]
+        })
+
         return {
             classes,
             wrapperClasses,
@@ -116,22 +152,54 @@ const Button = defineComponent({
             componentTag,
             componentProps,
             isRainbowBorder,
+            isIconOnly,
+            iconSize,
         }
     },
     template: `
     <div v-if="isRainbowBorder" :class="wrapperClasses" :style="gradientStyle">
       <component :is="componentTag" v-bind="{ ...componentProps, ...$attrs }">
         <span v-if="loading" class="btn-spinner" aria-hidden="true"></span>
-        <span v-else-if="$slots.default" :class="{ 'btn-content-hidden': loading }">
-          <slot />
-        </span>
+        <template v-else>
+          <span v-if="$slots['icon-left'] || iconLeft" class="btn-icon btn-icon-left">
+            <slot name="icon-left">
+              <Icon v-if="iconLeft" :icon="iconLeft" :width="iconSize" :height="iconSize" />
+            </slot>
+          </span>
+          <span v-if="icon && !iconLeft && !iconRight" class="btn-icon">
+            <Icon :icon="icon" :width="iconSize" :height="iconSize" />
+          </span>
+          <span v-if="$slots.default" class="btn-content">
+            <slot />
+          </span>
+          <span v-if="$slots['icon-right'] || iconRight" class="btn-icon btn-icon-right">
+            <slot name="icon-right">
+              <Icon v-if="iconRight" :icon="iconRight" :width="iconSize" :height="iconSize" />
+            </slot>
+          </span>
+        </template>
       </component>
     </div>
     <component v-else :is="componentTag" v-bind="{ ...componentProps, ...$attrs }">
       <span v-if="loading" class="btn-spinner" aria-hidden="true"></span>
-      <span v-else-if="$slots.default" :class="{ 'btn-content-hidden': loading }">
-        <slot />
-      </span>
+      <template v-else>
+        <span v-if="$slots['icon-left'] || iconLeft" class="btn-icon btn-icon-left">
+          <slot name="icon-left">
+            <Icon v-if="iconLeft" :icon="iconLeft" :width="iconSize" :height="iconSize" />
+          </slot>
+        </span>
+        <span v-if="icon && !iconLeft && !iconRight" class="btn-icon">
+          <Icon :icon="icon" :width="iconSize" :height="iconSize" />
+        </span>
+        <span v-if="$slots.default" class="btn-content">
+          <slot />
+        </span>
+        <span v-if="$slots['icon-right'] || iconRight" class="btn-icon btn-icon-right">
+          <slot name="icon-right">
+            <Icon v-if="iconRight" :icon="iconRight" :width="iconSize" :height="iconSize" />
+          </slot>
+        </span>
+      </template>
     </component>
   `,
 })
@@ -150,6 +218,9 @@ export interface ButtonProps {
     href?: string
     to?: string | object
     type?: 'button' | 'submit' | 'reset'
+    icon?: string
+    iconLeft?: string
+    iconRight?: string
     rainbowColors?: string
 }
 
