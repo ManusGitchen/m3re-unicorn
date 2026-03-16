@@ -15,11 +15,13 @@
   },
   "exports": {
     ".": "./dist/index.mjs",
+    "./typography.css": "./src/tokens/typography.css",
     "./package.json": "./package.json"
   },
   "types": "./dist/index.d.mts",
   "files": [
-    "dist"
+    "dist",
+    "src/tokens/typography.css"
   ],
   "scripts": {
     "build": "vp pack",

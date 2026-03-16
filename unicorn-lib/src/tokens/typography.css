@@ -1,0 +1,191 @@
+/**
+ * Typography Design Tokens - CSS Custom Properties
+ * Extracted from Figma Design System: Light Component Library
+ *
+ * Usage:
+ * - Apply font-size: var(--typography-page-heading-font-size)
+ * - Or use utility classes: .text-page-heading
+ */
+
+:root {
+  /* Font Families */
+  --typography-font-family-primary: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --typography-font-family-monospace: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+
+  /* Font Weights */
+  --typography-font-weight-light: 300;
+  --typography-font-weight-regular: 400;
+  --typography-font-weight-medium: 500;
+  --typography-font-weight-semibold: 600;
+  --typography-font-weight-bold: 700;
+
+  /* Font Sizes */
+  --typography-display-heading-font-size: 3.5rem;      /* 56px */
+  --typography-page-heading-font-size: 3rem;           /* 48px - H1 */
+  --typography-section-heading-font-size: 2.25rem;     /* 36px - H2 */
+  --typography-subsection-heading-font-size: 1.875rem; /* 30px - H3 */
+  --typography-less-loud-heading-font-size: 1.5rem;    /* 24px */
+  --typography-base-headline-font-size: 1.25rem;       /* 20px */
+  --typography-option-header-font-size: 1.125rem;      /* 18px */
+  --typography-alt-smart-headline-font-size: 1rem;     /* 16px */
+  --typography-h5-medium-font-size: 0.875rem;          /* 14px */
+  --typography-lead-paragraph-font-size: 1.25rem;      /* 20px */
+  --typography-paragraph-font-size: 1rem;              /* 16px */
+  --typography-compact-paragraph-font-size: 0.875rem;  /* 14px */
+  --typography-medium-text-font-size: 0.9375rem;       /* 15px */
+  --typography-small-text-font-size: 0.8125rem;        /* 13px */
+  --typography-spare-m-font-size: 0.75rem;             /* 12px */
+
+  /* Line Heights */
+  --typography-display-heading-line-height: 1.2;
+  --typography-page-heading-line-height: 1.2;
+  --typography-section-heading-line-height: 1.3;
+  --typography-subsection-heading-line-height: 1.3;
+  --typography-less-loud-heading-line-height: 1.4;
+  --typography-base-headline-line-height: 1.4;
+  --typography-option-header-line-height: 1.4;
+  --typography-alt-smart-headline-line-height: 1.5;
+  --typography-h5-medium-line-height: 1.5;
+  --typography-lead-paragraph-line-height: 1.6;
+  --typography-paragraph-line-height: 1.5;
+  --typography-compact-paragraph-line-height: 1.4;
+  --typography-medium-text-line-height: 1.5;
+  --typography-small-text-line-height: 1.4;
+  --typography-spare-m-line-height: 1.3;
+
+  /* Letter Spacings */
+  --typography-letter-spacing-tight: -0.02em;
+  --typography-letter-spacing-normal: 0;
+  --typography-letter-spacing-wide: 0.02em;
+  --typography-letter-spacing-wider: 0.05em;
+}
+
+/* Typography Utility Classes */
+.text-display-heading {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-display-heading-font-size);
+  font-weight: var(--typography-font-weight-bold);
+  line-height: var(--typography-display-heading-line-height);
+  letter-spacing: var(--typography-letter-spacing-tight);
+}
+
+.text-page-heading {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-page-heading-font-size);
+  font-weight: var(--typography-font-weight-bold);
+  line-height: var(--typography-page-heading-line-height);
+  letter-spacing: var(--typography-letter-spacing-tight);
+}
+
+.text-section-heading {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-section-heading-font-size);
+  font-weight: var(--typography-font-weight-semibold);
+  line-height: var(--typography-section-heading-line-height);
+}
+
+.text-subsection-heading {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-subsection-heading-font-size);
+  font-weight: var(--typography-font-weight-semibold);
+  line-height: var(--typography-subsection-heading-line-height);
+}
+
+.text-less-loud-heading {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-less-loud-heading-font-size);
+  font-weight: var(--typography-font-weight-medium);
+  line-height: var(--typography-less-loud-heading-line-height);
+}
+
+.text-base-headline {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-base-headline-font-size);
+  font-weight: var(--typography-font-weight-medium);
+  line-height: var(--typography-base-headline-line-height);
+}
+
+.text-option-header {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-option-header-font-size);
+  font-weight: var(--typography-font-weight-medium);
+  line-height: var(--typography-option-header-line-height);
+}
+
+.text-alt-smart-headline {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-alt-smart-headline-font-size);
+  font-weight: var(--typography-font-weight-semibold);
+  line-height: var(--typography-alt-smart-headline-line-height);
+  letter-spacing: var(--typography-letter-spacing-wider);
+  text-transform: uppercase;
+}
+
+.text-h5-medium {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-h5-medium-font-size);
+  font-weight: var(--typography-font-weight-medium);
+  line-height: var(--typography-h5-medium-line-height);
+}
+
+.text-lead-paragraph {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-lead-paragraph-font-size);
+  font-weight: var(--typography-font-weight-regular);
+  line-height: var(--typography-lead-paragraph-line-height);
+}
+
+.text-paragraph {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-paragraph-font-size);
+  font-weight: var(--typography-font-weight-regular);
+  line-height: var(--typography-paragraph-line-height);
+}
+
+.text-compact-paragraph {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-compact-paragraph-font-size);
+  font-weight: var(--typography-font-weight-regular);
+  line-height: var(--typography-compact-paragraph-line-height);
+}
+
+.text-medium-text {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-medium-text-font-size);
+  font-weight: var(--typography-font-weight-regular);
+  line-height: var(--typography-medium-text-line-height);
+}
+
+.text-small-text {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-small-text-font-size);
+  font-weight: var(--typography-font-weight-regular);
+  line-height: var(--typography-small-text-line-height);
+}
+
+.text-spare-m {
+  font-family: var(--typography-font-family-primary);
+  font-size: var(--typography-spare-m-font-size);
+  font-weight: var(--typography-font-weight-regular);
+  line-height: var(--typography-spare-m-line-height);
+}
+
+/* Responsive Typography - Mobile breakpoint */
+@media (max-width: 768px) {
+  :root {
+    /* Scale down larger headings on mobile */
+    --typography-display-heading-font-size: 2.5rem;   /* 40px */
+    --typography-page-heading-font-size: 2rem;        /* 32px */
+    --typography-section-heading-font-size: 1.75rem;  /* 28px */
+    --typography-subsection-heading-font-size: 1.5rem; /* 24px */
+  }
+}
+
+/* Responsive Typography - Tablet breakpoint */
+@media (min-width: 769px) and (max-width: 1024px) {
+  :root {
+    /* Slightly scale down on tablet */
+    --typography-display-heading-font-size: 3rem;     /* 48px */
+    --typography-page-heading-font-size: 2.5rem;      /* 40px */
+  }
+}
