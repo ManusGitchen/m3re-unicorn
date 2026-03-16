@@ -868,6 +868,331 @@
       </div>
     </section>
 
+    <!-- Utility Classes Section -->
+    <section class="demo-section">
+      <h2>Utility Classes</h2>
+      <p style="margin-bottom: 2rem; color: var(--color-text-muted);">
+        Comprehensive utility classes for rapid UI development. Use these classes to control spacing, layout, sizing, and positioning without writing custom CSS.
+      </p>
+
+      <h3 style="margin-bottom: 1rem;">Spacing Utilities - Padding</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-muted); font-size: 0.875rem;">
+        Apply padding with semantic sizes (xs, sm, md, lg, xl) or numeric values (1-24). Use directional variants: p-*, pt-*, pr-*, pb-*, pl-*, px-*, py-*
+      </p>
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+        <div class="p-xs" style="background: var(--color-primary-light); border-radius: var(--border-radius-sm); color: white; font-weight: 500;">p-xs</div>
+        <div class="p-sm" style="background: var(--color-primary-light); border-radius: var(--border-radius-sm); color: white; font-weight: 500;">p-sm</div>
+        <div class="p-md" style="background: var(--color-primary); border-radius: var(--border-radius-sm); color: white; font-weight: 500;">p-md</div>
+        <div class="p-lg" style="background: var(--color-primary); border-radius: var(--border-radius-sm); color: white; font-weight: 500;">p-lg</div>
+        <div class="p-xl" style="background: var(--color-primary-dark); border-radius: var(--border-radius-sm); color: white; font-weight: 500;">p-xl</div>
+      </div>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+        <div class="p-1" style="background: var(--color-secondary-light); border-radius: var(--border-radius-sm); color: white; font-weight: 500;">p-1 (4px)</div>
+        <div class="p-2" style="background: var(--color-secondary-light); border-radius: var(--border-radius-sm); color: white; font-weight: 500;">p-2 (8px)</div>
+        <div class="p-4" style="background: var(--color-secondary); border-radius: var(--border-radius-sm); color: white; font-weight: 500;">p-4 (16px)</div>
+        <div class="p-8" style="background: var(--color-secondary); border-radius: var(--border-radius-sm); color: white; font-weight: 500;">p-8 (32px)</div>
+        <div class="p-12" style="background: var(--color-secondary-dark); border-radius: var(--border-radius-sm); color: white; font-weight: 500;">p-12 (48px)</div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Spacing Utilities - Margin</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-muted); font-size: 0.875rem;">
+        Apply margin with the same sizing system. Use m-*, mt-*, mr-*, mb-*, ml-*, mx-*, my-*. Use m-auto or mx-auto for centering.
+      </p>
+      <div style="background: var(--color-background-contrast); padding: 1rem; border-radius: var(--border-radius-md); margin-bottom: 2rem;">
+        <div class="mt-md mb-lg" style="background: var(--color-info-light); padding: 0.5rem; border-radius: var(--border-radius-sm); text-align: center;">mt-md mb-lg</div>
+        <div class="mx-auto" style="background: var(--color-success-light); padding: 0.5rem; border-radius: var(--border-radius-sm); width: 200px; text-align: center;">mx-auto (centered)</div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Flexbox Utilities</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-muted); font-size: 0.875rem;">
+        Control flex layouts with direction, alignment, and gap utilities. Perfect for responsive layouts.
+      </p>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Horizontal Layout with Gap</h4>
+      <div class="flex gap-md items-center" style="background: var(--color-background-contrast); padding: 1rem; border-radius: var(--border-radius-md); margin-bottom: 1rem;">
+        <div class="p-sm" style="background: var(--color-primary); color: white; border-radius: var(--border-radius-sm);">Item 1</div>
+        <div class="p-sm" style="background: var(--color-primary); color: white; border-radius: var(--border-radius-sm);">Item 2</div>
+        <div class="p-sm" style="background: var(--color-primary); color: white; border-radius: var(--border-radius-sm);">Item 3</div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Vertical Layout (Column)</h4>
+      <div class="flex flex-col gap-sm" style="background: var(--color-background-contrast); padding: 1rem; border-radius: var(--border-radius-md); max-width: 300px; margin-bottom: 1rem;">
+        <div class="p-sm" style="background: var(--color-secondary); color: white; border-radius: var(--border-radius-sm);">Item 1</div>
+        <div class="p-sm" style="background: var(--color-secondary); color: white; border-radius: var(--border-radius-sm);">Item 2</div>
+        <div class="p-sm" style="background: var(--color-secondary); color: white; border-radius: var(--border-radius-sm);">Item 3</div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Space Between (justify-between)</h4>
+      <div class="flex justify-between items-center gap-md" style="background: var(--color-background-contrast); padding: 1rem; border-radius: var(--border-radius-md); margin-bottom: 1rem;">
+        <div class="p-sm" style="background: var(--color-success); color: white; border-radius: var(--border-radius-sm);">Left</div>
+        <div class="p-sm" style="background: var(--color-success); color: white; border-radius: var(--border-radius-sm);">Center</div>
+        <div class="p-sm" style="background: var(--color-success); color: white; border-radius: var(--border-radius-sm);">Right</div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Centered (justify-center items-center)</h4>
+      <div class="flex justify-center items-center" style="background: var(--color-background-contrast); padding: 2rem; border-radius: var(--border-radius-md); margin-bottom: 2rem; min-height: 120px;">
+        <div class="p-md" style="background: var(--color-info); color: white; border-radius: var(--border-radius-md); font-weight: 500;">Perfectly Centered</div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Width & Height Utilities</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-muted); font-size: 0.875rem;">
+        Control element sizing with percentage-based, fractional, and semantic width/height utilities.
+      </p>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Width - Fractional</h4>
+      <div style="margin-bottom: 1rem;">
+        <div class="w-full p-sm mb-2" style="background: var(--color-success-light); border-radius: var(--border-radius-sm);">w-full (100%)</div>
+        <div class="w-1/2 p-sm mb-2" style="background: var(--color-success-light); border-radius: var(--border-radius-sm);">w-1/2 (50%)</div>
+        <div class="w-1/3 p-sm mb-2" style="background: var(--color-success-light); border-radius: var(--border-radius-sm);">w-1/3 (33.33%)</div>
+        <div class="w-1/4 p-sm" style="background: var(--color-success-light); border-radius: var(--border-radius-sm);">w-1/4 (25%)</div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Width - Semantic Sizing</h4>
+      <div style="margin-bottom: 2rem;">
+        <div class="w-xs p-sm mb-2" style="background: var(--color-info-light); border-radius: var(--border-radius-sm);">w-xs (320px)</div>
+        <div class="w-sm p-sm mb-2" style="background: var(--color-info-light); border-radius: var(--border-radius-sm);">w-sm (384px)</div>
+        <div class="w-md p-sm" style="background: var(--color-info-light); border-radius: var(--border-radius-sm);">w-md (448px)</div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Position Utilities</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-muted); font-size: 0.875rem;">
+        Control element positioning with relative, absolute, fixed, and sticky positioning utilities.
+      </p>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Absolute Positioning Example</h4>
+      <div class="relative" style="background: var(--color-background-contrast); padding: 2rem; border-radius: var(--border-radius-md); height: 200px; margin-bottom: 1rem; border: 2px dashed var(--color-border);">
+        <div class="absolute top-0 left-0 p-2" style="background: var(--color-error); color: white; border-radius: var(--border-radius-sm); font-size: 0.875rem;">top-0 left-0</div>
+        <div class="absolute top-0 right-0 p-2" style="background: var(--color-warning); color: white; border-radius: var(--border-radius-sm); font-size: 0.875rem;">top-0 right-0</div>
+        <div class="absolute bottom-0 left-0 p-2" style="background: var(--color-info); color: white; border-radius: var(--border-radius-sm); font-size: 0.875rem;">bottom-0 left-0</div>
+        <div class="absolute bottom-0 right-0 p-2" style="background: var(--color-success); color: white; border-radius: var(--border-radius-sm); font-size: 0.875rem;">bottom-0 right-0</div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Display Utilities</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-muted); font-size: 0.875rem;">
+        Control element display modes: block, inline-block, inline, flex, grid, hidden, visible, invisible.
+      </p>
+      <div style="margin-bottom: 2rem;">
+        <div class="block p-sm mb-2" style="background: var(--color-primary-light); color: white; border-radius: var(--border-radius-sm);">display: block</div>
+        <div class="inline-block p-sm mr-2" style="background: var(--color-secondary-light); color: white; border-radius: var(--border-radius-sm);">display: inline-block</div>
+        <div class="inline-block p-sm" style="background: var(--color-secondary-light); color: white; border-radius: var(--border-radius-sm);">display: inline-block</div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Real-World Example: Card with Utilities</h3>
+      <div class="card card-elevated max-w-md mx-auto">
+        <div class="card-content">
+          <div class="flex items-center justify-between mb-md">
+            <h2 class="card-title">Product Card</h2>
+            <span class="p-1 px-2" style="background: var(--color-success); color: white; border-radius: var(--border-radius-full); font-size: 0.75rem; font-weight: 600;">NEW</span>
+          </div>
+          <div class="card-body mb-md">
+            <p class="mb-sm">This card demonstrates utility classes in action:</p>
+            <ul style="list-style: none; padding: 0;">
+              <li class="flex items-center gap-xs mb-1">
+                <span style="color: var(--color-success);">✓</span> Flexbox layout
+              </li>
+              <li class="flex items-center gap-xs mb-1">
+                <span style="color: var(--color-success);">✓</span> Spacing utilities
+              </li>
+              <li class="flex items-center gap-xs mb-1">
+                <span style="color: var(--color-success);">✓</span> Width constraints
+              </li>
+            </ul>
+          </div>
+          <div class="flex gap-sm justify-end">
+            <button class="btn btn-secondary btn-sm">Cancel</button>
+            <button class="btn btn-primary btn-sm">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem; margin-top: 2rem;">Grid System - 12 Column Layout</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-muted); font-size: 0.875rem;">
+        Powerful 12-column grid system with gap utilities using the same spacing scale. Perfect for responsive layouts.
+        <strong>No row wrappers needed</strong> - children automatically flow into the grid columns!
+      </p>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Basic 12 Column Grid (No Row Wrappers!)</h4>
+      <div class="grid grid-cols-12 gap-md mb-lg">
+        <div class="cols-12 p-sm" style="background: var(--color-primary-light); color: white; border-radius: var(--border-radius-sm); text-align: center;">cols-12</div>
+        <div class="cols-6 p-sm" style="background: var(--color-primary); color: white; border-radius: var(--border-radius-sm); text-align: center;">cols-6</div>
+        <div class="cols-6 p-sm" style="background: var(--color-primary); color: white; border-radius: var(--border-radius-sm); text-align: center;">cols-6</div>
+        <div class="cols-4 p-sm" style="background: var(--color-secondary); color: white; border-radius: var(--border-radius-sm); text-align: center;">cols-4</div>
+        <div class="cols-4 p-sm" style="background: var(--color-secondary); color: white; border-radius: var(--border-radius-sm); text-align: center;">cols-4</div>
+        <div class="cols-4 p-sm" style="background: var(--color-secondary); color: white; border-radius: var(--border-radius-sm); text-align: center;">cols-4</div>
+        <div class="cols-3 p-sm" style="background: var(--color-info); color: white; border-radius: var(--border-radius-sm); text-align: center;">cols-3</div>
+        <div class="cols-3 p-sm" style="background: var(--color-info); color: white; border-radius: var(--border-radius-sm); text-align: center;">cols-3</div>
+        <div class="cols-3 p-sm" style="background: var(--color-info); color: white; border-radius: var(--border-radius-sm); text-align: center;">cols-3</div>
+        <div class="cols-3 p-sm" style="background: var(--color-info); color: white; border-radius: var(--border-radius-sm); text-align: center;">cols-3</div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Responsive Grid - Auto-fit Columns</h4>
+      <div class="grid grid-cols-3 gap-lg mb-lg">
+        <div class="p-md" style="background: var(--color-success-light); border-radius: var(--border-radius-md); text-align: center;">
+          <strong>Column 1</strong>
+          <p style="font-size: 0.875rem; margin-top: 0.5rem;">grid-cols-3</p>
+        </div>
+        <div class="p-md" style="background: var(--color-success-light); border-radius: var(--border-radius-md); text-align: center;">
+          <strong>Column 2</strong>
+          <p style="font-size: 0.875rem; margin-top: 0.5rem;">Equal width</p>
+        </div>
+        <div class="p-md" style="background: var(--color-success-light); border-radius: var(--border-radius-md); text-align: center;">
+          <strong>Column 3</strong>
+          <p style="font-size: 0.875rem; margin-top: 0.5rem;">Automatic</p>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Grid with Different Gap Sizes</h4>
+      <div class="grid grid-cols-4 gap-xs mb-2">
+        <div class="p-sm" style="background: var(--color-warning-light); border-radius: var(--border-radius-sm); text-align: center;">gap-xs</div>
+        <div class="p-sm" style="background: var(--color-warning-light); border-radius: var(--border-radius-sm); text-align: center;">gap-xs</div>
+        <div class="p-sm" style="background: var(--color-warning-light); border-radius: var(--border-radius-sm); text-align: center;">gap-xs</div>
+        <div class="p-sm" style="background: var(--color-warning-light); border-radius: var(--border-radius-sm); text-align: center;">gap-xs</div>
+      </div>
+      <div class="grid grid-cols-4 gap-md mb-2">
+        <div class="p-sm" style="background: var(--color-warning); color: white; border-radius: var(--border-radius-sm); text-align: center;">gap-md</div>
+        <div class="p-sm" style="background: var(--color-warning); color: white; border-radius: var(--border-radius-sm); text-align: center;">gap-md</div>
+        <div class="p-sm" style="background: var(--color-warning); color: white; border-radius: var(--border-radius-sm); text-align: center;">gap-md</div>
+        <div class="p-sm" style="background: var(--color-warning); color: white; border-radius: var(--border-radius-sm); text-align: center;">gap-md</div>
+      </div>
+      <div class="grid grid-cols-4 gap-xl mb-lg">
+        <div class="p-sm" style="background: var(--color-warning-dark); color: white; border-radius: var(--border-radius-sm); text-align: center;">gap-xl</div>
+        <div class="p-sm" style="background: var(--color-warning-dark); color: white; border-radius: var(--border-radius-sm); text-align: center;">gap-xl</div>
+        <div class="p-sm" style="background: var(--color-warning-dark); color: white; border-radius: var(--border-radius-sm); text-align: center;">gap-xl</div>
+        <div class="p-sm" style="background: var(--color-warning-dark); color: white; border-radius: var(--border-radius-sm); text-align: center;">gap-xl</div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Spanning Multiple Columns</h4>
+      <div class="grid grid-cols-12 gap-md mb-lg">
+        <div class="cols-8 p-md" style="background: var(--color-error-light); border-radius: var(--border-radius-md);">
+          <strong>Main Content</strong>
+          <p style="font-size: 0.875rem; margin-top: 0.5rem;">cols-8 (2/3 width)</p>
+        </div>
+        <div class="cols-4 p-md" style="background: var(--color-error-light); border-radius: var(--border-radius-md);">
+          <strong>Sidebar</strong>
+          <p style="font-size: 0.875rem; margin-top: 0.5rem;">cols-4 (1/3 width)</p>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Column Start/End Positioning</h4>
+      <div class="grid grid-cols-12 gap-md mb-lg" style="min-height: 100px;">
+        <div class="col-start-1 col-end-4 p-sm" style="background: var(--color-primary); color: white; border-radius: var(--border-radius-sm); text-align: center;">col-start-1 col-end-4</div>
+        <div class="col-start-5 col-end-9 p-sm" style="background: var(--color-secondary); color: white; border-radius: var(--border-radius-sm); text-align: center;">col-start-5 col-end-9</div>
+        <div class="col-start-10 col-end-13 p-sm" style="background: var(--color-info); color: white; border-radius: var(--border-radius-sm); text-align: center;">col-start-10 col-end-13</div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Row Spanning (Multi-row Grid)</h4>
+      <div class="grid grid-cols-3 grid-rows-3 gap-md mb-lg" style="height: 300px;">
+        <div class="cols-2 rows-2 p-md" style="background: var(--color-success); color: white; border-radius: var(--border-radius-md); display: flex; align-items: center; justify-content: center;">
+          <div style="text-align: center;">
+            <strong>Featured</strong>
+            <p style="font-size: 0.875rem;">cols-2 rows-2</p>
+          </div>
+        </div>
+        <div class="rows-3 p-md" style="background: var(--color-info); color: white; border-radius: var(--border-radius-md); display: flex; align-items: center; justify-content: center;">
+          <div style="text-align: center;">
+            <strong>Sidebar</strong>
+            <p style="font-size: 0.875rem;">rows-3</p>
+          </div>
+        </div>
+        <div class="cols-2 p-md" style="background: var(--color-warning); color: white; border-radius: var(--border-radius-md); display: flex; align-items: center; justify-content: center;">
+          <div style="text-align: center;">
+            <strong>Footer</strong>
+            <p style="font-size: 0.875rem;">cols-2</p>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Real-World Example: Dashboard Layout</h4>
+      <div class="grid grid-cols-12 gap-md mb-lg">
+        <div class="cols-12 card card-elevated">
+          <div class="card-content">
+            <h3 class="card-title">Dashboard Header</h3>
+            <p style="font-size: 0.875rem; margin-top: 0.5rem;">Full width header - cols-12</p>
+          </div>
+        </div>
+        <div class="cols-8 card card-outlined">
+          <div class="card-content">
+            <h3 class="card-title">Main Content Area</h3>
+            <div class="card-body">
+              <p>Primary content spans 8 columns (2/3 width)</p>
+              <div class="grid grid-cols-2 gap-sm mt-md">
+                <div class="p-sm" style="background: var(--color-background-contrast); border-radius: var(--border-radius-sm);">Chart 1</div>
+                <div class="p-sm" style="background: var(--color-background-contrast); border-radius: var(--border-radius-sm);">Chart 2</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cols-4 card card-outlined">
+          <div class="card-content">
+            <h3 class="card-title">Sidebar</h3>
+            <div class="card-body">
+              <p>Sidebar spans 4 columns (1/3 width)</p>
+              <div class="flex flex-col gap-xs mt-sm">
+                <div class="p-xs" style="background: var(--color-info-tint); border-radius: var(--border-radius-sm);">Widget 1</div>
+                <div class="p-xs" style="background: var(--color-info-tint); border-radius: var(--border-radius-sm);">Widget 2</div>
+                <div class="p-xs" style="background: var(--color-info-tint); border-radius: var(--border-radius-sm);">Widget 3</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-outlined mt-lg" style="background: var(--color-info-tint);">
+        <div class="card-content">
+          <h3 class="card-title">💡 Utility Class Reference</h3>
+          <div class="card-body">
+            <p class="mb-md">Complete list of available utility classes:</p>
+            <div class="grid grid-cols-1 gap-md" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+              <div>
+                <strong>Spacing:</strong>
+                <ul style="font-size: 0.875rem; margin-top: 0.5rem;">
+                  <li>m-*, mt-*, mr-*, mb-*, ml-*, mx-*, my-*</li>
+                  <li>p-*, pt-*, pr-*, pb-*, pl-*, px-*, py-*</li>
+                  <li>Sizes: 0, xs, sm, md, lg, xl, 2xl, 3xl, 1-24</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Flexbox:</strong>
+                <ul style="font-size: 0.875rem; margin-top: 0.5rem;">
+                  <li>flex, inline-flex</li>
+                  <li>flex-row, flex-col, flex-wrap</li>
+                  <li>justify-*, items-*, self-*</li>
+                  <li>gap-* (same sizes as spacing)</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Grid:</strong>
+                <ul style="font-size: 0.875rem; margin-top: 0.5rem;">
+                  <li>grid-cols-* (1-12), grid-rows-* (1-6)</li>
+                  <li>cols-*, rows-*</li>
+                  <li>col-start-*, col-end-*, row-start-*, row-end-*</li>
+                  <li>gap-*, gap-x-*, gap-y-* (spacing scale)</li>
+                  <li>place-items-*, place-content-*, place-self-*</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Sizing:</strong>
+                <ul style="font-size: 0.875rem; margin-top: 0.5rem;">
+                  <li>w-*, h-* (auto, full, screen)</li>
+                  <li>w-1/2, w-1/3, w-2/3, w-1/4, w-3/4</li>
+                  <li>min-w-*, max-w-*, min-h-*, max-h-*</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Position:</strong>
+                <ul style="font-size: 0.875rem; margin-top: 0.5rem;">
+                  <li>relative, absolute, fixed, sticky</li>
+                  <li>top-0, right-0, bottom-0, left-0</li>
+                  <li>inset-0, z-* (0, 10, 20, 30, 40, 50)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Customization Example -->
     <section class="demo-section">
       <h2>Customization Example</h2>

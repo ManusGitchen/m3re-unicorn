@@ -6,10 +6,11 @@ A modern, type-safe Vue 3 component library built with TypeScript and optimized 
 
 - **Vue 3.5.30** - Latest Vue 3 stable version
 - **TypeScript** - Full type safety with strict mode
+- **Utility Classes** - Comprehensive spacing, grid, flexbox utilities (~10KB gzipped)
 - **Tree-shakeable** - Only import what you use
 - **ESM Bundle** - Modern ES modules format
 - **Zero Runtime** - No unnecessary abstractions
-- **Small Bundle** - ~1KB gzipped core
+- **Small Bundle** - ~1KB gzipped core (components only)
 
 ## 📦 Installation
 
@@ -183,6 +184,64 @@ Add a colorful gradient border to outlined cards with the `rainbow-border` prop:
 - The wrapper's padding (2px by default) creates the visible border width
 - Accent positions add extra padding (1.5rem by default) on the specified side
 - Supports any CSS color values with optional percentage stops for precise control
+
+## 🎨 Utility Classes
+
+Comprehensive utility class system for rapid UI development without writing custom CSS.
+
+### Quick Reference
+
+**Spacing** - Margin & Padding:
+```html
+<div class="p-md m-lg">Padding: 24px, Margin: 32px</div>
+<div class="px-lg py-sm">Horizontal: 32px, Vertical: 16px</div>
+<div class="mx-auto">Centered with auto margin</div>
+```
+
+**Grid System** - 12-Column Layout:
+```html
+<div class="grid grid-cols-12 gap-md">
+  <div class="cols-8">Main content (8/12)</div>
+  <div class="cols-4">Sidebar (4/12)</div>
+</div>
+```
+
+**Flexbox** - One-dimensional layouts:
+```html
+<div class="flex items-center justify-between gap-md">
+  <div>Left</div>
+  <div>Right</div>
+</div>
+```
+
+**Sizing** - Width & Height:
+```html
+<div class="w-full max-w-md mx-auto">Centered container</div>
+<div class="w-1/2">Half width</div>
+<div class="h-screen">Full viewport height</div>
+```
+
+**Position** - Absolute, Relative, Fixed:
+```html
+<div class="relative">
+  <div class="absolute top-0 right-0">Badge</div>
+</div>
+```
+
+### Available Utilities
+
+- **Spacing**: `m-*`, `p-*`, `mt-*`, `px-*`, `my-*` (margin & padding)
+- **Grid**: `.grid`, `.grid-cols-*`, `.cols-*`, `.gap-*` (12-column system)
+- **Flexbox**: `.flex`, `.flex-col`, `.items-center`, `.justify-between`, `.gap-*`
+- **Sizing**: `.w-*`, `.h-*`, `.min-w-*`, `.max-w-*` (width & height)
+- **Position**: `.relative`, `.absolute`, `.fixed`, `.top-0`, `.z-*`
+- **Display**: `.block`, `.inline-block`, `.flex`, `.grid`, `.hidden`
+
+**Spacing Scale:** `0`, `xs` (8px), `sm` (16px), `md` (24px), `lg` (32px), `xl` (48px), `2xl` (64px), `3xl` (96px), or numeric `1-24` (4px increments)
+
+**📖 For complete utility class documentation, see [UTILITIES.md](./UTILITIES.md)**
+
+---
 
 ## 🎨 Design Tokens
 
