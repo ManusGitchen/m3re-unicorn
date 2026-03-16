@@ -1,0 +1,189 @@
+/**
+ * Card Component Styles
+ * Uses design tokens with !default for easy customization
+ */
+
+/* Import design tokens */
+@import '../tokens/colors.css';
+@import '../tokens/typography.css';
+
+/* Card Base Styles - Customizable with !default */
+.card {
+  /* Background & Text */
+  background-color: var(--card-bg, var(--color-background)) !default;
+  color: var(--card-color, var(--color-text)) !default;
+
+  /* Border */
+  border: var(--card-border-width, var(--border-width-thin)) var(--border-style-solid) var(--card-border-color, var(--color-border)) !default;
+  border-radius: var(--card-border-radius, var(--border-radius-lg)) !default;
+
+  /* Spacing */
+  padding: var(--card-padding, 1.5rem) !default;
+
+  /* Display */
+  display: block !default;
+  box-sizing: border-box !default;
+
+  /* Transition */
+  transition: var(--card-transition, all 0.2s ease-in-out) !default;
+
+  /* Shadow */
+  box-shadow: var(--card-shadow, none) !default;
+}
+
+/* ===== Card Variants ===== */
+
+/* Default Card */
+.card-default {
+  background-color: var(--card-default-bg, var(--color-background)) !default;
+  border-color: var(--card-default-border, var(--color-border)) !default;
+  box-shadow: var(--card-default-shadow, none) !default;
+}
+
+/* Elevated Card */
+.card-elevated {
+  background-color: var(--card-elevated-bg, var(--color-background)) !default;
+  border-color: var(--card-elevated-border, transparent) !default;
+  box-shadow: var(--card-elevated-shadow,
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px -1px rgba(0, 0, 0, 0.1)
+  ) !default;
+}
+
+.card-elevated:hover {
+  box-shadow: var(--card-elevated-hover-shadow,
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1)
+  ) !default;
+  transform: var(--card-elevated-hover-transform, translateY(-2px)) !default;
+}
+
+/* Outlined Card */
+.card-outlined {
+  background-color: var(--card-outlined-bg, var(--color-background)) !default;
+  border-color: var(--card-outlined-border, var(--color-border)) !default;
+  border-width: var(--card-outlined-border-width, var(--border-width-medium)) !default;
+  box-shadow: var(--card-outlined-shadow, none) !default;
+}
+
+.card-outlined:hover {
+  border-color: var(--card-outlined-hover-border, var(--color-primary)) !default;
+}
+
+/* ===== Card States ===== */
+
+/* Interactive Card */
+.card-interactive {
+  cursor: pointer !default;
+}
+
+.card-interactive:hover {
+  border-color: var(--card-interactive-hover-border, var(--color-primary)) !default;
+  box-shadow: var(--card-interactive-hover-shadow,
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1)
+  ) !default;
+}
+
+.card-interactive:active {
+  transform: var(--card-interactive-active-transform, scale(0.98)) !default;
+}
+
+/* Disabled Card */
+.card-disabled {
+  background-color: var(--card-disabled-bg, var(--color-background-contrast)) !default;
+  color: var(--card-disabled-color, var(--color-text-disabled)) !default;
+  border-color: var(--card-disabled-border, var(--color-border)) !default;
+  cursor: not-allowed !default;
+  opacity: var(--card-disabled-opacity, 0.6) !default;
+}
+
+/* ===== Card Sections ===== */
+
+/* Card Header */
+.card-header {
+  padding: var(--card-header-padding, 1.5rem 1.5rem 1rem 1.5rem) !default;
+  border-bottom: var(--card-header-border-width, var(--border-width-thin)) var(--border-style-solid) var(--card-header-border-color, var(--color-border)) !default;
+  margin: var(--card-header-margin, calc(-1.5rem) calc(-1.5rem) 1rem calc(-1.5rem)) !default;
+  border-top-left-radius: var(--card-border-radius, var(--border-radius-lg)) !default;
+  border-top-right-radius: var(--card-border-radius, var(--border-radius-lg)) !default;
+}
+
+.card-header:first-child {
+  margin-top: calc(-1.5rem) !default;
+}
+
+/* Card Body */
+.card-body {
+  padding: var(--card-body-padding, 0) !default;
+}
+
+/* Card Footer */
+.card-footer {
+  padding: var(--card-footer-padding, 1rem 1.5rem 1.5rem 1.5rem) !default;
+  border-top: var(--card-footer-border-width, var(--border-width-thin)) var(--border-style-solid) var(--card-footer-border-color, var(--color-border)) !default;
+  margin: var(--card-footer-margin, 1rem calc(-1.5rem) calc(-1.5rem) calc(-1.5rem)) !default;
+  border-bottom-left-radius: var(--card-border-radius, var(--border-radius-lg)) !default;
+  border-bottom-right-radius: var(--card-border-radius, var(--border-radius-lg)) !default;
+}
+
+.card-footer:last-child {
+  margin-bottom: calc(-1.5rem) !default;
+}
+
+/* ===== Card Title & Description ===== */
+.card-title {
+  font-size: var(--card-title-font-size, var(--typography-base-headline-font-size)) !default;
+  font-weight: var(--card-title-font-weight, var(--typography-font-weight-semibold)) !default;
+  line-height: var(--card-title-line-height, var(--typography-base-headline-line-height)) !default;
+  color: var(--card-title-color, var(--color-text)) !default;
+  margin: var(--card-title-margin, 0 0 0.5rem 0) !default;
+}
+
+.card-description {
+  font-size: var(--card-description-font-size, var(--typography-paragraph-font-size)) !default;
+  font-weight: var(--card-description-font-weight, var(--typography-font-weight-regular)) !default;
+  line-height: var(--card-description-line-height, var(--typography-paragraph-line-height)) !default;
+  color: var(--card-description-color, var(--color-text)) !default;
+  margin: var(--card-description-margin, 0) !default;
+}
+
+/* ===== Dark Theme Adjustments ===== */
+[data-theme="dark"] .card-elevated {
+  box-shadow: var(--card-elevated-shadow-dark,
+    0 1px 3px 0 rgba(0, 0, 0, 0.3),
+    0 1px 2px -1px rgba(0, 0, 0, 0.3)
+  ) !default;
+}
+
+[data-theme="dark"] .card-elevated:hover {
+  box-shadow: var(--card-elevated-hover-shadow-dark,
+    0 4px 6px -1px rgba(0, 0, 0, 0.4),
+    0 2px 4px -2px rgba(0, 0, 0, 0.4)
+  ) !default;
+}
+
+[data-theme="dark"] .card-interactive:hover {
+  box-shadow: var(--card-interactive-hover-shadow-dark,
+    0 4px 6px -1px rgba(0, 0, 0, 0.4),
+    0 2px 4px -2px rgba(0, 0, 0, 0.4)
+  ) !default;
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 768px) {
+  .card {
+    padding: var(--card-padding-mobile, 1rem) !default;
+    border-radius: var(--card-border-radius-mobile, var(--border-radius-md)) !default;
+  }
+
+  .card-header {
+    padding: var(--card-header-padding-mobile, 1rem 1rem 0.75rem 1rem) !default;
+    margin: var(--card-header-margin-mobile, calc(-1rem) calc(-1rem) 0.75rem calc(-1rem)) !default;
+  }
+
+  .card-footer {
+    padding: var(--card-footer-padding-mobile, 0.75rem 1rem 1rem 1rem) !default;
+    margin: var(--card-footer-margin-mobile, 0.75rem calc(-1rem) calc(-1rem) calc(-1rem)) !default;
+  }
+}

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unicorn Component Library - Theme Demo</title>
+  <link rel="stylesheet" href="./src/styles.css">
+  <style>
+    .demo-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .demo-section {
+      margin-bottom: 3rem;
+    }
+
+    .demo-section h2 {
+      margin-bottom: 1rem;
+      font-size: var(--typography-section-heading-font-size);
+      font-weight: var(--typography-font-weight-semibold);
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .demo-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1000;
+    }
+
+    .color-swatch {
+      padding: 1rem;
+      border-radius: var(--border-radius-md);
+      text-align: center;
+      font-weight: var(--typography-font-weight-medium);
+    }
+
+    .code-block {
+      background-color: var(--color-background-contrast);
+      padding: 1rem;
+      border-radius: var(--border-radius-md);
+      font-family: var(--typography-font-family-monospace);
+      font-size: var(--typography-small-text-font-size);
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <button class="btn btn-primary btn-md theme-toggle" onclick="toggleTheme()">
+    Toggle Dark Mode
+  </button>
+
+  <div class="demo-container">
+    <header style="margin-bottom: 3rem;">
+      <h1 class="text-display-heading" style="margin-bottom: 0.5rem;">Unicorn Component Library</h1>
+      <p class="text-lead-paragraph">Theme-aware components with full light/dark mode support</p>
+    </header>
+
+    <!-- Buttons Section -->
+    <section class="demo-section">
+      <h2>Buttons</h2>
+
+      <h3 style="margin-bottom: 1rem;">Variants</h3>
+      <div class="demo-buttons">
+        <button class="btn btn-primary btn-md">Primary</button>
+        <button class="btn btn-secondary btn-md">Secondary</button>
+        <button class="btn btn-danger btn-md">Danger</button>
+        <button class="btn btn-primary btn-md" disabled>Disabled</button>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Sizes</h3>
+      <div class="demo-buttons">
+        <button class="btn btn-primary btn-sm">Small</button>
+        <button class="btn btn-primary btn-md">Medium</button>
+        <button class="btn btn-primary btn-lg">Large</button>
+      </div>
+    </section>
+
+    <!-- Cards Section -->
+    <section class="demo-section">
+      <h2>Cards</h2>
+      <div class="demo-grid">
+        <div class="card card-default">
+          <h3 class="card-title">Default Card</h3>
+          <p class="card-description">This is a default card with a simple border.</p>
+        </div>
+
+        <div class="card card-elevated">
+          <h3 class="card-title">Elevated Card</h3>
+          <p class="card-description">This card has a shadow effect.</p>
+        </div>
+
+        <div class="card card-outlined">
+          <h3 class="card-title">Outlined Card</h3>
+          <p class="card-description">This card has a prominent border.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Colors Section -->
+    <section class="demo-section">
+      <h2>Color Palette</h2>
+
+      <h3 style="margin-bottom: 1rem;">Brand Colors</h3>
+      <div class="demo-grid">
+        <div class="color-swatch bg-primary text-white">Primary</div>
+        <div class="color-swatch bg-primary-light text-white">Primary Light</div>
+        <div class="color-swatch bg-primary-dark text-white">Primary Dark</div>
+      </div>
+
+      <div class="demo-grid">
+        <div class="color-swatch bg-secondary text-white">Secondary</div>
+        <div class="color-swatch bg-secondary-light text-white">Secondary Light</div>
+        <div class="color-swatch bg-secondary-dark text-white">Secondary Dark</div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Semantic Colors</h3>
+      <div class="demo-grid">
+        <div class="color-swatch bg-success text-white">Success</div>
+        <div class="color-swatch bg-error text-white">Error</div>
+        <div class="color-swatch bg-warning text-white">Warning</div>
+        <div class="color-swatch bg-info text-white">Info</div>
+      </div>
+    </section>
+
+    <!-- Typography Section -->
+    <section class="demo-section">
+      <h2>Typography</h2>
+      <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <h1 class="text-page-heading">Page Heading</h1>
+        <h2 class="text-section-heading">Section Heading</h2>
+        <h3 class="text-subsection-heading">Subsection Heading</h3>
+        <p class="text-lead-paragraph">Lead paragraph with larger text for introductions.</p>
+        <p class="text-paragraph">Regular paragraph text for body content.</p>
+        <p class="text-small-text">Small text for captions and labels.</p>
+      </div>
+    </section>
+
+    <!-- Customization Example -->
+    <section class="demo-section">
+      <h2>Customization Example</h2>
+      <div class="card card-elevated" style="margin-bottom: 1rem;">
+        <h3 class="card-title">Custom Styled Card</h3>
+        <p class="card-description">Override CSS variables to customize any component:</p>
+        <div class="code-block">
+:root {
+  --color-primary: #FF6B6B;
+  --btn-border-radius: 50px;
+  --card-padding: 2rem;
+}
+        </div>
+      </div>
+
+      <button
+        class="btn btn-primary btn-lg"
+        style="--btn-border-radius: 50px; --btn-primary-bg: #FF6B6B;"
+      >
+        Custom Rounded Button
+      </button>
+    </section>
+
+    <!-- Theme Info -->
+    <section class="demo-section">
+      <div class="card card-outlined">
+        <h3 class="card-title">🌓 Theme System</h3>
+        <p class="card-description" style="margin-bottom: 1rem;">
+          All components automatically adapt to light and dark themes. The theme follows your system preference
+          or can be controlled manually using the <code>data-theme</code> attribute.
+        </p>
+        <div class="demo-buttons">
+          <button class="btn btn-primary btn-md" onclick="setTheme('light')">Light Mode</button>
+          <button class="btn btn-primary btn-md" onclick="setTheme('dark')">Dark Mode</button>
+          <button class="btn btn-secondary btn-md" onclick="setTheme('auto')">Auto (System)</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function setTheme(theme) {
+      const html = document.documentElement;
+      if (theme === 'auto') {
+        html.removeAttribute('data-theme');
+      } else {
+        html.setAttribute('data-theme', theme);
+      }
+      localStorage.setItem('theme', theme);
+    }
+
+    function toggleTheme() {
+      const html = document.documentElement;
+      const currentTheme = html.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      setTheme(newTheme);
+    }
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme && savedTheme !== 'auto') {
+      setTheme(savedTheme);
+    }
+  </script>
+</body>
+</html>

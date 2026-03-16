@@ -1,0 +1,204 @@
+/**
+ * Color Design Tokens - CSS Custom Properties
+ * Theme System with Light/Dark Mode Support
+ *
+ * Usage:
+ * - Apply colors: background-color: var(--color-primary)
+ * - Or use utility classes: .bg-primary, .text-primary, .border-primary
+ */
+
+:root {
+  /* Primary Colors */
+  --color-primary: #7B40F7;
+  --color-primary-light: #9f70f9;
+  --color-primary-dark: #6233c6;
+
+  /* Secondary Colors */
+  --color-secondary: #F740A4;
+  --color-secondary-light: #f970bd;
+  --color-secondary-dark: #c63383;
+
+  /* Semantic Colors */
+  --color-success: #4CAF50;
+  --color-success-light: #76c279;
+  --color-success-dark: #3d8c40;
+
+  --color-error: #F44336;
+  --color-error-light: #f7706a;
+  --color-error-dark: #c3362b;
+
+  --color-warning: #FF9800;
+  --color-warning-light: #ffb333;
+  --color-warning-dark: #cc7a00;
+
+  --color-info: #08c9af;
+  --color-info-light: #3dd5c2;
+  --color-info-dark: #06a18c;
+
+  /* Neutral Colors */
+  --color-neutral-black: #121212;
+  --color-neutral-black60: #717171;
+  --color-neutral-black30: #B8B8B8;
+  --color-neutral-black20: #D0D0D0;
+  --color-neutral-white: #FFFFFF;
+
+  /* Border Widths */
+  --border-width-thin: 1px;
+  --border-width-medium: 2px;
+  --border-width-thick: 4px;
+
+  /* Border Radius */
+  --border-radius-xs: 4px;
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 20px;
+  --border-radius-2xl: 24px;
+  --border-radius-full: 9999px;
+
+  /* Border Styles */
+  --border-style-solid: solid;
+  --border-style-transparent: transparent;
+  --border-style-none: none;
+
+  /* Light Theme (Default) */
+  --color-background: #FFFFFF;
+  --color-background-contrast: #D0D0D0;
+  --color-text: #121212;
+  --color-text-disabled: #717171;
+  --color-border: #B8B8B8;
+  --color-border-error: #F44336;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --color-background: #121212;
+  --color-background-contrast: #2A2A2A;
+  --color-text: #FFFFFF;
+  --color-text-disabled: #B8B8B8;
+  --color-border: #717171;
+  --color-border-error: #f7706a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-background: #121212;
+    --color-background-contrast: #2A2A2A;
+    --color-text: #FFFFFF;
+    --color-text-disabled: #B8B8B8;
+    --color-border: #717171;
+    --color-border-error: #f7706a;
+  }
+}
+
+/* ===== Background Color Utilities ===== */
+.bg-primary { background-color: var(--color-primary); }
+.bg-primary-light { background-color: var(--color-primary-light); }
+.bg-primary-dark { background-color: var(--color-primary-dark); }
+
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-secondary-light { background-color: var(--color-secondary-light); }
+.bg-secondary-dark { background-color: var(--color-secondary-dark); }
+
+.bg-success { background-color: var(--color-success); }
+.bg-success-light { background-color: var(--color-success-light); }
+.bg-success-dark { background-color: var(--color-success-dark); }
+
+.bg-error { background-color: var(--color-error); }
+.bg-error-light { background-color: var(--color-error-light); }
+.bg-error-dark { background-color: var(--color-error-dark); }
+
+.bg-warning { background-color: var(--color-warning); }
+.bg-warning-light { background-color: var(--color-warning-light); }
+.bg-warning-dark { background-color: var(--color-warning-dark); }
+
+.bg-info { background-color: var(--color-info); }
+.bg-info-light { background-color: var(--color-info-light); }
+.bg-info-dark { background-color: var(--color-info-dark); }
+
+.bg-base { background-color: var(--color-background); }
+.bg-contrast { background-color: var(--color-background-contrast); }
+
+/* ===== Text Color Utilities ===== */
+.text-primary { color: var(--color-primary); }
+.text-primary-light { color: var(--color-primary-light); }
+.text-primary-dark { color: var(--color-primary-dark); }
+
+.text-secondary { color: var(--color-secondary); }
+.text-secondary-light { color: var(--color-secondary-light); }
+.text-secondary-dark { color: var(--color-secondary-dark); }
+
+.text-success { color: var(--color-success); }
+.text-success-light { color: var(--color-success-light); }
+.text-success-dark { color: var(--color-success-dark); }
+
+.text-error { color: var(--color-error); }
+.text-error-light { color: var(--color-error-light); }
+.text-error-dark { color: var(--color-error-dark); }
+
+.text-warning { color: var(--color-warning); }
+.text-warning-light { color: var(--color-warning-light); }
+.text-warning-dark { color: var(--color-warning-dark); }
+
+.text-info { color: var(--color-info); }
+.text-info-light { color: var(--color-info-light); }
+.text-info-dark { color: var(--color-info-dark); }
+
+.text-base { color: var(--color-text); }
+.text-disabled { color: var(--color-text-disabled); }
+
+/* Neutral text colors */
+.text-black { color: var(--color-neutral-black); }
+.text-black60 { color: var(--color-neutral-black60); }
+.text-black30 { color: var(--color-neutral-black30); }
+.text-black20 { color: var(--color-neutral-black20); }
+.text-white { color: var(--color-neutral-white); }
+
+/* ===== Border Color Utilities ===== */
+.border-primary { border-color: var(--color-primary); }
+.border-primary-light { border-color: var(--color-primary-light); }
+.border-primary-dark { border-color: var(--color-primary-dark); }
+
+.border-secondary { border-color: var(--color-secondary); }
+.border-secondary-light { border-color: var(--color-secondary-light); }
+.border-secondary-dark { border-color: var(--color-secondary-dark); }
+
+.border-success { border-color: var(--color-success); }
+.border-error { border-color: var(--color-error); }
+.border-warning { border-color: var(--color-warning); }
+.border-info { border-color: var(--color-info); }
+
+.border-base { border-color: var(--color-border); }
+.border-error-state { border-color: var(--color-border-error); }
+
+/* ===== Border Width Utilities ===== */
+.border-thin { border-width: var(--border-width-thin); }
+.border-medium { border-width: var(--border-width-medium); }
+.border-thick { border-width: var(--border-width-thick); }
+
+/* ===== Border Radius Utilities ===== */
+.rounded-xs { border-radius: var(--border-radius-xs); }
+.rounded-sm { border-radius: var(--border-radius-sm); }
+.rounded-md { border-radius: var(--border-radius-md); }
+.rounded-lg { border-radius: var(--border-radius-lg); }
+.rounded-xl { border-radius: var(--border-radius-xl); }
+.rounded-2xl { border-radius: var(--border-radius-2xl); }
+.rounded-full { border-radius: var(--border-radius-full); }
+
+/* ===== Border Style Utilities ===== */
+.border-solid { border-style: var(--border-style-solid); }
+.border-transparent { border-color: transparent; }
+.border-none { border-style: none; }
+
+/* ===== Combined Border Utilities ===== */
+.border {
+  border-width: var(--border-width-thin);
+  border-style: var(--border-style-solid);
+  border-color: var(--color-border);
+}
+
+.border-error-combined {
+  border-width: var(--border-width-thin);
+  border-style: var(--border-style-solid);
+  border-color: var(--color-border-error);
+}

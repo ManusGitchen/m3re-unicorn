@@ -30,6 +30,14 @@ yarn add @ManusGitchen/m3re-unicorn/unicorn vue@^3.5.30
 
 ## 🚀 Quick Start
 
+### Installation & Setup
+
+```ts
+// In your main.ts or App.vue
+import '@ManusGitchen/m3re-unicorn/unicorn/styles.css'
+import { Button, Card } from '@ManusGitchen/m3re-unicorn/unicorn'
+```
+
 ### Basic Usage
 
 ```vue
@@ -38,7 +46,7 @@ yarn add @ManusGitchen/m3re-unicorn/unicorn vue@^3.5.30
     <Button variant="primary" size="lg">
       Click Me
     </Button>
-    
+
     <Card variant="elevated">
       <h3>Card Title</h3>
       <p>Card content goes here</p>
@@ -47,7 +55,7 @@ yarn add @ManusGitchen/m3re-unicorn/unicorn vue@^3.5.30
 </template>
 
 <script setup lang="ts">
-import { Button, Card } from '@your-org/unicorn'
+import { Button, Card } from '@ManusGitchen/m3re-unicorn/unicorn'
 </script>
 ```
 
@@ -96,22 +104,110 @@ const props: ButtonProps = {
 
 **Variants:** `default`, `elevated`, `outlined`
 
-## 🎨 Styling
+## 🎨 Design Tokens
 
-Components use inline styles and scoped CSS. Customize by:
+### Typography Tokens
 
-1. **CSS Variables** (recommended):
+Use typography design tokens for consistent text styling:
+
+```ts
+import { fontSizes, fontWeights, typographyStyles } from '@ManusGitchen/m3re-unicorn/unicorn'
+
+// In TypeScript
+const headingSize = fontSizes.pageHeading // '3rem'
+const boldWeight = fontWeights.bold // 700
+```
+
+Or use CSS custom properties:
 ```css
-:root {
-  --btn-primary-bg: #3b82f6;
-  --btn-primary-hover: #2563eb;
+/* Import typography tokens */
+@import '@ManusGitchen/m3re-unicorn/unicorn/tokens/typography.css';
+
+h1 {
+  font-size: var(--typography-page-heading-font-size);
+  font-weight: var(--typography-font-weight-bold);
+}
+
+/* Or use utility classes */
+.my-heading {
+  @apply text-page-heading;
 }
 ```
 
-2. **Override with classes**:
-```vue
-<Button class="my-custom-button">Text</Button>
+### Color & Theme Tokens
+
+The library includes a complete theming system with light/dark mode support:
+
+```ts
+import { primary, secondary, lightTheme, darkTheme } from '@ManusGitchen/m3re-unicorn/unicorn'
+
+// Access color variations
+console.log(primary.base)  // '#7B40F7'
+console.log(primary.light) // '#9f70f9'
+console.log(primary.dark)  // '#6233c6'
 ```
+
+Or use CSS custom properties:
+```css
+/* Import color tokens */
+@import '@ManusGitchen/m3re-unicorn/unicorn/tokens/colors.css';
+
+.my-button {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  border: var(--border-width-thin) solid var(--color-border);
+  border-radius: var(--border-radius-md);
+}
+
+/* Use utility classes */
+.card {
+  @apply bg-base text-base border border-base rounded-lg;
+}
+```
+
+#### Light/Dark Mode
+
+Enable dark mode by adding `data-theme="dark"` to your root element:
+
+```html
+<html data-theme="dark">
+  <!-- Your app -->
+</html>
+```
+
+Or let it follow system preferences (automatically supported).
+
+#### Available Color Tokens
+
+- **Brand Colors:** `primary`, `secondary` (base, light, dark variations)
+- **Semantic Colors:** `success`, `error`, `warning`, `info` (base, light, dark variations)
+- **Neutral Colors:** `black`, `black60`, `black30`, `black20`, `white`
+- **Theme Colors:** `background`, `text`, `border` (automatically switch with theme)
+- **Border Widths:** `thin` (1px), `medium` (2px), `thick` (4px)
+- **Border Radius:** `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `full`
+
+### Customization
+
+All components use CSS custom properties with `!default`, making them fully customizable:
+
+```css
+:root {
+  /* Override primary color */
+  --color-primary: #FF6B6B;
+  --color-primary-light: #FF8E8E;
+  --color-primary-dark: #CC5656;
+
+  /* Customize button appearance */
+  --btn-border-radius: 50px;
+  --btn-font-weight: 600;
+
+  /* Customize card appearance */
+  --card-padding: 2rem;
+  --card-border-radius: 20px;
+}
+```
+
+**📖 For complete customization options, see [CUSTOMIZATION.md](./CUSTOMIZATION.md)**
 
 ## 📖 Documentation
 
