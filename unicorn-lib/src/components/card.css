@@ -9,143 +9,532 @@
 
 /* Card Base Styles - Customizable with !default */
 .card {
-  /* Background & Text */
-  background-color: var(--card-bg, var(--color-background)) !default;
-  color: var(--card-color, var(--color-text)) !default;
+  /* Background & Text - Always has background based on theme */
+  background-color: var(--card-bg, var(--color-background));
+  color: var(--card-color, var(--color-text));
 
   /* Border */
-  border: var(--card-border-width, var(--border-width-thin)) var(--border-style-solid) var(--card-border-color, var(--color-border)) !default;
-  border-radius: var(--card-border-radius, var(--border-radius-lg)) !default;
+  border: var(--card-border-width, var(--border-width-thin)) var(--border-style-solid) var(--card-border-color, var(--color-border));
+  border-radius: var(--card-border-radius, var(--border-radius-lg));
 
   /* Spacing */
-  padding: var(--card-padding, 1.5rem) !default;
+  padding: var(--card-padding, 1.5rem);
 
   /* Display */
-  display: block !default;
-  box-sizing: border-box !default;
+  display: block;
+  box-sizing: border-box;
 
   /* Transition */
-  transition: var(--card-transition, all 0.2s ease-in-out) !default;
+  transition: var(--card-transition, all 0.2s ease-in-out);
 
   /* Shadow */
-  box-shadow: var(--card-shadow, none) !default;
+  box-shadow: var(--card-shadow, none);
+}
+
+/* Ensure cards always have proper background in both themes */
+/* Only apply to non-semantic cards to avoid overriding colored backgrounds */
+[data-theme="light"] .card-default,
+[data-theme="light"] .card-elevated:not(.card-success):not(.card-warning):not(.card-error):not(.card-info),
+[data-theme="light"] .card-outlined:not(.card-success):not(.card-warning):not(.card-error):not(.card-info) {
+  background-color: var(--card-bg, #FFFFFF);
+}
+
+[data-theme="dark"] .card-default,
+[data-theme="dark"] .card-elevated:not(.card-success):not(.card-warning):not(.card-error):not(.card-info),
+[data-theme="dark"] .card-outlined:not(.card-success):not(.card-warning):not(.card-error):not(.card-info) {
+  background-color: var(--card-bg, #1E1E1E);
+}
+
+/* Auto theme support */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .card-default,
+  :root:not([data-theme="dark"]) .card-elevated:not(.card-success):not(.card-warning):not(.card-error):not(.card-info),
+  :root:not([data-theme="dark"]) .card-outlined:not(.card-success):not(.card-warning):not(.card-error):not(.card-info) {
+    background-color: var(--card-bg, #FFFFFF);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .card-default,
+  :root:not([data-theme="light"]) .card-elevated:not(.card-success):not(.card-warning):not(.card-error):not(.card-info),
+  :root:not([data-theme="light"]) .card-outlined:not(.card-success):not(.card-warning):not(.card-error):not(.card-info) {
+    background-color: var(--card-bg, #1E1E1E);
+  }
 }
 
 /* ===== Card Variants ===== */
 
 /* Default Card */
 .card-default {
-  background-color: var(--card-default-bg, var(--color-background)) !default;
-  border-color: var(--card-default-border, var(--color-border)) !default;
-  box-shadow: var(--card-default-shadow, none) !default;
+  background-color: var(--card-default-bg, var(--color-background));
+  border-color: var(--card-default-border, var(--color-border));
+  box-shadow: var(--card-default-shadow, none);
 }
 
 /* Elevated Card */
 .card-elevated {
-  background-color: var(--card-elevated-bg, var(--color-background)) !default;
-  border-color: var(--card-elevated-border, transparent) !default;
+  background-color: var(--card-elevated-bg, var(--color-background));
+  border-color: var(--card-elevated-border, transparent);
   box-shadow: var(--card-elevated-shadow,
     0 1px 3px 0 rgba(0, 0, 0, 0.1),
     0 1px 2px -1px rgba(0, 0, 0, 0.1)
-  ) !default;
+  );
 }
 
 .card-elevated:hover {
   box-shadow: var(--card-elevated-hover-shadow,
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -2px rgba(0, 0, 0, 0.1)
-  ) !default;
-  transform: var(--card-elevated-hover-transform, translateY(-2px)) !default;
+  );
+  transform: var(--card-elevated-hover-transform, translateY(-2px));
 }
 
 /* Outlined Card */
 .card-outlined {
-  background-color: var(--card-outlined-bg, var(--color-background)) !default;
-  border-color: var(--card-outlined-border, var(--color-border)) !default;
-  border-width: var(--card-outlined-border-width, var(--border-width-medium)) !default;
-  box-shadow: var(--card-outlined-shadow, none) !default;
+  background-color: var(--card-outlined-bg, var(--color-background));
+  border-color: var(--card-outlined-border, var(--color-border));
+  border-width: var(--card-outlined-border-width, var(--border-width-medium));
+  box-shadow: var(--card-outlined-shadow, none);
 }
 
 .card-outlined:hover {
-  border-color: var(--card-outlined-hover-border, var(--color-primary)) !default;
+  border-color: var(--card-outlined-hover-border, var(--color-primary));
+}
+
+/* Transparent Card */
+.card-transparent {
+  background-color: transparent;
+  border-color: var(--card-transparent-border, transparent);
+  box-shadow: none;
+}
+
+/* ===== Semantic Variants - Filled (Full Color Background) ===== */
+
+/* Success Card - Filled */
+.card-success {
+  background-color: var(--card-success-bg, var(--color-success));
+  border-color: var(--card-success-border, var(--color-success-dark));
+  border-width: var(--card-success-border-width, var(--border-width-thin));
+  color: var(--card-success-color, var(--color-neutral-white));
+}
+
+.card-success .card-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Warning Card - Filled */
+.card-warning {
+  background-color: var(--card-warning-bg, var(--color-warning));
+  border-color: var(--card-warning-border, var(--color-warning-dark));
+  border-width: var(--card-warning-border-width, var(--border-width-thin));
+  color: var(--card-warning-color, var(--color-neutral-white));
+}
+
+.card-warning .card-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Error Card - Filled */
+.card-error {
+  background-color: var(--card-error-bg, var(--color-error));
+  border-color: var(--card-error-border, var(--color-error-dark));
+  border-width: var(--card-error-border-width, var(--border-width-thin));
+  color: var(--card-error-color, var(--color-neutral-white));
+}
+
+.card-error .card-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Info Card - Filled */
+.card-info {
+  background-color: var(--card-info-bg, var(--color-info));
+  border-color: var(--card-info-border, var(--color-info-dark));
+  border-width: var(--card-info-border-width, var(--border-width-thin));
+  color: var(--card-info-color, var(--color-neutral-white));
+}
+
+.card-info .card-subtitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Dark theme adjustments for filled semantic variants */
+[data-theme="dark"] .card-success {
+  background-color: var(--card-success-bg-dark, var(--color-success-light));
+  border-color: var(--card-success-border-dark, var(--color-success));
+}
+
+[data-theme="dark"] .card-warning {
+  background-color: var(--card-warning-bg-dark, var(--color-warning-light));
+  border-color: var(--card-warning-border-dark, var(--color-warning));
+}
+
+[data-theme="dark"] .card-error {
+  background-color: var(--card-error-bg-dark, var(--color-error-light));
+  border-color: var(--card-error-border-dark, var(--color-error));
+}
+
+[data-theme="dark"] .card-info {
+  background-color: var(--card-info-bg-dark, var(--color-info-light));
+  border-color: var(--card-info-border-dark, var(--color-info));
+}
+
+/* ===== Semantic Variants - Outlined (Tinted Background - Default) ===== */
+
+/* Success Card - Outlined */
+.card-outlined.card-success {
+  background-color: var(--card-success-outlined-bg, rgba(76, 175, 80, 0.15));
+  border-color: var(--card-success-outlined-border, var(--color-success));
+  border-width: var(--card-success-outlined-border-width, var(--border-width-medium));
+  color: var(--card-success-outlined-color, var(--color-text));
+}
+
+.card-outlined.card-success .card-subtitle {
+  color: var(--color-text-disabled);
+}
+
+/* Warning Card - Outlined */
+.card-outlined.card-warning {
+  background-color: var(--card-warning-outlined-bg, rgba(255, 152, 0, 0.15));
+  border-color: var(--card-warning-outlined-border, var(--color-warning));
+  border-width: var(--card-warning-outlined-border-width, var(--border-width-medium));
+  color: var(--card-warning-outlined-color, var(--color-text));
+}
+
+.card-outlined.card-warning .card-subtitle {
+  color: var(--color-text-disabled);
+}
+
+/* Error Card - Outlined */
+.card-outlined.card-error {
+  background-color: var(--card-error-outlined-bg, rgba(244, 67, 54, 0.15));
+  border-color: var(--card-error-outlined-border, var(--color-error));
+  border-width: var(--card-error-outlined-border-width, var(--border-width-medium));
+  color: var(--card-error-outlined-color, var(--color-text));
+}
+
+.card-outlined.card-error .card-subtitle {
+  color: var(--color-text-disabled);
+}
+
+/* Info Card - Outlined */
+.card-outlined.card-info {
+  background-color: var(--card-info-outlined-bg, rgba(8, 201, 175, 0.15));
+  border-color: var(--card-info-outlined-border, var(--color-info));
+  border-width: var(--card-info-outlined-border-width, var(--border-width-medium));
+  color: var(--card-info-outlined-color, var(--color-text));
+}
+
+.card-outlined.card-info .card-subtitle {
+  color: var(--color-text-disabled);
+}
+
+/* Dark theme adjustments for outlined semantic variants */
+[data-theme="dark"] .card-outlined.card-success {
+  background-color: var(--card-success-outlined-bg-dark, rgba(76, 175, 80, 0.2));
+  border-color: var(--card-success-outlined-border-dark, var(--color-success-light));
+}
+
+[data-theme="dark"] .card-outlined.card-warning {
+  background-color: var(--card-warning-outlined-bg-dark, rgba(255, 152, 0, 0.2));
+  border-color: var(--card-warning-outlined-border-dark, var(--color-warning-light));
+}
+
+[data-theme="dark"] .card-outlined.card-error {
+  background-color: var(--card-error-outlined-bg-dark, rgba(244, 67, 54, 0.2));
+  border-color: var(--card-error-outlined-border-dark, var(--color-error-light));
+}
+
+[data-theme="dark"] .card-outlined.card-info {
+  background-color: var(--card-info-outlined-bg-dark, rgba(8, 201, 175, 0.2));
+  border-color: var(--card-info-outlined-border-dark, var(--color-info-light));
+}
+
+/* ===== Semantic Variants - Plain Background Modifier ===== */
+/* Add 'card-plain' class for solid theme background (white/dark) */
+
+.card-outlined.card-plain.card-success {
+  background-color: var(--color-background);
+}
+
+.card-outlined.card-plain.card-warning {
+  background-color: var(--color-background);
+}
+
+.card-outlined.card-plain.card-error {
+  background-color: var(--color-background);
+}
+
+.card-outlined.card-plain.card-info {
+  background-color: var(--color-background);
+}
+
+[data-theme="light"] .card-outlined.card-plain.card-success,
+[data-theme="light"] .card-outlined.card-plain.card-warning,
+[data-theme="light"] .card-outlined.card-plain.card-error,
+[data-theme="light"] .card-outlined.card-plain.card-info {
+  background-color: #FFFFFF;
+}
+
+[data-theme="dark"] .card-outlined.card-plain.card-success,
+[data-theme="dark"] .card-outlined.card-plain.card-warning,
+[data-theme="dark"] .card-outlined.card-plain.card-error,
+[data-theme="dark"] .card-outlined.card-plain.card-info {
+  background-color: #1E1E1E;
+}
+
+/* ===== Semantic Variants - Transparent Background Modifier ===== */
+/* Add 'card-transparent' class for transparent background */
+
+.card-outlined.card-transparent.card-success,
+.card-outlined.card-transparent.card-warning,
+.card-outlined.card-transparent.card-error,
+.card-outlined.card-transparent.card-info {
+  background-color: transparent;
+}
+
+/* ===== Semantic Variants - Elevated Modifier ===== */
+/* Add 'card-elevated' class for shadow effect on filled semantic cards */
+
+.card-elevated.card-success,
+.card-elevated.card-warning,
+.card-elevated.card-error,
+.card-elevated.card-info {
+  box-shadow: var(--card-elevated-shadow,
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px -1px rgba(0, 0, 0, 0.1)
+  );
+  border-color: transparent;
+}
+
+.card-elevated.card-success:hover,
+.card-elevated.card-warning:hover,
+.card-elevated.card-error:hover,
+.card-elevated.card-info:hover {
+  box-shadow: var(--card-elevated-hover-shadow,
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1)
+  );
+  transform: var(--card-elevated-hover-transform, translateY(-2px));
+}
+
+/* Dark theme shadow for elevated semantic cards */
+[data-theme="dark"] .card-elevated.card-success,
+[data-theme="dark"] .card-elevated.card-warning,
+[data-theme="dark"] .card-elevated.card-error,
+[data-theme="dark"] .card-elevated.card-info {
+  box-shadow: var(--card-elevated-shadow-dark,
+    0 1px 3px 0 rgba(0, 0, 0, 0.3),
+    0 1px 2px -1px rgba(0, 0, 0, 0.3)
+  );
+}
+
+[data-theme="dark"] .card-elevated.card-success:hover,
+[data-theme="dark"] .card-elevated.card-warning:hover,
+[data-theme="dark"] .card-elevated.card-error:hover,
+[data-theme="dark"] .card-elevated.card-info:hover {
+  box-shadow: var(--card-elevated-hover-shadow-dark,
+    0 4px 6px -1px rgba(0, 0, 0, 0.4),
+    0 2px 4px -2px rgba(0, 0, 0, 0.4)
+  );
+}
+
+/* Elevated modifier for outlined semantic cards */
+.card-outlined.card-elevated.card-success,
+.card-outlined.card-elevated.card-warning,
+.card-outlined.card-elevated.card-error,
+.card-outlined.card-elevated.card-info {
+  box-shadow: var(--card-elevated-shadow,
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px -1px rgba(0, 0, 0, 0.1)
+  );
+}
+
+.card-outlined.card-elevated.card-success:hover,
+.card-outlined.card-elevated.card-warning:hover,
+.card-outlined.card-elevated.card-error:hover,
+.card-outlined.card-elevated.card-info:hover {
+  box-shadow: var(--card-elevated-hover-shadow,
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1)
+  );
+  transform: var(--card-elevated-hover-transform, translateY(-2px));
+}
+
+[data-theme="dark"] .card-outlined.card-elevated.card-success,
+[data-theme="dark"] .card-outlined.card-elevated.card-warning,
+[data-theme="dark"] .card-outlined.card-elevated.card-error,
+[data-theme="dark"] .card-outlined.card-elevated.card-info {
+  box-shadow: var(--card-elevated-shadow-dark,
+    0 1px 3px 0 rgba(0, 0, 0, 0.3),
+    0 1px 2px -1px rgba(0, 0, 0, 0.3)
+  );
+}
+
+[data-theme="dark"] .card-outlined.card-elevated.card-success:hover,
+[data-theme="dark"] .card-outlined.card-elevated.card-warning:hover,
+[data-theme="dark"] .card-outlined.card-elevated.card-error:hover,
+[data-theme="dark"] .card-outlined.card-elevated.card-info:hover {
+  box-shadow: var(--card-elevated-hover-shadow-dark,
+    0 4px 6px -1px rgba(0, 0, 0, 0.4),
+    0 2px 4px -2px rgba(0, 0, 0, 0.4)
+  );
 }
 
 /* ===== Card States ===== */
 
 /* Interactive Card */
 .card-interactive {
-  cursor: pointer !default;
+  cursor: pointer;
 }
 
 .card-interactive:hover {
-  border-color: var(--card-interactive-hover-border, var(--color-primary)) !default;
+  border-color: var(--card-interactive-hover-border, var(--color-primary));
   box-shadow: var(--card-interactive-hover-shadow,
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -2px rgba(0, 0, 0, 0.1)
-  ) !default;
+  );
 }
 
 .card-interactive:active {
-  transform: var(--card-interactive-active-transform, scale(0.98)) !default;
+  transform: var(--card-interactive-active-transform, scale(0.98));
 }
 
 /* Disabled Card */
 .card-disabled {
-  background-color: var(--card-disabled-bg, var(--color-background-contrast)) !default;
-  color: var(--card-disabled-color, var(--color-text-disabled)) !default;
-  border-color: var(--card-disabled-border, var(--color-border)) !default;
-  cursor: not-allowed !default;
-  opacity: var(--card-disabled-opacity, 0.6) !default;
+  background-color: var(--card-disabled-bg, var(--color-background-contrast));
+  color: var(--card-disabled-color, var(--color-text-disabled));
+  border-color: var(--card-disabled-border, var(--color-border));
+  cursor: not-allowed;
+  opacity: var(--card-disabled-opacity, 0.6);
 }
 
-/* ===== Card Sections ===== */
+/* ===== Card Layout Sections ===== */
 
-/* Card Header */
-.card-header {
-  padding: var(--card-header-padding, 1.5rem 1.5rem 1rem 1.5rem) !default;
-  border-bottom: var(--card-header-border-width, var(--border-width-thin)) var(--border-style-solid) var(--card-header-border-color, var(--color-border)) !default;
-  margin: var(--card-header-margin, calc(-1.5rem) calc(-1.5rem) 1rem calc(-1.5rem)) !default;
-  border-top-left-radius: var(--card-border-radius, var(--border-radius-lg)) !default;
-  border-top-right-radius: var(--card-border-radius, var(--border-radius-lg)) !default;
+/* Card Image - Full bleed, no padding */
+.card-image {
+  margin: calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem)) 0 calc(-1 * var(--card-padding, 1.5rem));
+  overflow: hidden;
+  border-top-left-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-top-right-radius: var(--card-border-radius, var(--border-radius-lg));
 }
 
-.card-header:first-child {
-  margin-top: calc(-1.5rem) !default;
+.card-image img,
+.card-image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-/* Card Body */
-.card-body {
-  padding: var(--card-body-padding, 0) !default;
+/* Image Position Variants */
+.card-image-top .card-image {
+  margin: calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem)) 0 calc(-1 * var(--card-padding, 1.5rem));
+  border-top-left-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-top-right-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
-/* Card Footer */
-.card-footer {
-  padding: var(--card-footer-padding, 1rem 1.5rem 1.5rem 1.5rem) !default;
-  border-top: var(--card-footer-border-width, var(--border-width-thin)) var(--border-style-solid) var(--card-footer-border-color, var(--color-border)) !default;
-  margin: var(--card-footer-margin, 1rem calc(-1.5rem) calc(-1.5rem) calc(-1.5rem)) !default;
-  border-bottom-left-radius: var(--card-border-radius, var(--border-radius-lg)) !default;
-  border-bottom-right-radius: var(--card-border-radius, var(--border-radius-lg)) !default;
+.card-image-bottom {
+  display: flex;
+  flex-direction: column;
 }
 
-.card-footer:last-child {
-  margin-bottom: calc(-1.5rem) !default;
+.card-image-bottom .card-image {
+  order: 3;
+  margin: 0 calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem));
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-left-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-bottom-right-radius: var(--card-border-radius, var(--border-radius-lg));
 }
 
-/* ===== Card Title & Description ===== */
+.card-image-bottom .card-content {
+  order: 1;
+}
+
+.card-image-bottom .card-actions {
+  order: 2;
+}
+
+.card-image-left,
+.card-image-right {
+  display: flex;
+}
+
+.card-image-left .card-image {
+  margin: calc(-1 * var(--card-padding, 1.5rem)) 1rem calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem));
+  border-top-left-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-bottom-left-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  flex-shrink: 0;
+  width: 40%;
+}
+
+.card-image-right .card-image {
+  order: 2;
+  margin: calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem)) calc(-1 * var(--card-padding, 1.5rem)) 1rem;
+  border-top-right-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-bottom-right-radius: var(--card-border-radius, var(--border-radius-lg));
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  flex-shrink: 0;
+  width: 40%;
+}
+
+.card-image-right .card-content {
+  order: 1;
+}
+
+/* Card Content - Contains title, subtitle, body */
+.card-content {
+  padding: var(--card-content-padding, 1rem);
+}
+
+/* Card Title */
 .card-title {
-  font-size: var(--card-title-font-size, var(--typography-base-headline-font-size)) !default;
-  font-weight: var(--card-title-font-weight, var(--typography-font-weight-semibold)) !default;
-  line-height: var(--card-title-line-height, var(--typography-base-headline-line-height)) !default;
-  color: var(--card-title-color, var(--color-text)) !default;
-  margin: var(--card-title-margin, 0 0 0.5rem 0) !default;
+  font-size: var(--card-title-font-size, var(--typography-base-headline-font-size));
+  font-weight: var(--card-title-font-weight, var(--typography-font-weight-semibold));
+  line-height: var(--card-title-line-height, var(--typography-base-headline-line-height));
+  color: var(--card-title-color, inherit);
+  margin: var(--card-title-margin, 0 0 0.5rem 0);
 }
 
-.card-description {
-  font-size: var(--card-description-font-size, var(--typography-paragraph-font-size)) !default;
-  font-weight: var(--card-description-font-weight, var(--typography-font-weight-regular)) !default;
-  line-height: var(--card-description-line-height, var(--typography-paragraph-line-height)) !default;
-  color: var(--card-description-color, var(--color-text)) !default;
-  margin: var(--card-description-margin, 0) !default;
+/* Card Subtitle */
+.card-subtitle {
+  font-size: var(--card-subtitle-font-size, var(--typography-paragraph-font-size));
+  font-weight: var(--card-subtitle-font-weight, var(--typography-font-weight-regular));
+  line-height: var(--card-subtitle-line-height, var(--typography-paragraph-line-height));
+  color: var(--card-subtitle-color, var(--color-text-disabled));
+  margin: var(--card-subtitle-margin, 0 0 0.75rem 0);
+}
+
+/* Card Body - Default slot content */
+.card-body {
+  font-size: var(--card-body-font-size, var(--typography-paragraph-font-size));
+  line-height: var(--card-body-line-height, var(--typography-paragraph-line-height));
+  color: var(--card-body-color, inherit);
+}
+
+.card-body > *:first-child {
+  margin-top: 0;
+}
+
+.card-body > *:last-child {
+  margin-bottom: 0;
+}
+
+/* Card Actions - Footer area for buttons */
+.card-actions {
+  display: flex;
+  gap: var(--card-actions-gap, 0.5rem);
+  padding: var(--card-actions-padding, 1rem);
+  padding-top: var(--card-actions-padding-top, 0.5rem);
+  border-top: var(--card-actions-border, none);
+  margin-top: var(--card-actions-margin-top, 0.5rem);
+  flex-wrap: wrap;
 }
 
 /* ===== Dark Theme Adjustments ===== */
@@ -153,37 +542,50 @@
   box-shadow: var(--card-elevated-shadow-dark,
     0 1px 3px 0 rgba(0, 0, 0, 0.3),
     0 1px 2px -1px rgba(0, 0, 0, 0.3)
-  ) !default;
+  );
 }
 
 [data-theme="dark"] .card-elevated:hover {
   box-shadow: var(--card-elevated-hover-shadow-dark,
     0 4px 6px -1px rgba(0, 0, 0, 0.4),
     0 2px 4px -2px rgba(0, 0, 0, 0.4)
-  ) !default;
+  );
 }
 
 [data-theme="dark"] .card-interactive:hover {
   box-shadow: var(--card-interactive-hover-shadow-dark,
     0 4px 6px -1px rgba(0, 0, 0, 0.4),
     0 2px 4px -2px rgba(0, 0, 0, 0.4)
-  ) !default;
+  );
 }
 
 /* ===== Responsive Adjustments ===== */
 @media (max-width: 768px) {
   .card {
-    padding: var(--card-padding-mobile, 1rem) !default;
-    border-radius: var(--card-border-radius-mobile, var(--border-radius-md)) !default;
+    padding: var(--card-padding-mobile, 1rem);
+    border-radius: var(--card-border-radius-mobile, var(--border-radius-md));
   }
 
-  .card-header {
-    padding: var(--card-header-padding-mobile, 1rem 1rem 0.75rem 1rem) !default;
-    margin: var(--card-header-margin-mobile, calc(-1rem) calc(-1rem) 0.75rem calc(-1rem)) !default;
+  .card-content {
+    padding: var(--card-content-padding-mobile, 0.75rem);
   }
 
-  .card-footer {
-    padding: var(--card-footer-padding-mobile, 0.75rem 1rem 1rem 1rem) !default;
-    margin: var(--card-footer-margin-mobile, 0.75rem calc(-1rem) calc(-1rem) calc(-1rem)) !default;
+  .card-actions {
+    padding: var(--card-actions-padding-mobile, 0.75rem);
+  }
+
+  /* Stack horizontal layouts on mobile */
+  .card-image-left,
+  .card-image-right {
+    flex-direction: column;
+  }
+
+  .card-image-left .card-image,
+  .card-image-right .card-image {
+    width: 100%;
+    margin: calc(-1 * var(--card-padding-mobile, 1rem)) calc(-1 * var(--card-padding-mobile, 1rem)) 0 calc(-1 * var(--card-padding-mobile, 1rem));
+    border-radius: 0;
+    border-top-left-radius: var(--card-border-radius-mobile, var(--border-radius-md));
+    border-top-right-radius: var(--card-border-radius-mobile, var(--border-radius-md));
   }
 }

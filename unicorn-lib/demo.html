@@ -94,20 +94,377 @@
     <!-- Cards Section -->
     <section class="demo-section">
       <h2>Cards</h2>
+
+      <h3 style="margin-bottom: 1rem;">Basic Variants</h3>
       <div class="demo-grid">
         <div class="card card-default">
-          <h3 class="card-title">Default Card</h3>
-          <p class="card-description">This is a default card with a simple border.</p>
+          <div class="card-content">
+            <h2 class="card-title">Default Card</h2>
+            <h3 class="card-subtitle">Simple bordered card</h3>
+            <div class="card-body">
+              <p>This is a default card with a simple border and standard styling.</p>
+            </div>
+          </div>
         </div>
 
         <div class="card card-elevated">
-          <h3 class="card-title">Elevated Card</h3>
-          <p class="card-description">This card has a shadow effect.</p>
+          <div class="card-content">
+            <h2 class="card-title">Elevated Card</h2>
+            <h3 class="card-subtitle">Card with shadow</h3>
+            <div class="card-body">
+              <p>This card has a shadow effect that lifts on hover.</p>
+            </div>
+          </div>
         </div>
 
         <div class="card card-outlined">
-          <h3 class="card-title">Outlined Card</h3>
-          <p class="card-description">This card has a prominent border.</p>
+          <div class="card-content">
+            <h2 class="card-title">Outlined Card</h2>
+            <h3 class="card-subtitle">Prominent border</h3>
+            <div class="card-body">
+              <p>This card has a prominent border that changes on hover.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-transparent">
+          <div class="card-content">
+            <h2 class="card-title">Transparent Card</h2>
+            <h3 class="card-subtitle">No background</h3>
+            <div class="card-body">
+              <p>This card has no background or border.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Semantic Variants - Filled</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-disabled);">Full colored background with white text for high contrast.</p>
+      <div class="demo-grid">
+        <div class="card card-success">
+          <div class="card-content">
+            <h2 class="card-title">Success</h2>
+            <h3 class="card-subtitle">Positive feedback</h3>
+            <div class="card-body">
+              <p>Use for success messages and positive feedback.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-info">
+          <div class="card-content">
+            <h2 class="card-title">Info</h2>
+            <h3 class="card-subtitle">Information</h3>
+            <div class="card-body">
+              <p>Use for informational messages and tips.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-warning">
+          <div class="card-content">
+            <h2 class="card-title">Warning</h2>
+            <h3 class="card-subtitle">Caution needed</h3>
+            <div class="card-body">
+              <p>Use for warnings and important notices.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-error">
+          <div class="card-content">
+            <h2 class="card-title">Error</h2>
+            <h3 class="card-subtitle">Something went wrong</h3>
+            <div class="card-body">
+              <p>Use for error messages and critical alerts.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem; margin-top: 2rem;">Semantic Variants - Filled Elevated</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-disabled);">Full colored background with shadow. Add <code>card-elevated</code> class.</p>
+      <div class="demo-grid">
+        <div class="card card-elevated card-success">
+          <div class="card-content">
+            <h2 class="card-title">Success</h2>
+            <h3 class="card-subtitle">With shadow</h3>
+            <div class="card-body">
+              <p>Elevated with shadow, lifts on hover.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-elevated card-info">
+          <div class="card-content">
+            <h2 class="card-title">Info</h2>
+            <h3 class="card-subtitle">With shadow</h3>
+            <div class="card-body">
+              <p>Elevated with shadow, lifts on hover.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-elevated card-warning">
+          <div class="card-content">
+            <h2 class="card-title">Warning</h2>
+            <h3 class="card-subtitle">With shadow</h3>
+            <div class="card-body">
+              <p>Elevated with shadow, lifts on hover.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-elevated card-error">
+          <div class="card-content">
+            <h2 class="card-title">Error</h2>
+            <h3 class="card-subtitle">With shadow</h3>
+            <div class="card-body">
+              <p>Elevated with shadow, lifts on hover.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem; margin-top: 2rem;">Semantic Variants - Outlined (Tinted)</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-disabled);">Tinted background with colored border and regular text color. Default style.</p>
+      <div class="demo-grid">
+        <div class="card card-outlined card-success">
+          <div class="card-content">
+            <h2 class="card-title">Success</h2>
+            <h3 class="card-subtitle">Tinted background</h3>
+            <div class="card-body">
+              <p>Default: Light tinted background (15% opacity).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outlined card-info">
+          <div class="card-content">
+            <h2 class="card-title">Info</h2>
+            <h3 class="card-subtitle">Tinted background</h3>
+            <div class="card-body">
+              <p>Default: Light tinted background (15% opacity).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outlined card-warning">
+          <div class="card-content">
+            <h2 class="card-title">Warning</h2>
+            <h3 class="card-subtitle">Tinted background</h3>
+            <div class="card-body">
+              <p>Default: Light tinted background (15% opacity).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outlined card-error">
+          <div class="card-content">
+            <h2 class="card-title">Error</h2>
+            <h3 class="card-subtitle">Tinted background</h3>
+            <div class="card-body">
+              <p>Default: Light tinted background (15% opacity).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem; margin-top: 2rem;">Semantic Variants - Outlined Plain</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-disabled);">Solid white/dark background with colored border. Add <code>card-plain</code> class.</p>
+      <div class="demo-grid">
+        <div class="card card-outlined card-plain card-success">
+          <div class="card-content">
+            <h2 class="card-title">Success</h2>
+            <h3 class="card-subtitle">Plain background</h3>
+            <div class="card-body">
+              <p>White in light mode, dark in dark mode.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outlined card-plain card-info">
+          <div class="card-content">
+            <h2 class="card-title">Info</h2>
+            <h3 class="card-subtitle">Plain background</h3>
+            <div class="card-body">
+              <p>White in light mode, dark in dark mode.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outlined card-plain card-warning">
+          <div class="card-content">
+            <h2 class="card-title">Warning</h2>
+            <h3 class="card-subtitle">Plain background</h3>
+            <div class="card-body">
+              <p>White in light mode, dark in dark mode.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outlined card-plain card-error">
+          <div class="card-content">
+            <h2 class="card-title">Error</h2>
+            <h3 class="card-subtitle">Plain background</h3>
+            <div class="card-body">
+              <p>White in light mode, dark in dark mode.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem; margin-top: 2rem;">Semantic Variants - Outlined Transparent</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-disabled);">Transparent background with colored border. Add <code>card-transparent</code> class.</p>
+      <div class="demo-grid">
+        <div class="card card-outlined card-transparent card-success">
+          <div class="card-content">
+            <h2 class="card-title">Success</h2>
+            <h3 class="card-subtitle">Transparent</h3>
+            <div class="card-body">
+              <p>Fully transparent background, only border visible.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outlined card-transparent card-info">
+          <div class="card-content">
+            <h2 class="card-title">Info</h2>
+            <h3 class="card-subtitle">Transparent</h3>
+            <div class="card-body">
+              <p>Fully transparent background, only border visible.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outlined card-transparent card-warning">
+          <div class="card-content">
+            <h2 class="card-title">Warning</h2>
+            <h3 class="card-subtitle">Transparent</h3>
+            <div class="card-body">
+              <p>Fully transparent background, only border visible.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outlined card-transparent card-error">
+          <div class="card-content">
+            <h2 class="card-title">Error</h2>
+            <h3 class="card-subtitle">Transparent</h3>
+            <div class="card-body">
+              <p>Fully transparent background, only border visible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem; margin-top: 2rem;">Semantic Variants - Outlined Elevated</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-disabled);">Tinted background with shadow. Combine <code>card-outlined</code> + <code>card-elevated</code>.</p>
+      <div class="demo-grid">
+        <div class="card card-outlined card-elevated card-success">
+          <div class="card-content">
+            <h2 class="card-title">Success</h2>
+            <h3 class="card-subtitle">Elevated</h3>
+            <div class="card-body">
+              <p>Tinted background with shadow, lifts on hover.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outlined card-elevated card-info">
+          <div class="card-content">
+            <h2 class="card-title">Info</h2>
+            <h3 class="card-subtitle">Elevated</h3>
+            <div class="card-body">
+              <p>Tinted background with shadow, lifts on hover.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outlined card-elevated card-warning">
+          <div class="card-content">
+            <h2 class="card-title">Warning</h2>
+            <h3 class="card-subtitle">Elevated</h3>
+            <div class="card-body">
+              <p>Tinted background with shadow, lifts on hover.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-outlined card-elevated card-error">
+          <div class="card-content">
+            <h2 class="card-title">Error</h2>
+            <h3 class="card-subtitle">Elevated</h3>
+            <div class="card-body">
+              <p>Tinted background with shadow, lifts on hover.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Cards with Images</h3>
+      <div class="demo-grid">
+        <div class="card card-elevated card-image-top">
+          <div class="card-image" style="aspect-ratio: 16/9; background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));">
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Image at Top</h2>
+            <h3 class="card-subtitle">Default position</h3>
+            <div class="card-body">
+              <p>Image spans full width with no padding.</p>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-sm">Action</button>
+            <button class="btn btn-secondary btn-sm">Cancel</button>
+          </div>
+        </div>
+
+        <div class="card card-elevated card-image-bottom">
+          <div class="card-content">
+            <h2 class="card-title">Image at Bottom</h2>
+            <h3 class="card-subtitle">Alternative layout</h3>
+            <div class="card-body">
+              <p>Content first, then image at the bottom.</p>
+            </div>
+          </div>
+          <div class="card-actions">
+            <button class="btn btn-primary btn-sm">Action</button>
+          </div>
+          <div class="card-image" style="aspect-ratio: 16/9; background: linear-gradient(135deg, var(--color-success), var(--color-info));">
+          </div>
+        </div>
+
+        <div class="card card-elevated card-image-left">
+          <div class="card-image" style="aspect-ratio: 1/1; background: linear-gradient(135deg, var(--color-warning), var(--color-error));">
+          </div>
+          <div>
+            <div class="card-content">
+              <h2 class="card-title">Image Left</h2>
+              <h3 class="card-subtitle">Horizontal layout</h3>
+              <div class="card-body">
+                <p>Image on the left, content on the right.</p>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary btn-sm">View</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Card with Actions</h3>
+      <div class="card card-elevated" style="max-width: 400px;">
+        <div class="card-content">
+          <h2 class="card-title">Complete Card Example</h2>
+          <h3 class="card-subtitle">All features demonstrated</h3>
+          <div class="card-body">
+            <p>This card demonstrates title, subtitle, body content, and action buttons all working together.</p>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-primary btn-md">Primary Action</button>
+          <button class="btn btn-secondary btn-md">Secondary</button>
         </div>
       </div>
     </section>

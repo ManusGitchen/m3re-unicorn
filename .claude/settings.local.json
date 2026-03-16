@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd unicorn-lib:*)",
+      "Bash(cd:*)"
+    ]
+  }
+}
