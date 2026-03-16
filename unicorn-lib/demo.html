@@ -6,14 +6,79 @@
   <title>Unicorn Component Library - Theme Demo</title>
   <link rel="stylesheet" href="./src/styles.css">
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .page-layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .nav-sidebar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 100vh;
+      background-color: var(--color-background-contrast);
+      border-right: 1px solid var(--color-border);
+      overflow-y: auto;
+      padding: 2rem 1rem;
+      flex-shrink: 0;
+    }
+
+    .nav-sidebar h3 {
+      margin: 0 0 1rem 0;
+      font-size: var(--typography-base-text-font-size);
+      font-weight: var(--typography-font-weight-semibold);
+      color: var(--color-text-primary);
+      padding: 0 0.75rem;
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .nav-list a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: var(--color-text-muted);
+      text-decoration: none;
+      border-radius: var(--border-radius-sm);
+      font-size: var(--typography-small-text-font-size);
+      transition: all 0.2s ease;
+    }
+
+    .nav-list a:hover {
+      background-color: var(--color-background-hover);
+      color: var(--color-text-primary);
+    }
+
+    .nav-list a.active {
+      background-color: var(--color-primary);
+      color: white;
+      font-weight: var(--typography-font-weight-medium);
+    }
+
     .demo-container {
+      flex: 1;
       max-width: 1200px;
       margin: 0 auto;
       padding: 2rem;
+      width: 100%;
     }
 
     .demo-section {
       margin-bottom: 3rem;
+      scroll-margin-top: 2rem;
     }
 
     .demo-section h2 {
@@ -58,6 +123,13 @@
       font-size: var(--typography-small-text-font-size);
       overflow-x: auto;
     }
+
+    /* Responsive behavior */
+    @media (max-width: 768px) {
+      .nav-sidebar {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
@@ -65,14 +137,29 @@
     Toggle Dark Mode
   </button>
 
-  <div class="demo-container">
+  <div class="page-layout">
+    <!-- Navigation Sidebar -->
+    <nav class="nav-sidebar">
+      <h3>Navigation</h3>
+      <ul class="nav-list">
+        <li><a href="#buttons" onclick="setActiveNav(event)">Buttons</a></li>
+        <li><a href="#cards" onclick="setActiveNav(event)">Cards</a></li>
+        <li><a href="#colors" onclick="setActiveNav(event)">Color Palette</a></li>
+        <li><a href="#typography" onclick="setActiveNav(event)">Typography</a></li>
+        <li><a href="#utilities" onclick="setActiveNav(event)">Utility Classes</a></li>
+        <li><a href="#customization" onclick="setActiveNav(event)">Customization</a></li>
+        <li><a href="#theme" onclick="setActiveNav(event)">Theme System</a></li>
+      </ul>
+    </nav>
+
+    <div class="demo-container">
     <header style="margin-bottom: 3rem;">
       <h1 class="text-display-heading" style="margin-bottom: 0.5rem;">Unicorn Component Library</h1>
       <p class="text-lead-paragraph">Theme-aware components with full light/dark mode support</p>
     </header>
 
     <!-- Buttons Section -->
-    <section class="demo-section">
+    <section id="buttons" class="demo-section">
       <h2>Buttons</h2>
 
       <h3 style="margin-bottom: 1rem;">Variants (Style Types)</h3>
@@ -267,7 +354,7 @@
     </section>
 
     <!-- Cards Section -->
-    <section class="demo-section">
+    <section id="cards" class="demo-section">
       <h2>Cards</h2>
 
       <h3 style="margin-bottom: 1rem;">Basic Variants</h3>
@@ -830,7 +917,7 @@
     </section>
 
     <!-- Colors Section -->
-    <section class="demo-section">
+    <section id="colors" class="demo-section">
       <h2>Color Palette</h2>
 
       <h3 style="margin-bottom: 1rem;">Brand Colors</h3>
@@ -856,7 +943,7 @@
     </section>
 
     <!-- Typography Section -->
-    <section class="demo-section">
+    <section id="typography" class="demo-section">
       <h2>Typography</h2>
       <div style="display: flex; flex-direction: column; gap: 1rem;">
         <h1 class="text-page-heading">Page Heading</h1>
@@ -869,7 +956,7 @@
     </section>
 
     <!-- Utility Classes Section -->
-    <section class="demo-section">
+    <section id="utilities" class="demo-section">
       <h2>Utility Classes</h2>
       <p style="margin-bottom: 2rem; color: var(--color-text-muted);">
         Comprehensive utility classes for rapid UI development. Use these classes to control spacing, layout, sizing, and positioning without writing custom CSS.
@@ -1194,7 +1281,7 @@
     </section>
 
     <!-- Customization Example -->
-    <section class="demo-section">
+    <section id="customization" class="demo-section">
       <h2>Customization Example</h2>
       <div class="card card-elevated" style="margin-bottom: 1rem;">
         <h3 class="card-title">Custom Styled Card</h3>
@@ -1217,7 +1304,7 @@
     </section>
 
     <!-- Theme Info -->
-    <section class="demo-section">
+    <section id="theme" class="demo-section">
       <div class="card card-outlined">
         <h3 class="card-title">🌓 Theme System</h3>
         <p class="card-description" style="margin-bottom: 1rem;">
@@ -1231,6 +1318,7 @@
         </div>
       </div>
     </section>
+  </div>
   </div>
 
   <script>
@@ -1256,6 +1344,54 @@
     if (savedTheme && savedTheme !== 'auto') {
       setTheme(savedTheme);
     }
+
+    // Navigation active state
+    function setActiveNav(event) {
+      event.preventDefault();
+      const link = event.target;
+      const targetId = link.getAttribute('href').substring(1);
+      const targetElement = document.getElementById(targetId);
+
+      // Remove active class from all links
+      document.querySelectorAll('.nav-list a').forEach(a => a.classList.remove('active'));
+
+      // Add active class to clicked link
+      link.classList.add('active');
+
+      // Smooth scroll to target
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    // Update active navigation on scroll
+    function updateActiveNavOnScroll() {
+      const sections = document.querySelectorAll('.demo-section[id]');
+      const navLinks = document.querySelectorAll('.nav-list a');
+
+      let currentSection = '';
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (window.scrollY >= sectionTop - 100) {
+          currentSection = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${currentSection}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // Add scroll event listener
+    window.addEventListener('scroll', updateActiveNavOnScroll);
+
+    // Set initial active state
+    updateActiveNavOnScroll();
   </script>
 </body>
 </html>
