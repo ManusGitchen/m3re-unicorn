@@ -467,6 +467,191 @@
           <button class="btn btn-secondary btn-md">Secondary</button>
         </div>
       </div>
+
+      <h3 style="margin-bottom: 1rem; margin-top: 2rem;">🌈 Rainbow Border (Outlined Cards Only)</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-disabled);">
+        Add colorful gradient borders to outlined cards. By default uses primary/secondary colors (50/50).
+        Customize with any CSS gradient colors.
+      </p>
+
+      <h4 style="margin-bottom: 0.5rem; margin-top: 1.5rem;">Default Rainbow (Primary + Secondary)</h4>
+      <div class="demo-grid">
+        <div class="card-rainbow-wrapper" style="--rainbow-colors: var(--color-primary) 50%, var(--color-secondary) 50%;">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Default Rainbow</h2>
+              <h3 class="card-subtitle">50% Primary, 50% Secondary</h3>
+              <div class="card-body">
+                <p>Uses design tokens for theme-aware colors.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-rainbow-wrapper" style="--rainbow-colors: var(--color-primary) 50%, var(--color-secondary) 50%;">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Another Default</h2>
+              <h3 class="card-subtitle">With actions</h3>
+              <div class="card-body">
+                <p>Rainbow borders work great with any outlined card.</p>
+              </div>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary btn-sm">Action</button>
+              <button class="btn btn-secondary btn-sm">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; margin-top: 1.5rem;">Custom Colors - Hard Stops</h4>
+      <div class="demo-grid">
+        <div class="card-rainbow-wrapper" style="--rainbow-colors: var(--color-success) 33%, var(--color-warning) 33% 66%, var(--color-error) 66%;">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Traffic Light</h2>
+              <h3 class="card-subtitle">Three equal sections</h3>
+              <div class="card-body">
+                <p>Green, yellow, red using semantic colors with hard stops.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-rainbow-wrapper" style="--rainbow-colors: var(--color-info) 70%, var(--color-primary) 70%;">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Info + Primary</h2>
+              <h3 class="card-subtitle">70% / 30% split</h3>
+              <div class="card-body">
+                <p>Info color for 70%, primary for 30%.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-rainbow-wrapper" style="--rainbow-colors: #FF1493 25%, #00CED1 25% 50%, #FFD700 50% 75%, #7B68EE 75%;">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Neon Vibes</h2>
+              <h3 class="card-subtitle">Four color sections</h3>
+              <div class="card-body">
+                <p>Bold neon colors in equal sections.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; margin-top: 1.5rem;">Smooth Gradients</h4>
+      <div class="demo-grid">
+        <div class="card-rainbow-wrapper" style="--rainbow-colors: var(--color-primary), var(--color-secondary);">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Smooth Primary → Secondary</h2>
+              <h3 class="card-subtitle">No hard stops</h3>
+              <div class="card-body">
+                <p>Colors blend smoothly from left to right.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-rainbow-wrapper" style="--rainbow-colors: #FF6B9D, #C371F2, #4FACFE;">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Pink → Purple → Blue</h2>
+              <h3 class="card-subtitle">Smooth three-color blend</h3>
+              <div class="card-body">
+                <p>Beautiful gradient through multiple colors.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-rainbow-wrapper" style="--rainbow-colors: var(--color-success), var(--color-warning), var(--color-error);">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Traffic Light Smooth</h2>
+              <h3 class="card-subtitle">Smooth semantic gradient</h3>
+              <div class="card-body">
+                <p>Green through yellow to red, smooth transition.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; margin-top: 1.5rem;">Full Rainbow Spectrum</h4>
+      <div class="demo-grid">
+        <div class="card-rainbow-wrapper" style="--rainbow-colors: #FF0000 0%, #FF7F00 16.67%, #FFFF00 33.33%, #00FF00 50%, #0000FF 66.67%, #4B0082 83.33%, #9400D3 100%;">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Full Rainbow</h2>
+              <h3 class="card-subtitle">All 7 colors</h3>
+              <div class="card-body">
+                <p>Red, orange, yellow, green, blue, indigo, violet.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; margin-top: 1.5rem;">Rainbow Accent Bars</h4>
+      <p style="margin-bottom: 1rem; color: var(--color-text-disabled);">
+        Add extra padding on one side to create a visible accent bar. Use <code>card-rainbow-accent-{top|right|bottom|left}</code> class.
+      </p>
+      <div class="demo-grid">
+        <div class="card-rainbow-wrapper card-rainbow-accent-top" style="--rainbow-colors: var(--color-primary) 50%, var(--color-secondary) 50%;">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Accent Top</h2>
+              <h3 class="card-subtitle">Rainbow bar on top</h3>
+              <div class="card-body">
+                <p>A colorful accent bar appears at the top of the card.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-rainbow-wrapper card-rainbow-accent-right" style="--rainbow-colors: var(--color-success), var(--color-info);">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Accent Right</h2>
+              <h3 class="card-subtitle">Rainbow bar on right</h3>
+              <div class="card-body">
+                <p>A colorful accent bar appears on the right side.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-rainbow-wrapper card-rainbow-accent-bottom" style="--rainbow-colors: var(--color-warning), var(--color-error);">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Accent Bottom</h2>
+              <h3 class="card-subtitle">Rainbow bar on bottom</h3>
+              <div class="card-body">
+                <p>A colorful accent bar appears at the bottom of the card.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-rainbow-wrapper card-rainbow-accent-left" style="--rainbow-colors: #FF6B9D, #C371F2, #4FACFE;">
+          <div class="card card-outlined">
+            <div class="card-content">
+              <h2 class="card-title">Accent Left</h2>
+              <h3 class="card-subtitle">Rainbow bar on left</h3>
+              <div class="card-body">
+                <p>A colorful accent bar appears on the left side.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- Colors Section -->

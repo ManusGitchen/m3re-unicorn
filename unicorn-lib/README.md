@@ -104,6 +104,86 @@ const props: ButtonProps = {
 
 **Variants:** `default`, `elevated`, `outlined`
 
+#### Rainbow Border Feature
+
+Add a colorful gradient border to outlined cards with the `rainbow-border` prop:
+
+```vue
+<!-- Default: Uses primary and secondary colors (50% each) -->
+<Card variant="outlined" :rainbow-border="true" title="Rainbow Card">
+  Content here
+</Card>
+
+<!-- Custom colors: Full rainbow spectrum -->
+<Card
+  variant="outlined"
+  :rainbow-border="true"
+  rainbow-colors="#FF0000 0%, #FF7F00 16.67%, #FFFF00 33.33%, #00FF00 50%, #0000FF 66.67%, #4B0082 83.33%, #9400D3 100%"
+  title="Full Rainbow">
+  Content here
+</Card>
+
+<!-- Custom colors: Using design tokens with hard stops -->
+<Card
+  variant="outlined"
+  :rainbow-border="true"
+  rainbow-colors="var(--color-success) 33%, var(--color-warning) 33% 66%, var(--color-error) 66%"
+  title="Traffic Light">
+  Content here
+</Card>
+
+<!-- Custom colors: Smooth gradient -->
+<Card
+  variant="outlined"
+  :rainbow-border="true"
+  rainbow-colors="var(--color-primary), var(--color-secondary)"
+  title="Smooth Gradient">
+  Content here
+</Card>
+```
+
+**Props:**
+- `rainbow-border` (boolean): Enables rainbow border effect (only works with `variant="outlined"`)
+- `rainbow-colors` (string): Custom CSS gradient colors. Defaults to `var(--color-primary) 50%, var(--color-secondary) 50%`
+- `rainbow-accent` (string): Position of accent bar - `'top' | 'right' | 'bottom' | 'left'`. Adds extra padding on one side to create a visible gradient accent bar.
+
+**Rainbow Accent Bars:**
+```vue
+<!-- Accent bar on top -->
+<Card
+  variant="outlined"
+  :rainbow-border="true"
+  rainbow-accent="top"
+  title="Accent Top">
+  Content here
+</Card>
+
+<!-- Accent bar on left with custom colors -->
+<Card
+  variant="outlined"
+  :rainbow-border="true"
+  rainbow-accent="left"
+  rainbow-colors="var(--color-success), var(--color-info)"
+  title="Left Accent">
+  Content here
+</Card>
+```
+
+**Customization:**
+```css
+/* Change accent bar size (default: 1.5rem) */
+:root {
+  --card-rainbow-accent-size: 2rem;
+}
+```
+
+**How it works:**
+- Creates a wrapper div with a linear gradient background
+- Makes the card's border transparent to reveal the gradient
+- The wrapper's padding (2px by default) creates the visible border width
+- Accent positions add extra padding (1.5rem by default) on the specified side
+- Supports any CSS color values with optional percentage stops for precise control
+
 ## 🎨 Design Tokens
 
 ### Typography Tokens

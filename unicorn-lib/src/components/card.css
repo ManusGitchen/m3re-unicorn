@@ -7,6 +7,58 @@
 @import '../tokens/colors.css';
 @import '../tokens/typography.css';
 
+/* ===== Rainbow Border Wrapper ===== */
+/* Wrapper for rainbow border effect - only active when rainbowBorder prop is true */
+.card-rainbow-wrapper {
+  /* Padding creates space for the gradient border to show through */
+  padding: var(--card-rainbow-border-width, var(--border-width-medium));
+
+  /* Gradient background using custom colors or fallback to primary/secondary */
+  background: linear-gradient(90deg, var(--rainbow-colors));
+
+  /* Border radius matches the card */
+  border-radius: var(--card-border-radius, var(--border-radius-lg));
+
+  /* Display */
+  display: inline-block;
+  box-sizing: border-box;
+
+  /* Allow full width */
+  width: 100%;
+}
+
+/* Card inside rainbow wrapper needs transparent border */
+.card-rainbow-wrapper .card {
+  /* Make border transparent so gradient shows through */
+  border-color: transparent;
+
+  /* Remove any spacing that might interfere */
+  margin: 0;
+
+  /* Fill wrapper height to prevent gradient showing underneath */
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* ===== Rainbow Accent Positions ===== */
+/* Add extra padding on one side to create a visible accent bar */
+
+.card-rainbow-accent-top {
+  padding-top: var(--card-rainbow-accent-size, 1.5rem);
+}
+
+.card-rainbow-accent-right {
+  padding-right: var(--card-rainbow-accent-size, 1.5rem);
+}
+
+.card-rainbow-accent-bottom {
+  padding-bottom: var(--card-rainbow-accent-size, 1.5rem);
+}
+
+.card-rainbow-accent-left {
+  padding-left: var(--card-rainbow-accent-size, 1.5rem);
+}
+
 /* Card Base Styles - Customizable with !default */
 .card {
   /* Background & Text - Always has background based on theme */
