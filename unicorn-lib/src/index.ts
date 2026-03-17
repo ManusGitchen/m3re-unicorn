@@ -10,6 +10,9 @@ export { ButtonGroup, type ButtonGroupProps } from './components/button-group'
 // Card Component
 export { Card, type CardProps } from './components/card'
 
+// Dialog Component
+export { Dialog, type DialogProps, type DialogVariant, type DialogHeight } from './components/dialog'
+
 // Icon Component (from Iconify)
 export { Icon } from '@iconify/vue'
 

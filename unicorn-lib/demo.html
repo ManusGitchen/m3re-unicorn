@@ -133,6 +133,9 @@
   </style>
 </head>
 <body>
+  <!-- Dialog Container (Vue app will mount here) -->
+  <div id="dialog-app"></div>
+
   <button class="btn btn-primary btn-md theme-toggle" onclick="toggleTheme()">
     Toggle Dark Mode
   </button>
@@ -144,6 +147,7 @@
       <ul class="nav-list">
         <li><a href="#buttons" onclick="setActiveNav(event)">Buttons</a></li>
         <li><a href="#cards" onclick="setActiveNav(event)">Cards</a></li>
+        <li><a href="#dialogs" onclick="setActiveNav(event)">Dialogs</a></li>
         <li><a href="#colors" onclick="setActiveNav(event)">Color Palette</a></li>
         <li><a href="#typography" onclick="setActiveNav(event)">Typography</a></li>
         <li><a href="#utilities" onclick="setActiveNav(event)">Utility Classes</a></li>
@@ -1070,6 +1074,94 @@
 
     </section>
 
+    <!-- Dialogs Section -->
+    <section id="dialogs" class="demo-section">
+      <h2>Dialogs</h2>
+
+      <h3 style="margin-bottom: 1rem;">Default Centered Dialog</h3>
+      <div class="demo-buttons">
+        <button class="btn btn-primary btn-md" onclick="openDialog('default-dialog')">
+          Open Default Dialog
+        </button>
+        <button class="btn btn-secondary btn-md" onclick="openDialog('small-dialog')">
+          Open Small Dialog
+        </button>
+        <button class="btn btn-tertiary btn-md" onclick="openDialog('large-dialog')">
+          Open Large Dialog
+        </button>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Fullscreen Dialog</h3>
+      <div class="demo-buttons">
+        <button class="btn btn-primary btn-md" onclick="openDialog('fullscreen-dialog')">
+          Open Fullscreen
+        </button>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Float Variants</h3>
+      <div class="demo-buttons">
+        <button class="btn btn-primary btn-md" onclick="openDialog('float-bottom-dialog')">
+          Float from Bottom
+        </button>
+        <button class="btn btn-primary btn-md" onclick="openDialog('float-top-dialog')">
+          Float from Top
+        </button>
+        <button class="btn btn-primary btn-md" onclick="openDialog('float-left-dialog')">
+          Float from Left
+        </button>
+        <button class="btn btn-primary btn-md" onclick="openDialog('float-right-dialog')">
+          Float from Right
+        </button>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Height Variants</h3>
+      <div class="demo-buttons">
+        <button class="btn btn-secondary btn-md" onclick="openDialog('fixed-height-dialog')">
+          Fixed Height (Scrollable)
+        </button>
+        <button class="btn btn-secondary btn-md" onclick="openDialog('auto-height-dialog')">
+          Auto Height (Grows)
+        </button>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">🦄 Unicorn Mode</h3>
+      <div class="demo-buttons">
+        <div class="btn-rainbow-wrapper" style="--rainbow-colors: var(--color-primary) 0%, var(--color-secondary) 20%, var(--color-info) 40%, var(--color-success) 60%, var(--color-warning) 80%, var(--color-error) 100%;">
+          <button class="btn btn-rainbow-border btn-md" onclick="openDialog('unicorn-dialog')">
+            🦄 Open Unicorn Dialog ✨
+          </button>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Custom Content</h3>
+      <div class="demo-buttons">
+        <button class="btn btn-primary btn-md" onclick="openDialog('form-dialog')">
+          Dialog with Form
+        </button>
+        <button class="btn btn-secondary btn-md" onclick="openDialog('no-footer-dialog')">
+          Dialog without Footer
+        </button>
+      </div>
+
+      <!-- Usage Guidelines -->
+      <div class="card card-outlined" style="background: var(--color-info-light); margin-top: 2rem;">
+        <div class="card-content">
+          <h4 class="card-title">💡 Usage Guidelines</h4>
+          <div class="card-body">
+            <ul>
+              <li><strong>Accessibility:</strong> Focus automatically moves into dialog when opened and returns to trigger on close</li>
+              <li><strong>Keyboard:</strong> Escape key closes dialog, Tab cycles through focusable elements</li>
+              <li><strong>Mobile:</strong> On mobile, dialogs default to full width for better usability</li>
+              <li><strong>Float variants:</strong> Great for sidebars, notifications, or slide-out panels</li>
+              <li><strong>Unicorn mode:</strong> Adds magical rainbow gradient backdrop for special moments ✨</li>
+              <li><strong>Custom actions:</strong> Use the footer slot to override default Cancel/Submit buttons</li>
+              <li><strong>Scrollable content:</strong> Enable scrollable prop for long content with fixed dialog height</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Colors Section -->
     <section id="colors" class="demo-section">
       <h2>Color Palette</h2>
@@ -1660,6 +1752,391 @@
 
     // Set initial active state
     updateActiveNavOnScroll();
+
+    // Dialog state management
+    const activeDialogs = new Set();
+    const previouslyFocusedElements = new Map();
+
+    // Global function to open dialogs
+    window.openDialog = function(dialogId) {
+      const backdropElement = document.querySelector(`[data-dialog-id="${dialogId}"]`);
+      if (backdropElement) {
+        // Store currently focused element
+        previouslyFocusedElements.set(dialogId, document.activeElement);
+
+        // Show backdrop
+        backdropElement.style.display = 'flex';
+        activeDialogs.add(dialogId);
+        document.body.style.overflow = 'hidden';
+
+        // Add opening class for animation
+        backdropElement.classList.add('dialog-backdrop-open');
+
+        // Focus first focusable element inside dialog
+        setTimeout(() => {
+          const dialogContent = backdropElement.querySelector('.dialog');
+          const focusable = dialogContent.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          if (focusable) {
+            focusable.focus();
+          } else {
+            dialogContent.focus();
+          }
+        }, 50);
+      }
+    };
+
+    window.closeDialog = function(dialogId) {
+      const backdropElement = document.querySelector(`[data-dialog-id="${dialogId}"]`);
+      if (backdropElement) {
+        // Remove opening class
+        backdropElement.classList.remove('dialog-backdrop-open');
+
+        // Hide after animation
+        setTimeout(() => {
+          backdropElement.style.display = 'none';
+          activeDialogs.delete(dialogId);
+
+          // Restore body scroll if no dialogs are open
+          if (activeDialogs.size === 0) {
+            document.body.style.overflow = '';
+          }
+
+          // Restore focus to previously focused element
+          const previousElement = previouslyFocusedElements.get(dialogId);
+          if (previousElement && previousElement.focus) {
+            previousElement.focus();
+          }
+          previouslyFocusedElements.delete(dialogId);
+        }, 300);
+      }
+    };
+
+    // Handle escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && activeDialogs.size > 0) {
+        // Close the most recently opened dialog
+        const dialogId = Array.from(activeDialogs).pop();
+        closeDialog(dialogId);
+      }
+    });
+
+    // Handle tab key for focus trap
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Tab' && activeDialogs.size > 0) {
+        const dialogId = Array.from(activeDialogs).pop();
+        const backdropElement = document.querySelector(`[data-dialog-id="${dialogId}"]`);
+        if (!backdropElement) return;
+
+        const dialogContent = backdropElement.querySelector('.dialog');
+        const focusableElements = dialogContent.querySelectorAll(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        );
+
+        if (focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          // Shift + Tab
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          // Tab
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+    });
   </script>
+
+  <!-- Dialog HTML Structures -->
+
+  <!-- Default Dialog -->
+  <div class="dialog-backdrop" data-dialog-id="default-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('default-dialog')">
+    <div class="dialog dialog-default" role="dialog" aria-modal="true" aria-labelledby="default-dialog-title" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="default-dialog-title" class="dialog-title">Default Dialog</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('default-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p>This is a default centered dialog. It automatically handles focus management and keyboard navigation.</p>
+        <p style="margin-top: 1rem;">Try pressing <kbd>Escape</kbd> to close or clicking outside the dialog.</p>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary btn-md" onclick="closeDialog('default-dialog')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-md" onclick="closeDialog('default-dialog')">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Small Dialog -->
+  <div class="dialog-backdrop" data-dialog-id="small-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('small-dialog')">
+    <div class="dialog dialog-default" role="dialog" aria-modal="true" aria-labelledby="small-dialog-title" tabindex="-1" style="width: 400px;">
+      <div class="dialog-header">
+        <h2 id="small-dialog-title" class="dialog-title">Small Dialog</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('small-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p>This dialog has a custom width of 400px.</p>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary btn-md" onclick="closeDialog('small-dialog')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-md" onclick="closeDialog('small-dialog')">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Large Dialog -->
+  <div class="dialog-backdrop" data-dialog-id="large-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('large-dialog')">
+    <div class="dialog dialog-default" role="dialog" aria-modal="true" aria-labelledby="large-dialog-title" tabindex="-1" style="width: 800px;">
+      <div class="dialog-header">
+        <h2 id="large-dialog-title" class="dialog-title">Large Dialog</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('large-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p>This dialog has a custom width of 800px, perfect for detailed content or forms with multiple columns.</p>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary btn-md" onclick="closeDialog('large-dialog')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-md" onclick="closeDialog('large-dialog')">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fullscreen Dialog -->
+  <div class="dialog-backdrop" data-dialog-id="fullscreen-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('fullscreen-dialog')">
+    <div class="dialog dialog-fullscreen" role="dialog" aria-modal="true" aria-labelledby="fullscreen-dialog-title" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="fullscreen-dialog-title" class="dialog-title">Fullscreen Dialog</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('fullscreen-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p>This dialog takes up the entire viewport, ideal for immersive experiences or complex workflows.</p>
+        <p style="margin-top: 1rem;">On mobile devices, all dialogs default to fullscreen for better usability.</p>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary btn-md" onclick="closeDialog('fullscreen-dialog')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-md" onclick="closeDialog('fullscreen-dialog')">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Float Bottom Dialog -->
+  <div class="dialog-backdrop" data-dialog-id="float-bottom-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('float-bottom-dialog')">
+    <div class="dialog dialog-float-bottom" role="dialog" aria-modal="true" aria-labelledby="float-bottom-dialog-title" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="float-bottom-dialog-title" class="dialog-title">Bottom Sheet</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('float-bottom-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p>This dialog slides in from the bottom, commonly used for mobile-style bottom sheets.</p>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary btn-md" onclick="closeDialog('float-bottom-dialog')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-md" onclick="closeDialog('float-bottom-dialog')">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Float Top Dialog -->
+  <div class="dialog-backdrop" data-dialog-id="float-top-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('float-top-dialog')">
+    <div class="dialog dialog-float-top" role="dialog" aria-modal="true" aria-labelledby="float-top-dialog-title" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="float-top-dialog-title" class="dialog-title">Top Notification</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('float-top-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p>This dialog slides in from the top, perfect for notifications or announcements.</p>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary btn-md" onclick="closeDialog('float-top-dialog')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-md" onclick="closeDialog('float-top-dialog')">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Float Left Dialog -->
+  <div class="dialog-backdrop" data-dialog-id="float-left-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('float-left-dialog')">
+    <div class="dialog dialog-float-left" role="dialog" aria-modal="true" aria-labelledby="float-left-dialog-title" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="float-left-dialog-title" class="dialog-title">Left Sidebar</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('float-left-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p>This dialog slides in from the left, ideal for navigation menus or sidebars.</p>
+        <p style="margin-top: 1rem;">Great for:</p>
+        <ul>
+          <li>Navigation menus</li>
+          <li>Filters and settings</li>
+          <li>Secondary content panels</li>
+        </ul>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary btn-md" onclick="closeDialog('float-left-dialog')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-md" onclick="closeDialog('float-left-dialog')">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Float Right Dialog -->
+  <div class="dialog-backdrop" data-dialog-id="float-right-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('float-right-dialog')">
+    <div class="dialog dialog-float-right" role="dialog" aria-modal="true" aria-labelledby="float-right-dialog-title" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="float-right-dialog-title" class="dialog-title">Right Panel</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('float-right-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p>This dialog slides in from the right, commonly used for detail panels or forms.</p>
+        <p style="margin-top: 1rem;">Common use cases:</p>
+        <ul>
+          <li>Detail views</li>
+          <li>Edit forms</li>
+          <li>Chat interfaces</li>
+        </ul>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary btn-md" onclick="closeDialog('float-right-dialog')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-md" onclick="closeDialog('float-right-dialog')">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fixed Height Dialog -->
+  <div class="dialog-backdrop" data-dialog-id="fixed-height-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('fixed-height-dialog')">
+    <div class="dialog dialog-default dialog-height-fixed" role="dialog" aria-modal="true" aria-labelledby="fixed-height-dialog-title" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="fixed-height-dialog-title" class="dialog-title">Fixed Height Dialog</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('fixed-height-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body dialog-body-scrollable">
+        <p>This dialog has a fixed height with scrollable content.</p>
+        <p style="margin-top: 1rem;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p style="margin-top: 1rem;">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p style="margin-top: 1rem;">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <p style="margin-top: 1rem;">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p style="margin-top: 1rem;">More content to demonstrate scrolling...</p>
+        <p style="margin-top: 1rem;">Keep scrolling...</p>
+        <p style="margin-top: 1rem;">Almost there...</p>
+        <p style="margin-top: 1rem;">You reached the end!</p>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary btn-md" onclick="closeDialog('fixed-height-dialog')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-md" onclick="closeDialog('fixed-height-dialog')">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auto Height Dialog -->
+  <div class="dialog-backdrop" data-dialog-id="auto-height-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('auto-height-dialog')">
+    <div class="dialog dialog-default dialog-height-auto" role="dialog" aria-modal="true" aria-labelledby="auto-height-dialog-title" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="auto-height-dialog-title" class="dialog-title">Auto Height Dialog</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('auto-height-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p>This dialog automatically adjusts its height based on content.</p>
+        <p style="margin-top: 1rem;">Perfect for dynamic content that may vary in length.</p>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary btn-md" onclick="closeDialog('auto-height-dialog')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-md" onclick="closeDialog('auto-height-dialog')">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Unicorn Dialog -->
+  <div class="dialog-backdrop dialog-backdrop-unicorn" data-dialog-id="unicorn-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('unicorn-dialog')">
+    <div class="dialog dialog-default" role="dialog" aria-modal="true" aria-labelledby="unicorn-dialog-title" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="unicorn-dialog-title" class="dialog-title">🦄 Unicorn Mode</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('unicorn-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p>Welcome to Unicorn Mode! ✨</p>
+        <p style="margin-top: 1rem;">This dialog features a magical animated rainbow gradient backdrop using your design system's color tokens.</p>
+        <p style="margin-top: 1rem;">Perfect for celebrating achievements, special announcements, or just adding some sparkle to your UI!</p>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary btn-md" onclick="closeDialog('unicorn-dialog')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-md" onclick="closeDialog('unicorn-dialog')">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Dialog -->
+  <div class="dialog-backdrop" data-dialog-id="form-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('form-dialog')">
+    <div class="dialog dialog-default" role="dialog" aria-modal="true" aria-labelledby="form-dialog-title" tabindex="-1" style="width: 500px;">
+      <div class="dialog-header">
+        <h2 id="form-dialog-title" class="dialog-title">Sign Up Form</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('form-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div>
+            <label for="name" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Name</label>
+            <input id="name" type="text" style="width: 100%; padding: 0.5rem; border: 1px solid var(--color-border); border-radius: var(--border-radius-sm); background: var(--color-background); color: var(--color-text);" placeholder="Enter your name">
+          </div>
+          <div>
+            <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email</label>
+            <input id="email" type="email" style="width: 100%; padding: 0.5rem; border: 1px solid var(--color-border); border-radius: var(--border-radius-sm); background: var(--color-background); color: var(--color-text);" placeholder="Enter your email">
+          </div>
+          <div>
+            <label for="message" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Message</label>
+            <textarea id="message" rows="4" style="width: 100%; padding: 0.5rem; border: 1px solid var(--color-border); border-radius: var(--border-radius-sm); background: var(--color-background); color: var(--color-text);" placeholder="Enter your message"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="dialog-footer">
+        <button type="button" class="btn btn-secondary btn-md" onclick="closeDialog('form-dialog')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-md" onclick="closeDialog('form-dialog')">Submit Form</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- No Footer Dialog -->
+  <div class="dialog-backdrop" data-dialog-id="no-footer-dialog" style="display: none;" onclick="if(event.target === this) closeDialog('no-footer-dialog')">
+    <div class="dialog dialog-default" role="dialog" aria-modal="true" aria-labelledby="no-footer-dialog-title" tabindex="-1">
+      <div class="dialog-header">
+        <h2 id="no-footer-dialog-title" class="dialog-title">Simple Alert</h2>
+        <button type="button" class="dialog-close" onclick="closeDialog('no-footer-dialog')" aria-label="Close dialog">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="dialog-body">
+        <p>This is a simple alert dialog without action buttons.</p>
+        <p style="margin-top: 1rem;">Close it by clicking the X button, pressing Escape, or clicking outside.</p>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

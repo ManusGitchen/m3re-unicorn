@@ -1,0 +1,432 @@
+/**
+ * Dialog Component Styles
+ * Modal dialog with variants, accessibility, and unicorn mode
+ */
+
+/* Import design tokens */
+@import '../tokens/colors.css';
+@import '../tokens/typography.css';
+
+/* ============================================
+   BACKDROP
+   ============================================ */
+
+.dialog-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: var(--dialog-backdrop-padding, 1rem);
+}
+
+/* Dark theme backdrop */
+[data-theme="dark"] .dialog-backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Unicorn mode - Rainbow gradient backdrop */
+.dialog-backdrop-unicorn {
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-info),
+    var(--color-success),
+    var(--color-warning),
+    var(--color-error),
+    var(--color-primary)
+  );
+  background-size: 200% 200%;
+  animation: rainbow-shift 10s ease infinite;
+}
+
+@keyframes rainbow-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Backdrop transitions */
+.dialog-backdrop-fade-enter-active,
+.dialog-backdrop-fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.dialog-backdrop-fade-enter-from,
+.dialog-backdrop-fade-leave-to {
+  opacity: 0;
+}
+
+/* ============================================
+   DIALOG BASE
+   ============================================ */
+
+.dialog {
+  background-color: var(--color-background);
+  border-radius: var(--dialog-border-radius, var(--border-radius-lg));
+  box-shadow: var(--dialog-shadow, 0 20px 60px rgba(0, 0, 0, 0.3));
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 2rem);
+  width: 100%;
+  max-width: var(--dialog-max-width, 600px);
+  position: relative;
+  outline: none;
+}
+
+/* Mobile: full width */
+@media (max-width: 767px) {
+  .dialog {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .dialog-backdrop {
+    padding: 0;
+  }
+}
+
+/* ============================================
+   DIALOG HEADER
+   ============================================ */
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--dialog-header-padding, 1.5rem);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.dialog-title {
+  margin: 0;
+  font-size: var(--dialog-title-font-size, var(--typography-section-heading-font-size));
+  font-weight: var(--typography-font-weight-semibold);
+  color: var(--color-text);
+  flex: 1;
+  padding-right: 1rem;
+}
+
+.dialog-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.dialog-close:hover {
+  background-color: var(--color-background-contrast);
+}
+
+.dialog-close:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   DIALOG BODY
+   ============================================ */
+
+.dialog-body {
+  padding: var(--dialog-body-padding, 1.5rem);
+  flex: 1;
+  overflow-y: auto;
+  color: var(--color-text);
+  font-size: var(--typography-paragraph-font-size);
+  line-height: 1.6;
+}
+
+.dialog-body-scrollable {
+  overflow-y: auto;
+}
+
+/* When body is not scrollable, allow natural growth */
+.dialog-body:not(.dialog-body-scrollable) {
+  overflow-y: visible;
+}
+
+/* ============================================
+   DIALOG FOOTER
+   ============================================ */
+
+.dialog-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: var(--dialog-footer-padding, 1.5rem);
+  border-top: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+/* Mobile: stack footer buttons */
+@media (max-width: 767px) {
+  .dialog-footer {
+    flex-direction: column-reverse;
+    gap: 0.75rem;
+  }
+
+  .dialog-footer .btn {
+    width: 100%;
+  }
+}
+
+/* ============================================
+   DIALOG VARIANTS
+   ============================================ */
+
+/* Default - Centered modal */
+.dialog-default {
+  /* Base styles already applied */
+}
+
+/* Fullscreen */
+.dialog-fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  border-radius: 0;
+}
+
+/* Float from bottom */
+.dialog-float-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  max-height: 90vh;
+}
+
+@media (max-width: 767px) {
+  .dialog-float-bottom {
+    left: 0;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Float from top */
+.dialog-float-top {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  max-height: 90vh;
+}
+
+@media (max-width: 767px) {
+  .dialog-float-top {
+    left: 0;
+    transform: none;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Float from left */
+.dialog-float-left {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  max-height: 100vh;
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  max-width: 400px;
+}
+
+@media (max-width: 767px) {
+  .dialog-float-left {
+    max-width: 85%;
+  }
+}
+
+/* Float from right */
+.dialog-float-right {
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  max-height: 100vh;
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  max-width: 400px;
+}
+
+@media (max-width: 767px) {
+  .dialog-float-right {
+    max-width: 85%;
+  }
+}
+
+/* ============================================
+   DIALOG HEIGHT VARIANTS
+   ============================================ */
+
+.dialog-height-auto {
+  /* Default - content drives height */
+}
+
+.dialog-height-fixed {
+  height: var(--dialog-fixed-height, 600px);
+  max-height: calc(100vh - 2rem);
+}
+
+.dialog-height-fullscreen {
+  height: 100vh;
+  max-height: 100vh;
+}
+
+/* ============================================
+   DIALOG TRANSITIONS
+   ============================================ */
+
+/* Default - Fade + scale */
+.dialog-default-enter-active,
+.dialog-default-leave-active {
+  transition: all 0.3s ease;
+}
+
+.dialog-default-enter-from,
+.dialog-default-leave-to {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Fullscreen - Fade */
+.dialog-fullscreen-enter-active,
+.dialog-fullscreen-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.dialog-fullscreen-enter-from,
+.dialog-fullscreen-leave-to {
+  opacity: 0;
+}
+
+/* Float bottom - Slide up */
+.dialog-float-bottom-enter-active,
+.dialog-float-bottom-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.dialog-float-bottom-enter-from,
+.dialog-float-bottom-leave-to {
+  transform: translateX(-50%) translateY(100%);
+  opacity: 0;
+}
+
+@media (max-width: 767px) {
+  .dialog-float-bottom-enter-from,
+  .dialog-float-bottom-leave-to {
+    transform: translateY(100%);
+  }
+}
+
+/* Float top - Slide down */
+.dialog-float-top-enter-active,
+.dialog-float-top-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.dialog-float-top-enter-from,
+.dialog-float-top-leave-to {
+  transform: translateX(-50%) translateY(-100%);
+  opacity: 0;
+}
+
+@media (max-width: 767px) {
+  .dialog-float-top-enter-from,
+  .dialog-float-top-leave-to {
+    transform: translateY(-100%);
+  }
+}
+
+/* Float left - Slide right */
+.dialog-float-left-enter-active,
+.dialog-float-left-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.dialog-float-left-enter-from,
+.dialog-float-left-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+/* Float right - Slide left */
+.dialog-float-right-enter-active,
+.dialog-float-right-leave-active {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.dialog-float-right-enter-from,
+.dialog-float-right-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
+
+/* ============================================
+   DARK THEME
+   ============================================ */
+
+[data-theme="dark"] .dialog {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .dialog-header,
+[data-theme="dark"] .dialog-footer {
+  border-color: var(--color-border);
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+/* Ensure dialog is keyboard navigable */
+.dialog:focus {
+  outline: none;
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

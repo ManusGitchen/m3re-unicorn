@@ -12,6 +12,7 @@
 @import './components/button.css';
 @import './components/button-group.css';
 @import './components/card.css';
+@import './components/dialog.css';
 
 /* Global Resets & Base Styles */
 *,
