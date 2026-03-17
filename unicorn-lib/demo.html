@@ -1247,6 +1247,111 @@
         </div>
       </div>
 
+      <h3 style="margin-bottom: 1rem; margin-top: 2rem;">Container System</h3>
+      <p style="margin-bottom: 1rem; color: var(--color-text-muted); font-size: 0.875rem;">
+        Responsive container that centers content with responsive max-widths and consistent padding. Perfect for wrapping page layouts.
+      </p>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Standard Container (Responsive Max-Width)</h4>
+      <div style="background: var(--color-background-contrast); padding: 1rem; margin-bottom: 1rem;">
+        <div class="container" style="background: var(--color-primary-light); padding: 2rem; border-radius: var(--border-radius-md);">
+          <div style="text-align: center; color: white;">
+            <strong>.container</strong>
+            <p style="font-size: 0.875rem; margin-top: 0.5rem;">
+              Max-width changes at breakpoints: 100% (xs/sm), 900px (md), 1185px (lg), 1785px (xl+)
+            </p>
+            <p style="font-size: 0.75rem; margin-top: 0.25rem; opacity: 0.9;">
+              Always centered with 1rem padding • Resize window to see responsive behavior
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Fluid Container (Full Width)</h4>
+      <div style="background: var(--color-background-contrast); padding: 1rem; margin-bottom: 1rem;">
+        <div class="container fluid" style="background: var(--color-secondary-light); padding: 2rem; border-radius: var(--border-radius-md);">
+          <div style="text-align: center; color: white;">
+            <strong>.container.fluid</strong>
+            <p style="font-size: 0.875rem; margin-top: 0.5rem;">
+              Always 100% width at all breakpoints • Still maintains 1rem padding
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="margin-bottom: 0.5rem; font-size: 1rem;">Container with Height Utilities</h4>
+      <div style="background: var(--color-background-contrast); padding: 1rem; margin-bottom: 2rem;">
+        <div class="container h-screen" style="background: var(--color-info-light); border-radius: var(--border-radius-md); display: flex; align-items: center; justify-content: center; max-height: 300px;">
+          <div style="text-align: center; color: white;">
+            <strong>.container.h-screen</strong>
+            <p style="font-size: 0.875rem; margin-top: 0.5rem;">
+              Combine container with height utilities like h-screen, min-h-screen, h-full
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card card-outlined mb-lg" style="background: var(--color-success-tint);">
+        <div class="card-content">
+          <h4 class="card-title">💡 Container Breakpoints & Max-Widths</h4>
+          <div class="card-body">
+            <div style="font-size: 0.875rem;">
+              <table style="width: 100%; border-collapse: collapse; margin-top: 0.5rem;">
+                <thead>
+                  <tr style="border-bottom: 2px solid var(--color-border);">
+                    <th style="text-align: left; padding: 0.5rem;">Breakpoint</th>
+                    <th style="text-align: left; padding: 0.5rem;">Min Width</th>
+                    <th style="text-align: left; padding: 0.5rem;">Container Max-Width</th>
+                    <th style="text-align: left; padding: 0.5rem;">Device</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px solid var(--color-border);">
+                    <td style="padding: 0.5rem;"><code>xs</code></td>
+                    <td style="padding: 0.5rem;">0px</td>
+                    <td style="padding: 0.5rem;">100%</td>
+                    <td style="padding: 0.5rem;">Mobile (portrait)</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--color-border);">
+                    <td style="padding: 0.5rem;"><code>sm</code></td>
+                    <td style="padding: 0.5rem;">600px</td>
+                    <td style="padding: 0.5rem;">100%</td>
+                    <td style="padding: 0.5rem;">Mobile (landscape)</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--color-border);">
+                    <td style="padding: 0.5rem;"><code>md</code></td>
+                    <td style="padding: 0.5rem;">960px</td>
+                    <td style="padding: 0.5rem;">900px</td>
+                    <td style="padding: 0.5rem;">Tablet</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--color-border);">
+                    <td style="padding: 0.5rem;"><code>lg</code></td>
+                    <td style="padding: 0.5rem;">1264px</td>
+                    <td style="padding: 0.5rem;">1185px</td>
+                    <td style="padding: 0.5rem;">Desktop</td>
+                  </tr>
+                  <tr style="border-bottom: 1px solid var(--color-border);">
+                    <td style="padding: 0.5rem;"><code>xl</code></td>
+                    <td style="padding: 0.5rem;">1904px</td>
+                    <td style="padding: 0.5rem;">1785px</td>
+                    <td style="padding: 0.5rem;">Large Desktop</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 0.5rem;"><code>xxl</code></td>
+                    <td style="padding: 0.5rem;">2544px</td>
+                    <td style="padding: 0.5rem;">1785px</td>
+                    <td style="padding: 0.5rem;">Ultra Wide</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p style="margin-top: 1rem; font-size: 0.8125rem; color: var(--color-text-muted);">
+                <strong>Usage:</strong> <code>.container</code> for centered layouts • <code>.container.fluid</code> for full-width • Combine with height utilities as needed
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <h3 style="margin-bottom: 1rem; margin-top: 2rem;">Grid System - 12 Column Layout</h3>
       <p style="margin-bottom: 1rem; color: var(--color-text-muted); font-size: 0.875rem;">
         Powerful 12-column grid system with gap utilities using the same spacing scale. Perfect for responsive layouts.
@@ -1400,6 +1505,15 @@
                   <li>flex-row, flex-col, flex-wrap</li>
                   <li>justify-*, items-*, self-*</li>
                   <li>gap-* (same sizes as spacing)</li>
+                </ul>
+              </div>
+              <div>
+                <strong>Container:</strong>
+                <ul style="font-size: 0.875rem; margin-top: 0.5rem;">
+                  <li>.container - Responsive centered layout</li>
+                  <li>.container.fluid - Full width at all breakpoints</li>
+                  <li>Breakpoints: xs, sm, md, lg, xl, xxl</li>
+                  <li>1rem padding • box-sizing: border-box</li>
                 </ul>
               </div>
               <div>

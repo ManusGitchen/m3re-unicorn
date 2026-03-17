@@ -243,7 +243,6 @@
 
 .btn-rainbow-wrapper .btn-rainbow-border:hover:not(:disabled) {
   background-color: var(--btn-rainbow-hover-bg, var(--color-background-contrast));
-  transform: var(--btn-hover-transform, translateY(-1px));
 }
 
 .btn-rainbow-wrapper .btn-rainbow-border:active:not(:disabled) {

@@ -500,6 +500,65 @@
 .z-auto { z-index: auto; }
 
 /* ============================================
+   CONTAINER SYSTEM
+   ============================================ */
+
+/* Breakpoints:
+   xs:  0px      (mobile)
+   sm:  600px    (mobile)
+   md:  960px    (tablet)
+   lg:  1264px   (desktop - 1280px - 16px)
+   xl:  1904px   (large - 1920px - 16px)
+   xxl: 2544px   (xlarge - 2560px - 16px)
+*/
+
+/* Container - Responsive centered layout with max-width */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+/* Container Fluid - Full width at all breakpoints */
+.container.fluid {
+  max-width: none;
+}
+
+/* Responsive Max Widths */
+/* xs & sm: 100% (default - no max-width for mobile) */
+
+/* md: 960px * 0.9375 = 900px */
+@media (min-width: 960px) {
+  .container:not(.fluid) {
+    max-width: 900px;
+  }
+}
+
+/* lg: (1280px - 16px) * 0.9375 = 1185px */
+@media (min-width: 1264px) {
+  .container:not(.fluid) {
+    max-width: 1185px;
+  }
+}
+
+/* xl: (1920px - 16px) * 0.9375 = 1785px */
+@media (min-width: 1904px) {
+  .container:not(.fluid) {
+    max-width: 1785px;
+  }
+}
+
+/* xxl: 1785px (same as xl) */
+@media (min-width: 2544px) {
+  .container:not(.fluid) {
+    max-width: 1785px;
+  }
+}
+
+/* ============================================
    GRID SYSTEM - 12 COLUMN LAYOUT
    ============================================ */
 
