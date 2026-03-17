@@ -13,6 +13,9 @@ export { Card, type CardProps } from './components/card'
 // Dialog Component
 export { Dialog, type DialogProps, type DialogVariant, type DialogHeight } from './components/dialog'
 
+// Tag Component
+export { Tag, type TagProps } from './components/tag'
+
 // Icon Component (from Iconify)
 export { Icon } from '@iconify/vue'
 

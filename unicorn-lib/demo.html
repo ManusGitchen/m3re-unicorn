@@ -148,6 +148,7 @@
         <li><a href="#buttons" onclick="setActiveNav(event)">Buttons</a></li>
         <li><a href="#cards" onclick="setActiveNav(event)">Cards</a></li>
         <li><a href="#dialogs" onclick="setActiveNav(event)">Dialogs</a></li>
+        <li><a href="#tags" onclick="setActiveNav(event)">Tags</a></li>
         <li><a href="#colors" onclick="setActiveNav(event)">Color Palette</a></li>
         <li><a href="#typography" onclick="setActiveNav(event)">Typography</a></li>
         <li><a href="#utilities" onclick="setActiveNav(event)">Utility Classes</a></li>
@@ -1156,6 +1157,278 @@
               <li><strong>Unicorn mode:</strong> Adds magical rainbow gradient backdrop for special moments ✨</li>
               <li><strong>Custom actions:</strong> Use the footer slot to override default Cancel/Submit buttons</li>
               <li><strong>Scrollable content:</strong> Enable scrollable prop for long content with fixed dialog height</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tags Section -->
+    <section id="tags" class="demo-section">
+      <h2>Tags</h2>
+
+      <h3 style="margin-bottom: 1rem;">Variants (Style Types)</h3>
+      <div class="demo-buttons">
+        <span class="tag tag-filled tag-color-primary tag-md">Filled</span>
+        <span class="tag tag-outlined tag-color-primary tag-md">Outlined</span>
+        <span class="tag tag-soft tag-color-primary tag-md">Soft</span>
+        <span class="tag tag-soft-outlined tag-color-primary tag-md">Soft Outlined</span>
+        <div class="tag-rainbow-wrapper" style="--rainbow-colors: var(--color-primary) 0%, var(--color-secondary) 100%;">
+          <span class="tag tag-rainbow-border tag-md">Rainbow Border</span>
+        </div>
+        <span class="tag tag-glass tag-md">Glass (Frosted)</span>
+        <span class="tag tag-glass-shiny tag-md">Glass (Shiny)</span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Colors (Semantic)</h3>
+      <div class="demo-buttons">
+        <span class="tag tag-filled tag-color-primary tag-md">Primary</span>
+        <span class="tag tag-filled tag-color-secondary tag-md">Secondary</span>
+        <span class="tag tag-filled tag-color-success tag-md">Success</span>
+        <span class="tag tag-filled tag-color-error tag-md">Error</span>
+        <span class="tag tag-filled tag-color-warning tag-md">Warning</span>
+        <span class="tag tag-filled tag-color-info tag-md">Info</span>
+        <span class="tag tag-filled tag-color-neutral tag-md">Neutral</span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Outlined Variants</h3>
+      <div class="demo-buttons">
+        <span class="tag tag-outlined tag-color-primary tag-md">Primary</span>
+        <span class="tag tag-outlined tag-color-secondary tag-md">Secondary</span>
+        <span class="tag tag-outlined tag-color-success tag-md">Success</span>
+        <span class="tag tag-outlined tag-color-error tag-md">Error</span>
+        <span class="tag tag-outlined tag-color-warning tag-md">Warning</span>
+        <span class="tag tag-outlined tag-color-info tag-md">Info</span>
+        <span class="tag tag-outlined tag-color-neutral tag-md">Neutral</span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Soft Variants</h3>
+      <div class="demo-buttons">
+        <span class="tag tag-soft tag-color-primary tag-md">Primary</span>
+        <span class="tag tag-soft tag-color-secondary tag-md">Secondary</span>
+        <span class="tag tag-soft tag-color-success tag-md">Success</span>
+        <span class="tag tag-soft tag-color-error tag-md">Error</span>
+        <span class="tag tag-soft tag-color-warning tag-md">Warning</span>
+        <span class="tag tag-soft tag-color-info tag-md">Info</span>
+        <span class="tag tag-soft tag-color-neutral tag-md">Neutral</span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Soft-Outlined Variants</h3>
+      <div class="demo-buttons">
+        <span class="tag tag-soft-outlined tag-color-primary tag-md">Primary</span>
+        <span class="tag tag-soft-outlined tag-color-secondary tag-md">Secondary</span>
+        <span class="tag tag-soft-outlined tag-color-success tag-md">Success</span>
+        <span class="tag tag-soft-outlined tag-color-error tag-md">Error</span>
+        <span class="tag tag-soft-outlined tag-color-warning tag-md">Warning</span>
+        <span class="tag tag-soft-outlined tag-color-info tag-md">Info</span>
+        <span class="tag tag-soft-outlined tag-color-neutral tag-md">Neutral</span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Sizes</h3>
+      <div class="demo-buttons" style="align-items: center;">
+        <span class="tag tag-filled tag-color-primary tag-sm">Small Tag</span>
+        <span class="tag tag-filled tag-color-primary tag-md">Medium Tag</span>
+        <span class="tag tag-filled tag-color-primary tag-lg">Large Tag</span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Border Radius</h3>
+      <div class="demo-buttons">
+        <span class="tag tag-filled tag-color-primary tag-md tag-rounded-sm">Rounded SM</span>
+        <span class="tag tag-filled tag-color-primary tag-md tag-rounded-md">Rounded MD</span>
+        <span class="tag tag-filled tag-color-primary tag-md tag-rounded-lg">Rounded LG</span>
+        <span class="tag tag-filled tag-color-primary tag-md tag-rounded-full">Rounded Full</span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Default Icons (Semantic Colors)</h3>
+      <div class="demo-buttons">
+        <span class="tag tag-filled tag-color-success tag-md">
+          <span class="tag-icon tag-icon-prepend">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z" />
+            </svg>
+          </span>
+          <span class="tag-content">Success</span>
+        </span>
+        <span class="tag tag-filled tag-color-error tag-md">
+          <span class="tag-icon tag-icon-prepend">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M15.59,7L12,10.59L8.41,7L7,8.41L10.59,12L7,15.59L8.41,17L12,13.41L15.59,17L17,15.59L13.41,12L17,8.41L15.59,7Z" />
+            </svg>
+          </span>
+          <span class="tag-content">Error</span>
+        </span>
+        <span class="tag tag-filled tag-color-warning tag-md">
+          <span class="tag-icon tag-icon-prepend">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M13,14H11V10H13M13,18H11V16H13M1,21H23L12,2L1,21Z" />
+            </svg>
+          </span>
+          <span class="tag-content">Warning</span>
+        </span>
+        <span class="tag tag-filled tag-color-info tag-md">
+          <span class="tag-icon tag-icon-prepend">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+            </svg>
+          </span>
+          <span class="tag-content">Info</span>
+        </span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Custom Prepend Icons</h3>
+      <div class="demo-buttons">
+        <span class="tag tag-filled tag-color-primary tag-md">
+          <span class="tag-icon tag-icon-prepend">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z" />
+            </svg>
+          </span>
+          <span class="tag-content">Featured</span>
+        </span>
+        <span class="tag tag-outlined tag-color-secondary tag-md">
+          <span class="tag-icon tag-icon-prepend">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" />
+            </svg>
+          </span>
+          <span class="tag-content">Favorite</span>
+        </span>
+        <span class="tag tag-soft tag-color-info tag-md">
+          <span class="tag-icon tag-icon-prepend">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4Z" />
+            </svg>
+          </span>
+          <span class="tag-content">Badge</span>
+        </span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Append Icons</h3>
+      <div class="demo-buttons">
+        <span class="tag tag-filled tag-color-primary tag-md">
+          <span class="tag-content">Download</span>
+          <span class="tag-icon tag-icon-append">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+            </svg>
+          </span>
+        </span>
+        <span class="tag tag-outlined tag-color-success tag-md">
+          <span class="tag-content">External</span>
+          <span class="tag-icon tag-icon-append">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z" />
+            </svg>
+          </span>
+        </span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Dismissible Tags</h3>
+      <div class="demo-buttons">
+        <span class="tag tag-filled tag-color-primary tag-md tag-dismissible">
+          <span class="tag-content">Dismissible</span>
+          <button type="button" class="tag-dismiss" aria-label="Dismiss tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+            </svg>
+          </button>
+        </span>
+        <span class="tag tag-outlined tag-color-error tag-md tag-dismissible">
+          <span class="tag-content">Remove</span>
+          <button type="button" class="tag-dismiss" aria-label="Dismiss tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+            </svg>
+          </button>
+        </span>
+        <span class="tag tag-soft tag-color-success tag-md tag-dismissible">
+          <span class="tag-icon tag-icon-prepend">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,16.5L18,9.5L16.59,8.09L11,13.67L7.91,10.59L6.5,12L11,16.5Z" />
+            </svg>
+          </span>
+          <span class="tag-content">Selected</span>
+          <button type="button" class="tag-dismiss" aria-label="Dismiss tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+            </svg>
+          </button>
+        </span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Rainbow Border Tags</h3>
+      <div class="demo-buttons">
+        <div class="tag-rainbow-wrapper" style="--rainbow-colors: var(--color-primary) 0%, var(--color-secondary) 100%;">
+          <span class="tag tag-rainbow-border tag-md">Primary → Secondary</span>
+        </div>
+        <div class="tag-rainbow-wrapper" style="--rainbow-colors: var(--color-success) 0%, var(--color-info) 100%;">
+          <span class="tag tag-rainbow-border tag-md">Success → Info</span>
+        </div>
+        <div class="tag-rainbow-wrapper" style="--rainbow-colors: var(--color-warning) 0%, var(--color-error) 100%;">
+          <span class="tag tag-rainbow-border tag-md">Warning → Error</span>
+        </div>
+        <div class="tag-rainbow-wrapper" style="--rainbow-colors: #ff0080 0%, #ff8c00 50%, #40e0d0 100%;">
+          <span class="tag tag-rainbow-border tag-md">Custom Gradient</span>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Glass Tags (Frosted)</h3>
+      <div class="demo-buttons" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.5rem; border-radius: 8px; align-items: flex-start;">
+        <span class="tag tag-glass tag-sm">Small Glass</span>
+        <span class="tag tag-glass tag-md">Medium Glass</span>
+        <span class="tag tag-glass tag-lg">Large Glass</span>
+        <span class="tag tag-glass tag-md tag-dismissible">
+          <span class="tag-content">Dismissible</span>
+          <button type="button" class="tag-dismiss" aria-label="Dismiss tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+            </svg>
+          </button>
+        </span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Glass Tags (Shiny)</h3>
+      <div class="demo-buttons" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 1.5rem; border-radius: 8px; align-items: flex-start;">
+        <span class="tag tag-glass-shiny tag-sm">Small Shiny</span>
+        <span class="tag tag-glass-shiny tag-md">Medium Shiny</span>
+        <span class="tag tag-glass-shiny tag-lg">Large Shiny</span>
+        <span class="tag tag-glass-shiny tag-md tag-dismissible">
+          <span class="tag-content">Dismissible</span>
+          <button type="button" class="tag-dismiss" aria-label="Dismiss tag">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
+            </svg>
+          </button>
+        </span>
+      </div>
+
+      <h3 style="margin-bottom: 1rem;">Disabled State</h3>
+      <div class="demo-buttons">
+        <span class="tag tag-filled tag-color-primary tag-md tag-disabled">Disabled Tag</span>
+        <span class="tag tag-outlined tag-color-secondary tag-md tag-disabled">Disabled Outline</span>
+        <span class="tag tag-soft tag-color-info tag-md tag-disabled">Disabled Soft</span>
+      </div>
+
+      <!-- Usage guidelines card -->
+      <div class="card card-outlined" style="background: var(--color-info-tint); margin-top: 2rem;">
+        <div class="card-content">
+          <h4 class="card-title">💡 Usage Guidelines</h4>
+          <div class="card-body">
+            <ul>
+              <li><strong>Filled variant:</strong> High-emphasis tags with white text on colored background - best for statuses</li>
+              <li><strong>Outlined variant:</strong> Medium-emphasis tags with colored border and text - good for categories</li>
+              <li><strong>Soft variant:</strong> Subtle tags with light tinted background - ideal for labels and metadata</li>
+              <li><strong>Soft-outlined variant:</strong> Combines soft background with border - balanced emphasis with definition</li>
+              <li><strong>Rainbow border:</strong> Gradient border wrapper for eye-catching tags - use rainbowColors prop for custom gradients</li>
+              <li><strong>Glass (frosted):</strong> Translucent glassmorphism effect with backdrop blur - works best on colorful backgrounds</li>
+              <li><strong>Glass (shiny):</strong> Enhanced glass with gradient shimmer and hover shine effect - premium look</li>
+              <li><strong>Default icons:</strong> Success, Error, Warning, and Info colors automatically show semantic icons (filled, outlined, and soft-outlined)</li>
+              <li><strong>Custom icons:</strong> Use prepend-icon and append-icon slots or props for custom icons</li>
+              <li><strong>Colors:</strong> All colors provide proper contrast - filled tags use white text in light mode</li>
+              <li><strong>Dismissible:</strong> Add dismiss functionality for removable filters or selections</li>
+              <li><strong>Accessibility:</strong> WCAG 2.1 AA compliant with proper ARIA labels and keyboard support</li>
+              <li><strong>Dark theme:</strong> All variants adapt automatically with proper contrast ratios</li>
+              <li><strong>Mobile:</strong> Touch targets meet WCAG minimum 44x44px on mobile devices</li>
             </ul>
           </div>
         </div>

@@ -1,0 +1,521 @@
+/**
+ * Tag Component Styles
+ * Uses design tokens for consistent theming
+ */
+
+/* Import design tokens */
+@import '../tokens/colors.css';
+@import '../tokens/typography.css';
+
+/* Tag Base Styles */
+.tag {
+  /* Typography */
+  font-family: var(--tag-font-family, var(--typography-font-family-primary));
+  font-size: var(--tag-font-size, var(--typography-small-text-font-size));
+  font-weight: var(--tag-font-weight, var(--typography-font-weight-medium));
+  line-height: var(--tag-line-height, 1.4);
+
+  /* Display & Layout */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tag-gap, 0.375rem);
+
+  /* Spacing */
+  padding: var(--tag-padding-y, 0.25rem) var(--tag-padding-x, 0.625rem);
+
+  /* Border */
+  border: var(--tag-border-width, var(--border-width-thin)) var(--border-style-solid) transparent;
+  border-radius: var(--tag-border-radius, var(--border-radius-full));
+
+  /* Interaction */
+  user-select: none;
+  white-space: nowrap;
+
+  /* Transition */
+  transition: var(--tag-transition, all 0.2s ease-in-out);
+
+  /* Defaults */
+  box-sizing: border-box;
+}
+
+/* ===== Tag Variants (Style Types) ===== */
+
+/* Filled Variant - Solid background with white text */
+.tag-filled {
+  background-color: var(--tag-bg, var(--color-primary));
+  color: var(--tag-filled-text, var(--color-neutral-white));
+  border-color: var(--tag-border, var(--color-primary));
+}
+
+/* Outlined Variant - Border only */
+.tag-outlined {
+  background-color: transparent;
+  color: var(--tag-text, var(--color-primary));
+  border-color: var(--tag-border, var(--color-primary));
+  border-width: var(--border-width-medium);
+}
+
+/* Soft Variant - Light background with matching text */
+.tag-soft {
+  background-color: var(--tag-soft-bg, var(--color-primary-light));
+  color: var(--tag-soft-text, var(--color-primary-dark));
+  border-color: transparent;
+}
+
+/* Soft-Outlined Variant - Light background with colored border */
+.tag-soft-outlined {
+  background-color: var(--tag-soft-bg, var(--color-primary-light));
+  color: var(--tag-text, var(--color-primary));
+  border-color: var(--tag-border, var(--color-primary));
+  border-width: var(--border-width-thin);
+}
+
+/* Rainbow Border Variant */
+.tag-rainbow-border {
+  background-color: var(--tag-rainbow-bg, var(--color-background));
+  color: var(--tag-rainbow-color, var(--color-text));
+  border-color: transparent;
+}
+
+.tag-rainbow-wrapper {
+  display: inline-flex;
+  position: relative;
+  padding: var(--border-width-medium);
+  background: linear-gradient(135deg, var(--rainbow-colors));
+  border-radius: var(--tag-border-radius, var(--border-radius-full));
+}
+
+.tag-rainbow-wrapper .tag {
+  border-radius: calc(var(--tag-border-radius, var(--border-radius-full)) - var(--border-width-medium));
+}
+
+/* Dark theme for rainbow border */
+[data-theme="dark"] .tag-rainbow-border {
+  background-color: var(--tag-rainbow-bg-dark, var(--color-background));
+}
+
+/* Glass Variant (Frosted) */
+.tag-glass {
+  background-color: var(--tag-glass-bg, rgba(255, 255, 255, 0.15));
+  backdrop-filter: blur(var(--tag-glass-blur, 10px)) saturate(var(--tag-glass-saturate, 180%));
+  -webkit-backdrop-filter: blur(var(--tag-glass-blur, 10px)) saturate(var(--tag-glass-saturate, 180%));
+  border: var(--tag-glass-border-width, 1px) solid var(--tag-glass-border-color, rgba(255, 255, 255, 0.3));
+  box-shadow: var(--tag-glass-shadow, 0 4px 16px 0 rgba(0, 0, 0, 0.1));
+  color: var(--color-text);
+}
+
+/* Dark theme glass adjustments */
+[data-theme="dark"] .tag-glass {
+  background-color: var(--tag-glass-bg-dark, rgba(255, 255, 255, 0.1));
+  border-color: var(--tag-glass-border-color-dark, rgba(255, 255, 255, 0.2));
+}
+
+/* Glass Shiny Variant */
+.tag-glass-shiny {
+  background: linear-gradient(
+    135deg,
+    var(--tag-glass-shiny-gradient-start, rgba(255, 255, 255, 0.3)) 0%,
+    var(--tag-glass-shiny-gradient-mid, rgba(255, 255, 255, 0.1)) 50%,
+    var(--tag-glass-shiny-gradient-end, rgba(255, 255, 255, 0.25)) 100%
+  );
+  backdrop-filter: blur(var(--tag-glass-shiny-blur, 12px)) saturate(var(--tag-glass-shiny-saturate, 200%)) brightness(var(--tag-glass-shiny-brightness, 1.1));
+  -webkit-backdrop-filter: blur(var(--tag-glass-shiny-blur, 12px)) saturate(var(--tag-glass-shiny-saturate, 200%)) brightness(var(--tag-glass-shiny-brightness, 1.1));
+  border: var(--tag-glass-shiny-border-width, 1px) solid var(--tag-glass-shiny-border-color, rgba(255, 255, 255, 0.5));
+  box-shadow: var(--tag-glass-shiny-shadow,
+    0 4px 16px 0 rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.1)
+  );
+  color: var(--color-text);
+  position: relative;
+  overflow: hidden;
+}
+
+.tag-glass-shiny::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  transition: left 0.5s ease;
+}
+
+.tag-glass-shiny:hover::before {
+  left: 100%;
+}
+
+/* Dark theme shiny glass adjustments */
+[data-theme="dark"] .tag-glass-shiny {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 16px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+/* ===== Tag Colors (Semantic Colors) ===== */
+
+/* Primary Color (default) */
+.tag-color-primary {
+  --tag-bg: var(--color-primary);
+  --tag-border: var(--color-primary);
+  --tag-text: var(--color-primary);
+  --tag-filled-text: var(--color-neutral-white);
+  --tag-soft-bg: rgba(123, 64, 247, 0.15); /* 15% opacity primary */
+  --tag-soft-text: var(--color-primary-dark);
+  --tag-dismiss-hover-bg: rgba(255, 255, 255, 0.2);
+}
+
+/* Secondary Color */
+.tag-color-secondary {
+  --tag-bg: var(--color-secondary);
+  --tag-border: var(--color-secondary);
+  --tag-text: var(--color-secondary);
+  --tag-filled-text: var(--color-neutral-white);
+  --tag-soft-bg: rgba(247, 64, 164, 0.15); /* 15% opacity secondary */
+  --tag-soft-text: var(--color-secondary-dark);
+  --tag-dismiss-hover-bg: rgba(255, 255, 255, 0.2);
+}
+
+/* Error Color */
+.tag-color-error {
+  --tag-bg: var(--color-error);
+  --tag-border: var(--color-error);
+  --tag-text: var(--color-error);
+  --tag-filled-text: var(--color-neutral-white);
+  --tag-soft-bg: rgba(244, 67, 54, 0.15); /* 15% opacity error */
+  --tag-soft-text: var(--color-error-dark);
+  --tag-dismiss-hover-bg: rgba(255, 255, 255, 0.2);
+}
+
+/* Success Color */
+.tag-color-success {
+  --tag-bg: var(--color-success);
+  --tag-border: var(--color-success);
+  --tag-text: var(--color-success);
+  --tag-filled-text: var(--color-neutral-white);
+  --tag-soft-bg: rgba(76, 175, 80, 0.15); /* 15% opacity success */
+  --tag-soft-text: var(--color-success-dark);
+  --tag-dismiss-hover-bg: rgba(255, 255, 255, 0.2);
+}
+
+/* Warning Color */
+.tag-color-warning {
+  --tag-bg: var(--color-warning);
+  --tag-border: var(--color-warning);
+  --tag-text: var(--color-warning);
+  --tag-filled-text: var(--color-neutral-white);
+  --tag-soft-bg: rgba(255, 152, 0, 0.15); /* 15% opacity warning */
+  --tag-soft-text: var(--color-warning-dark);
+  --tag-dismiss-hover-bg: rgba(255, 255, 255, 0.2);
+}
+
+/* Info Color */
+.tag-color-info {
+  --tag-bg: var(--color-info);
+  --tag-border: var(--color-info);
+  --tag-text: var(--color-info);
+  --tag-filled-text: var(--color-neutral-white);
+  --tag-soft-bg: rgba(8, 201, 175, 0.15); /* 15% opacity info */
+  --tag-soft-text: var(--color-info-dark);
+  --tag-dismiss-hover-bg: rgba(255, 255, 255, 0.2);
+}
+
+/* Neutral Color */
+.tag-color-neutral {
+  --tag-bg: var(--color-neutral-black30);
+  --tag-border: var(--color-neutral-black30);
+  --tag-text: var(--color-neutral-black60);
+  --tag-filled-text: var(--color-neutral-black);
+  --tag-soft-bg: rgba(184, 184, 184, 0.2); /* 20% opacity neutral */
+  --tag-soft-text: var(--color-neutral-black60);
+  --tag-dismiss-hover-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Tag Sizes ===== */
+
+/* Small Tag */
+.tag-sm {
+  font-size: var(--tag-sm-font-size, var(--typography-spare-m-font-size));
+  padding: var(--tag-sm-padding-y, 0.125rem) var(--tag-sm-padding-x, 0.5rem);
+  gap: var(--tag-sm-gap, 0.25rem);
+}
+
+/* Medium Tag (default) */
+.tag-md {
+  font-size: var(--tag-md-font-size, var(--typography-small-text-font-size));
+  padding: var(--tag-md-padding-y, 0.25rem) var(--tag-md-padding-x, 0.625rem);
+  gap: var(--tag-md-gap, 0.375rem);
+}
+
+/* Large Tag */
+.tag-lg {
+  font-size: var(--tag-lg-font-size, var(--typography-paragraph-font-size));
+  padding: var(--tag-lg-padding-y, 0.375rem) var(--tag-lg-padding-x, 0.75rem);
+  gap: var(--tag-lg-gap, 0.5rem);
+}
+
+/* Ensure glass variants respect size classes */
+.tag-glass.tag-sm,
+.tag-glass-shiny.tag-sm {
+  font-size: var(--typography-spare-m-font-size);
+  padding: 0.125rem 0.5rem;
+  gap: 0.25rem;
+}
+
+.tag-glass.tag-md,
+.tag-glass-shiny.tag-md {
+  font-size: var(--typography-small-text-font-size);
+  padding: 0.25rem 0.625rem;
+  gap: 0.375rem;
+}
+
+.tag-glass.tag-lg,
+.tag-glass-shiny.tag-lg {
+  font-size: var(--typography-paragraph-font-size);
+  padding: 0.375rem 0.75rem;
+  gap: 0.5rem;
+}
+
+/* ===== Tag Rounded ===== */
+
+.tag-rounded-sm {
+  border-radius: var(--border-radius-sm);
+}
+
+.tag-rounded-md {
+  border-radius: var(--border-radius-md);
+}
+
+.tag-rounded-lg {
+  border-radius: var(--border-radius-lg);
+}
+
+.tag-rounded-full {
+  border-radius: var(--border-radius-full);
+}
+
+/* ===== Tag Icon ===== */
+
+.tag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tag-icon-prepend {
+  margin-right: 0;
+}
+
+.tag-icon-append {
+  margin-left: 0;
+}
+
+.tag-content {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ===== Tag Dismiss Button ===== */
+
+.tag-dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: inherit;
+  border-radius: var(--border-radius-sm);
+  transition: background-color 0.2s ease;
+}
+
+.tag-dismiss:hover:not(:disabled) {
+  background-color: var(--tag-dismiss-hover-bg, rgba(0, 0, 0, 0.1));
+}
+
+.tag-dismiss:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.tag-dismiss:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ===== Tag States ===== */
+
+/* Disabled Tag */
+.tag-disabled {
+  opacity: var(--tag-disabled-opacity, 0.5);
+  cursor: not-allowed;
+}
+
+/* ===== Dark Theme Adjustments ===== */
+
+/* Filled variants use lighter colors in dark mode */
+[data-theme="dark"] .tag-filled.tag-color-primary {
+  --tag-bg: var(--color-primary-light);
+}
+
+[data-theme="dark"] .tag-filled.tag-color-secondary {
+  --tag-bg: var(--color-secondary-light);
+}
+
+[data-theme="dark"] .tag-filled.tag-color-error {
+  --tag-bg: var(--color-error-light);
+}
+
+[data-theme="dark"] .tag-filled.tag-color-success {
+  --tag-bg: var(--color-success-light);
+}
+
+[data-theme="dark"] .tag-filled.tag-color-warning {
+  --tag-bg: var(--color-warning-light);
+}
+
+[data-theme="dark"] .tag-filled.tag-color-info {
+  --tag-bg: var(--color-info-light);
+}
+
+[data-theme="dark"] .tag-filled.tag-color-neutral {
+  --tag-bg: var(--color-neutral-black60);
+  color: var(--color-neutral-white);
+}
+
+/* Outlined variants use lighter colors in dark mode */
+[data-theme="dark"] .tag-outlined.tag-color-primary {
+  --tag-text: var(--color-primary-light);
+  --tag-border: var(--color-primary-light);
+}
+
+[data-theme="dark"] .tag-outlined.tag-color-secondary {
+  --tag-text: var(--color-secondary-light);
+  --tag-border: var(--color-secondary-light);
+}
+
+[data-theme="dark"] .tag-outlined.tag-color-error {
+  --tag-text: var(--color-error-light);
+  --tag-border: var(--color-error-light);
+}
+
+[data-theme="dark"] .tag-outlined.tag-color-success {
+  --tag-text: var(--color-success-light);
+  --tag-border: var(--color-success-light);
+}
+
+[data-theme="dark"] .tag-outlined.tag-color-warning {
+  --tag-text: var(--color-warning-light);
+  --tag-border: var(--color-warning-light);
+}
+
+[data-theme="dark"] .tag-outlined.tag-color-info {
+  --tag-text: var(--color-info-light);
+  --tag-border: var(--color-info-light);
+}
+
+[data-theme="dark"] .tag-outlined.tag-color-neutral {
+  --tag-text: var(--color-neutral-black30);
+  --tag-border: var(--color-neutral-black30);
+}
+
+/* Soft variants in dark mode */
+[data-theme="dark"] .tag-soft.tag-color-primary {
+  --tag-soft-bg: rgba(159, 112, 249, 0.2); /* 20% opacity primary-light */
+  --tag-soft-text: var(--color-primary-light);
+}
+
+[data-theme="dark"] .tag-soft.tag-color-secondary {
+  --tag-soft-bg: rgba(249, 112, 189, 0.2); /* 20% opacity secondary-light */
+  --tag-soft-text: var(--color-secondary-light);
+}
+
+[data-theme="dark"] .tag-soft.tag-color-error {
+  --tag-soft-bg: rgba(247, 112, 106, 0.2); /* 20% opacity error-light */
+  --tag-soft-text: var(--color-error-light);
+}
+
+[data-theme="dark"] .tag-soft.tag-color-success {
+  --tag-soft-bg: rgba(118, 194, 121, 0.2); /* 20% opacity success-light */
+  --tag-soft-text: var(--color-success-light);
+}
+
+[data-theme="dark"] .tag-soft.tag-color-warning {
+  --tag-soft-bg: rgba(255, 179, 51, 0.2); /* 20% opacity warning-light */
+  --tag-soft-text: var(--color-warning-light);
+}
+
+[data-theme="dark"] .tag-soft.tag-color-info {
+  --tag-soft-bg: rgba(61, 213, 194, 0.2); /* 20% opacity info-light */
+  --tag-soft-text: var(--color-info-light);
+}
+
+[data-theme="dark"] .tag-soft.tag-color-neutral {
+  --tag-soft-bg: rgba(184, 184, 184, 0.15); /* 15% opacity neutral */
+  --tag-soft-text: var(--color-neutral-black20);
+}
+
+/* Soft-outlined variants in dark mode */
+[data-theme="dark"] .tag-soft-outlined.tag-color-primary {
+  --tag-text: var(--color-primary-light);
+  --tag-border: var(--color-primary-light);
+}
+
+[data-theme="dark"] .tag-soft-outlined.tag-color-secondary {
+  --tag-text: var(--color-secondary-light);
+  --tag-border: var(--color-secondary-light);
+}
+
+[data-theme="dark"] .tag-soft-outlined.tag-color-error {
+  --tag-text: var(--color-error-light);
+  --tag-border: var(--color-error-light);
+}
+
+[data-theme="dark"] .tag-soft-outlined.tag-color-success {
+  --tag-text: var(--color-success-light);
+  --tag-border: var(--color-success-light);
+}
+
+[data-theme="dark"] .tag-soft-outlined.tag-color-warning {
+  --tag-text: var(--color-warning-light);
+  --tag-border: var(--color-warning-light);
+}
+
+[data-theme="dark"] .tag-soft-outlined.tag-color-info {
+  --tag-text: var(--color-info-light);
+  --tag-border: var(--color-info-light);
+}
+
+[data-theme="dark"] .tag-soft-outlined.tag-color-neutral {
+  --tag-text: var(--color-neutral-black30);
+  --tag-border: var(--color-neutral-black30);
+}
+
+/* ===== Responsive Design (Mobile-First) ===== */
+
+/* Touch targets for mobile - ensure min 44x44px */
+@media (max-width: 767px) {
+  .tag-dismiss {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem;
+  }
+}
