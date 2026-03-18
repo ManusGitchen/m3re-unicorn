@@ -14,6 +14,7 @@
 @import './components/card.css';
 @import './components/dialog.css';
 @import './components/tag.css';
+@import './components/notification.css';
 
 /* Global Resets & Base Styles */
 *,

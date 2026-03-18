@@ -1,0 +1,14 @@
+/* Minimal docs-specific styles - most styling comes from unicorn-lib */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  min-height: 100vh;
+}

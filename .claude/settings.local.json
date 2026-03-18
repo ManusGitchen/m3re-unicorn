@@ -3,7 +3,9 @@
     "allow": [
       "Bash(cd unicorn-lib:*)",
       "Bash(cd:*)",
-      "mcp__figma__get_design_context"
+      "mcp__figma__get_design_context",
+      "Bash(vp add:*)",
+      "Bash(vp install:*)"
     ]
   }
 }

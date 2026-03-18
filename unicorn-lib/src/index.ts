@@ -16,6 +16,9 @@ export { Dialog, type DialogProps, type DialogVariant, type DialogHeight } from 
 // Tag Component
 export { Tag, type TagProps } from './components/tag'
 
+// Notification Component
+export { Notification, type NotificationProps, type NotificationType, type NotificationVariant, type NotificationPosition, type NotificationPlacement } from './components/notification'
+
 // Icon Component (from Iconify)
 export { Icon } from '@iconify/vue'
 
