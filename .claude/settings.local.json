@@ -5,7 +5,9 @@
       "Bash(cd:*)",
       "mcp__figma__get_design_context",
       "Bash(vp add:*)",
-      "Bash(vp install:*)"
+      "Bash(vp install:*)",
+      "Bash(npm test *)",
+      "Bash(npm run *)"
     ]
   }
 }

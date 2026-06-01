@@ -1,0 +1,36 @@
+{
+  "name": "@m3re/unicorn-darts",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A 501 darts score tracking web application",
+  "author": "mrath",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc --noEmit",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "uuid": "^10.0.0",
+    "vue": "^3.5.30",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.5",
+    "@types/uuid": "^10.0.0",
+    "@vitejs/plugin-vue": "^5.2.0",
+    "@vitest/coverage-istanbul": "^2.1.9",
+    "@vue/test-utils": "^2.4.10",
+    "fake-indexeddb": "^6.0.0",
+    "happy-dom": "^15.11.7",
+    "typescript": "^5.9.3",
+    "vite": "^6.0.15",
+    "vite-plus": "latest",
+    "vitest": "^2.1.8"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "npm@11.16.0"
+}
