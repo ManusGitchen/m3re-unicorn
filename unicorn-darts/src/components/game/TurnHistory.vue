@@ -16,6 +16,9 @@
           }"
         >
           <div class="turn-history__round">R{{ turn.round }}</div>
+          <div v-if="showPlayerNames" class="turn-history__player">
+            {{ getPlayerName(turn.playerId) }}
+          </div>
           <div class="turn-history__score">
             <span class="turn-history__total">{{ turn.totalScore }}</span>
             <span class="turn-history__remaining">→ {{ turn.remainingAfter }}</span>
@@ -39,11 +42,20 @@ import type { Turn } from '@/types/game'
 const props = defineProps<{
   turns: Turn[]
   limit?: number
+  showPlayerNames?: boolean
+  playerNames?: Map<string, string>
 }>()
 
 const reversedTurns = computed(() => {
   return [...props.turns].reverse()
 })
+
+function getPlayerName(playerId: string): string {
+  if (props.playerNames) {
+    return props.playerNames.get(playerId) || `Player ${playerId.slice(0, 4)}`
+  }
+  return `Player ${playerId.slice(0, 4)}`
+}
 </script>
 
 <style scoped>
@@ -98,6 +110,13 @@ const reversedTurns = computed(() => {
 
 .turn-history__remaining {
   color: var(--color-text-secondary);
+}
+
+.turn-history__player {
+  font-size: 0.875rem;
+  font-weight: var(--typography-font-weight-semibold);
+  color: var(--color-primary);
+  min-width: 80px;
 }
 
 .turn-history__badge {

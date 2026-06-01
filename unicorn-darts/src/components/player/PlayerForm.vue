@@ -38,6 +38,14 @@
           <button type="button" class="btn btn-color-secondary" @click="emit('cancel')">
             Cancel
           </button>
+          <button
+            v-if="mode === 'edit' && player"
+            type="button"
+            class="btn btn-color-error"
+            @click="handleDelete"
+          >
+            Delete Player
+          </button>
         </div>
       </form>
     </div>
@@ -56,15 +64,16 @@ const props = defineProps<{
 const emit = defineEmits<{
   save: [name: string, imageUrl: string]
   cancel: []
+  delete: [playerId: string]
 }>()
 
 const availableImages = [
   '/images/players/avatar1.svg',
   '/images/players/avatar2.svg',
   '/images/players/avatar3.svg',
-  '/images/players/avatar4.svg',
-  '/images/players/avatar5.svg',
-  '/images/players/avatar6.svg',
+  '/images/players/avatar4.jpg',
+  '/images/players/avatar5.png',
+  '/images/players/avatar6.jpg',
 ]
 
 const formData = reactive({
@@ -82,6 +91,15 @@ onMounted(() => {
 function handleSubmit() {
   if (!formData.name.trim()) return
   emit('save', formData.name, formData.imageUrl)
+}
+
+function handleDelete() {
+  if (!props.player) return
+
+  const confirmMessage = `Are you sure you want to delete "${props.player.name}"? This action cannot be undone.`
+  if (confirm(confirmMessage)) {
+    emit('delete', props.player.id)
+  }
 }
 </script>
 
@@ -135,7 +153,18 @@ function handleSubmit() {
 
 .form-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--spacing-sm);
   margin-top: var(--spacing-lg);
+}
+
+.btn-color-error {
+  background-color: var(--color-error);
+  color: white;
+  margin-left: auto;
+}
+
+.btn-color-error:hover {
+  background-color: var(--color-error-dark);
 }
 </style>

@@ -24,24 +24,38 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
+import { useDatabase } from '@/composables/useDatabase'
 import type { Game } from '@/types/game'
+import type { Player } from '@/types/player'
 
 const props = defineProps<{
   game: Game
   highlightPlayerId?: string
 }>()
 
-// This would typically come from a composable that loads players
-// For now, we'll compute minimal info from game data
+const db = useDatabase()
+const players = ref<Map<string, Player>>(new Map())
+
+onMounted(async () => {
+  // Load all players for this game
+  const playerPromises = props.game.playerIds.map(id => db.getPlayer(id))
+  const loadedPlayers = await Promise.all(playerPromises)
+
+  loadedPlayers.forEach(player => {
+    if (player) {
+      players.value.set(player.id, player)
+    }
+  })
+})
+
 const playerScores = computed(() => {
   return props.game.scores.map(score => {
-    // In real implementation, fetch player details
-    // For now, create placeholder
+    const player = players.value.get(score.playerId)
     return {
       playerId: score.playerId,
-      name: `Player ${score.playerId.slice(0, 4)}`,
-      imageUrl: '/images/players/avatar1.png',
+      name: player?.name || `Player ${score.playerId.slice(0, 4)}`,
+      imageUrl: player?.imageUrl || '/images/players/avatar1.png',
       score: score.currentScore,
       dartsThrown: score.dartsThrown
     }

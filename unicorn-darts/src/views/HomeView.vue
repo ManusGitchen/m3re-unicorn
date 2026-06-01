@@ -77,8 +77,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed, onMounted, watch } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import { usePlayer } from '@/composables/usePlayer'
 import { useGame } from '@/composables/useGame'
 import { useDatabase } from '@/composables/useDatabase'
@@ -86,6 +86,7 @@ import PlayerList from '@/components/player/PlayerList.vue'
 import type { Game } from '@/types/game'
 
 const router = useRouter()
+const route = useRoute()
 const { players, loading, loadPlayers } = usePlayer()
 const game = useGame()
 const db = useDatabase()
@@ -98,7 +99,10 @@ const completedGamesCount = computed(() => {
   return recentGames.value.filter(g => g.status === 'completed').length
 })
 
-onMounted(async () => {
+async function loadData() {
+  // Reset player selection
+  selectedPlayerIds.value = []
+
   await loadPlayers()
 
   // Check for active games
@@ -110,6 +114,17 @@ onMounted(async () => {
   // Load recent completed games
   const completed = await db.getGames('completed')
   recentGames.value = completed.slice(0, 5)
+}
+
+onMounted(async () => {
+  await loadData()
+})
+
+// Reload data when navigating back to home
+watch(() => route.path, (newPath) => {
+  if (newPath === '/') {
+    loadData()
+  }
 })
 
 function togglePlayerSelection(playerId: string) {

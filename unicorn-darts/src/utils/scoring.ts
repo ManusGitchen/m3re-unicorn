@@ -9,6 +9,7 @@ export function calculateScore(current: number, throws: number[]): number {
 /**
  * Check if turn results in bust
  * Bust conditions: score < 0 or score === 1
+ * Note: score === 0 without a double is checked separately in isWin
  */
 export function isBust(current: number, throws: number[]): boolean {
   const newScore = calculateScore(current, throws)

@@ -37,16 +37,25 @@
       </div>
 
       <!-- Bust warning -->
-      <div v-if="wouldBust" class="score-entry__warning text-error">
+      <div v-if="wouldBust && projectedScore !== 0" class="score-entry__warning text-error">
         ⚠️ This would BUST! Score would be {{ projectedScore }}
       </div>
+      <div v-if="projectedScore === 0 && !lastIsDouble" class="score-entry__warning text-error">
+        ⚠️ This will be marked as BUST! (No double checkout)
+      </div>
 
-      <!-- Double checkbox for potential wins -->
-      <div v-if="projectedScore === 0" class="score-entry__double">
-        <label>
+      <!-- Double checkout requirement -->
+      <div v-if="projectedScore === 0" class="score-entry__double-required">
+        <div class="score-entry__double-warning">
+          ⚠️ You must finish on a double to win!
+        </div>
+        <label class="score-entry__double-label">
           <input v-model="lastIsDouble" type="checkbox" />
-          Last dart was a double
+          <span>Last dart was a double</span>
         </label>
+        <p class="score-entry__double-hint">
+          If the last dart was NOT a double, this will be marked as BUST.
+        </p>
       </div>
 
       <!-- Actions -->
@@ -110,7 +119,14 @@ const validationError = computed(() => {
 
 const wouldBust = computed(() => {
   if (parsedScore.value === null) return false
-  return isBust(props.currentScore, [parsedScore.value])
+
+  // Check regular bust conditions
+  if (isBust(props.currentScore, [parsedScore.value])) return true
+
+  // Check if reaching 0 without double (which will be treated as bust)
+  if (projectedScore.value === 0 && !lastIsDouble.value) return true
+
+  return false
 })
 
 const projectedScore = computed(() => {
@@ -119,7 +135,11 @@ const projectedScore = computed(() => {
 })
 
 const isValid = computed(() => {
-  return parsedScore.value !== null && !validationError.value
+  if (parsedScore.value === null || validationError.value) return false
+
+  // If reaching exactly 0, must confirm it was a double (or accept bust)
+  // We allow submission either way - the game logic will handle it as win or bust
+  return true
 })
 
 function handleInput() {
@@ -185,15 +205,39 @@ function handleUndo() {
   background-color: var(--color-error-tint);
 }
 
-.score-entry__double {
+.score-entry__double-required {
   margin-bottom: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--color-warning-tint);
+  border: 2px solid var(--color-warning);
+  border-radius: 8px;
 }
 
-.score-entry__double label {
+.score-entry__double-warning {
+  font-weight: var(--typography-font-weight-semibold);
+  color: var(--color-warning);
+  margin-bottom: var(--spacing-sm);
+}
+
+.score-entry__double-label {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
   cursor: pointer;
+  margin-bottom: var(--spacing-xs);
+  font-size: 1.125rem;
+}
+
+.score-entry__double-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.score-entry__double-hint {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  margin: 0;
 }
 
 .score-entry__actions {

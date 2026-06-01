@@ -16,7 +16,10 @@ export function usePlayer() {
     error.value = null
     try {
       const allPlayers = await db.getAllPlayers()
-      players.value = allPlayers
+      // Sort players alphabetically by name (case-insensitive)
+      players.value = allPlayers.sort((a, b) =>
+        a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+      )
     } catch (e) {
       error.value = e instanceof Error ? e : new Error('Failed to load players')
     } finally {
@@ -46,6 +49,10 @@ export function usePlayer() {
       }
       const player = await db.addPlayer(playerData)
       players.value.push(player)
+      // Re-sort after adding
+      players.value.sort((a, b) =>
+        a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+      )
       return player
     } catch (e) {
       error.value = e instanceof Error ? e : new Error('Failed to create player')
@@ -63,6 +70,10 @@ export function usePlayer() {
       const index = players.value.findIndex(p => p.id === id)
       if (index !== -1) {
         players.value[index] = updatedPlayer
+        // Re-sort after updating (in case name changed)
+        players.value.sort((a, b) =>
+          a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+        )
       }
     } catch (e) {
       error.value = e instanceof Error ? e : new Error('Failed to update player')

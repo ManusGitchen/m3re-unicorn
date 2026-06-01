@@ -13,6 +13,7 @@
       :player="editingPlayer"
       @save="handleSave"
       @cancel="handleCancel"
+      @delete="handleDelete"
     />
 
     <div v-if="loading">Loading players...</div>
@@ -33,7 +34,7 @@ import PlayerList from '@/components/player/PlayerList.vue'
 import PlayerForm from '@/components/player/PlayerForm.vue'
 import type { Player } from '@/types/player'
 
-const { players, loading, error, loadPlayers, createPlayer, updatePlayer } = usePlayer()
+const { players, loading, error, loadPlayers, createPlayer, updatePlayer, deletePlayer } = usePlayer()
 
 const showForm = ref(false)
 const editingPlayer = ref<Player | undefined>()
@@ -61,6 +62,16 @@ function handleEdit(playerId: string) {
   if (player) {
     editingPlayer.value = player
     showForm.value = true
+  }
+}
+
+async function handleDelete(playerId: string) {
+  try {
+    await deletePlayer(playerId)
+    handleCancel()
+  } catch (e) {
+    error.value = e as Error
+    alert(`Failed to delete player: ${(e as Error).message}`)
   }
 }
 </script>

@@ -370,6 +370,24 @@ export function useDatabase() {
     })
   }
 
+  async function clearAllGames(): Promise<void> {
+    const db = await init()
+
+    return new Promise((resolve, reject) => {
+      const transaction = db.transaction(['games'], 'readwrite')
+      const store = transaction.objectStore('games')
+      const request = store.clear()
+
+      request.onsuccess = () => {
+        resolve()
+      }
+
+      request.onerror = () => {
+        reject(new Error('Failed to clear games'))
+      }
+    })
+  }
+
   async function close(): Promise<void> {
     if (dbInstance) {
       dbInstance.close()
@@ -388,6 +406,7 @@ export function useDatabase() {
     addGame,
     updateGame,
     deleteGame,
+    clearAllGames,
     getGame,
     getGames
   }

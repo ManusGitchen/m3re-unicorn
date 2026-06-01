@@ -2,8 +2,9 @@
   <div
     class="card player-card"
     :class="{ 'player-card--selected': selected, 'player-card--selectable': selectable }"
+    @click="handleClick"
   >
-    <div class="player-card__avatar" @click="handleClick">
+    <div class="player-card__avatar">
       <img :src="player.imageUrl" :alt="player.name" />
     </div>
     <div class="card-content">
@@ -18,7 +19,8 @@
         </button>
       </div>
       <div v-if="variant === 'detailed'" class="card-body">
-        <p>Games: {{ player.stats.gamesPlayed }} ({{ player.stats.gamesWon }} wins)</p>
+        <p>Games: {{ player.stats.gamesPlayed }}</p>
+        <p>Wins: {{ player.stats.gamesWon }}</p>
         <p>Avg Score: {{ player.stats.averageScore.toFixed(1) }}</p>
         <p>Best: {{ player.stats.highestScore }}</p>
       </div>

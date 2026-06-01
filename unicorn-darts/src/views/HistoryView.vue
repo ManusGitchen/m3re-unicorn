@@ -1,7 +1,16 @@
 <template>
   <div class="history-view">
     <div class="history-view__container">
-      <h1 class="history-view__title">Game History</h1>
+      <div class="history-view__header">
+        <h1 class="history-view__title">Game History</h1>
+        <button
+          v-if="!selectedGameId && games.length > 0"
+          class="btn btn-color-error btn-sm"
+          @click="handleClearHistory"
+        >
+          Clear History
+        </button>
+      </div>
 
       <div v-if="selectedGameId" class="history-view__detail">
         <GameDetail :game-id="selectedGameId" @back="handleBack" />
@@ -92,6 +101,21 @@ function handleBack() {
   selectedGameId.value = null
   router.push('/history')
 }
+
+async function handleClearHistory() {
+  const confirmMessage = `Are you sure you want to delete ALL ${games.value.length} game(s) from history? This action cannot be undone.`
+  if (!confirm(confirmMessage)) {
+    return
+  }
+
+  try {
+    await db.clearAllGames()
+    games.value = []
+  } catch (e) {
+    console.error('Failed to clear history:', e)
+    alert('Failed to clear history. Please try again.')
+  }
+}
 </script>
 
 <style scoped>
@@ -105,9 +129,16 @@ function handleBack() {
   padding: var(--spacing-xl) var(--spacing-md);
 }
 
+.history-view__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
 .history-view__title {
   font-size: 2rem;
-  margin-bottom: var(--spacing-lg);
+  margin: 0;
 }
 
 .history-view__loading {

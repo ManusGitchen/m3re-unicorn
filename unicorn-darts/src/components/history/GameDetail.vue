@@ -56,7 +56,7 @@
                 :class="{ 'game-detail__player-score--winner': score.playerId === game.winnerId }"
               >
                 <span class="game-detail__player-name">
-                  Player {{ score.playerId.slice(0, 4) }}
+                  {{ getPlayerName(score.playerId) }}
                   <span v-if="score.playerId === game.winnerId">🏆</span>
                 </span>
                 <span class="game-detail__score-value">{{ score.currentScore }}</span>
@@ -71,7 +71,12 @@
         <div class="card-content">
           <h3 class="card-title">Turn History</h3>
           <div class="card-body">
-            <TurnHistory :turns="game.turns" :limit="100" />
+            <TurnHistory
+              :turns="game.turns"
+              :limit="100"
+              :show-player-names="true"
+              :player-names="playerNamesMap"
+            />
           </div>
         </div>
       </div>
@@ -80,10 +85,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useDatabase } from '@/composables/useDatabase'
 import TurnHistory from '@/components/game/TurnHistory.vue'
 import type { Game } from '@/types/game'
+import type { Player } from '@/types/player'
 
 const props = defineProps<{
   gameId: string
@@ -95,18 +101,43 @@ defineEmits<{
 
 const db = useDatabase()
 const game = ref<Game | null>(null)
+const players = ref<Map<string, Player>>(new Map())
 const loading = ref(true)
 const error = ref<Error | null>(null)
 
 onMounted(async () => {
   try {
     game.value = await db.getGame(props.gameId) ?? null
+
+    // Load all players for this game
+    if (game.value) {
+      const playerPromises = game.value.playerIds.map(id => db.getPlayer(id))
+      const loadedPlayers = await Promise.all(playerPromises)
+
+      loadedPlayers.forEach(player => {
+        if (player) {
+          players.value.set(player.id, player)
+        }
+      })
+    }
   } catch (e) {
     error.value = e as Error
   } finally {
     loading.value = false
   }
 })
+
+const playerNamesMap = computed(() => {
+  const map = new Map<string, string>()
+  players.value.forEach((player, id) => {
+    map.set(id, player.name)
+  })
+  return map
+})
+
+function getPlayerName(playerId: string): string {
+  return players.value.get(playerId)?.name || `Player ${playerId.slice(0, 4)}`
+}
 
 function formatDate(date: Date): string {
   return new Date(date).toLocaleDateString('en-US', {

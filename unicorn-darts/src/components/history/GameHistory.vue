@@ -37,7 +37,7 @@
           </div>
 
           <div v-if="game.winnerId" class="game-history__winner">
-            🏆 Winner: Player {{ game.winnerId.slice(0, 4) }}
+            🏆 Winner: {{ getPlayerName(game.winnerId) }}
           </div>
         </div>
       </div>
@@ -46,7 +46,10 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
+import { useDatabase } from '@/composables/useDatabase'
 import type { Game } from '@/types/game'
+import type { Player } from '@/types/player'
 
 const props = defineProps<{
   games: Game[]
@@ -55,6 +58,31 @@ const props = defineProps<{
 const emit = defineEmits<{
   'view-game': [gameId: string]
 }>()
+
+const db = useDatabase()
+const players = ref<Map<string, Player>>(new Map())
+
+onMounted(async () => {
+  // Load all unique players from all games
+  const allPlayerIds = new Set<string>()
+  props.games.forEach(game => {
+    game.playerIds.forEach(id => allPlayerIds.add(id))
+    if (game.winnerId) allPlayerIds.add(game.winnerId)
+  })
+
+  const playerPromises = Array.from(allPlayerIds).map(id => db.getPlayer(id))
+  const loadedPlayers = await Promise.all(playerPromises)
+
+  loadedPlayers.forEach(player => {
+    if (player) {
+      players.value.set(player.id, player)
+    }
+  })
+})
+
+function getPlayerName(playerId: string): string {
+  return players.value.get(playerId)?.name || `Player ${playerId.slice(0, 4)}`
+}
 
 function formatDate(date: Date): string {
   return new Date(date).toLocaleDateString('en-US', {

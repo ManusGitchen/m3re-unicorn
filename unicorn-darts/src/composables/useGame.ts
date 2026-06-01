@@ -76,8 +76,13 @@ export function useGame() {
 
     const totalScore = throwScores.reduce((sum, s) => sum + s, 0)
     const newScore = calculateScore(playerScore.currentScore, throwScores)
-    const bustDetected = isBust(playerScore.currentScore, throwScores)
+    let bustDetected = isBust(playerScore.currentScore, throwScores)
     const winDetected = isWin(playerScore.currentScore, throwScores, lastIsDouble)
+
+    // If score reaches 0 but it's not marked as a double, it's a bust
+    if (newScore === 0 && !winDetected) {
+      bustDetected = true
+    }
 
     // Create turn record
     const turn: Turn = {
@@ -117,8 +122,8 @@ export function useGame() {
       updatedGame.winnerId = playerId
       updatedGame.completedAt = new Date()
 
-      // Update winner stats
-      await updatePlayerStats(playerId, updatedGame)
+      // Update stats for all players
+      await updateAllPlayerStats(updatedGame)
     } else {
       // Move to next player
       updatedGame.currentPlayerIndex = (game.currentPlayerIndex + 1) % game.playerIds.length
@@ -184,11 +189,28 @@ export function useGame() {
 
     await db.updateGame(updatedGame.id, toRaw(updatedGame))
     currentGame.value = updatedGame
+
+    // Update stats for all players when game is abandoned
+    if (status === 'abandoned') {
+      await updateAllPlayerStats(updatedGame)
+    }
   }
 
-  async function updatePlayerStats(playerId: string, game: Game): Promise<void> {
+  async function updateAllPlayerStats(game: Game): Promise<void> {
+    // Update stats for all players in the game
+    console.log(`Updating stats for ${game.playerIds.length} players. Winner: ${game.winnerId}`)
+    const updatePromises = game.playerIds.map(playerId =>
+      updatePlayerStats(playerId, game, playerId === game.winnerId)
+    )
+    await Promise.all(updatePromises)
+  }
+
+  async function updatePlayerStats(playerId: string, game: Game, isWinner: boolean): Promise<void> {
     const player = await db.getPlayer(playerId)
-    if (!player) return
+    if (!player) {
+      console.warn(`Player ${playerId} not found`)
+      return
+    }
 
     const playerTurns = game.turns.filter(t => t.playerId === playerId && !t.isBust)
     const totalScore = playerTurns.reduce((sum, t) => sum + t.totalScore, 0)
@@ -201,8 +223,12 @@ export function useGame() {
     const prevGames = player.stats.gamesPlayed
     const newGamesPlayed = prevGames + 1
 
+    console.log(`Player ${player.name}: gamesPlayed ${prevGames} -> ${newGamesPlayed}, isWinner: ${isWinner}`)
+
     player.stats.gamesPlayed = newGamesPlayed
-    player.stats.gamesWon++
+    if (isWinner) {
+      player.stats.gamesWon++
+    }
     player.stats.totalDartsThrown += playerTurns.reduce((sum, t) => sum + t.throws.length, 0)
     player.stats.averageScore = (prevAvg * prevGames + avgScore) / newGamesPlayed
     player.stats.highestScore = Math.max(player.stats.highestScore, highestScore)
