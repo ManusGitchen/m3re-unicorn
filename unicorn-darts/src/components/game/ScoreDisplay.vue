@@ -5,16 +5,20 @@
         <div
           v-for="playerScore in playerScores"
           :key="playerScore.playerId"
-          class="score-display__player"
-          :class="{ 'score-display__player--active': playerScore.playerId === highlightPlayerId }"
+          :class="{'card-rainbow-wrapper':playerScore.playerId === highlightPlayerId, 'card-rainbow-accent-top': playerScore.playerId === highlightPlayerId}"
+          style="--rainbow-colors: var(--color-primary) 0%, var(--color-secondary) 20%, var(--color-info) 40%, var(--color-success) 60%, var(--color-warning) 80%, var(--color-error) 100%;"
         >
-          <div class="score-display__avatar mobile-hidden">
-            <img :src="playerScore.imageUrl" :alt="playerScore.name" />
-          </div>
-          <div class="score-display__info">
-            <div class="score-display__name">{{ playerScore.name }}</div>
-            <div class="score-display__score">{{ playerScore.score }}</div>
-            <div class="score-display__darts">{{ playerScore.dartsThrown }} darts</div>
+          <div
+            class="score-display__player"
+          >
+            <div class="score-display__avatar mobile-hidden">
+              <img :src="playerScore.imageUrl" :alt="playerScore.name" />
+            </div>
+            <div class="score-display__info">
+              <div class="score-display__name">{{ playerScore.name }}</div>
+              <div class="score-display__score">{{ playerScore.score }}</div>
+              <div class="score-display__darts">{{ playerScore.dartsThrown }} darts</div>
+            </div>
           </div>
         </div>
       </div>
@@ -74,13 +78,13 @@ const playerScores = computed(() => {
   align-items: center;
   flex-direction: column;
   gap: var(--spacing-md);
+  background-color: white;
   padding: var(--spacing-sm);
   border-radius: 8px;
   transition: background-color 0.2s;
 }
 
 .score-display__player--active {
-  background-color: var(--color-primary-tint);
   border: 2px solid var(--color-primary);
 }
 

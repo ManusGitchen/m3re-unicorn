@@ -1,9 +1,6 @@
 <template>
   <div class="home-view">
-    <div class="container">
-      <h1 class="home-view__title">🎯 Unicorn Darts</h1>
-      <p class="home-view__subtitle">Track your 501 darts games</p>
-
+    <div class="container pt-8">
       <!-- Resume game section -->
       <div v-if="activeGame" class="card home-view__active-game">
         <div class="card-content">
