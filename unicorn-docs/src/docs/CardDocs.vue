@@ -4,6 +4,7 @@ import CodeBlock from '../components/CodeBlock.vue'
 
 const showVariantsCode = ref(false)
 const showStatesCode = ref(false)
+const showRainbowCode = ref(false)
 </script>
 
 <template>
@@ -132,6 +133,89 @@ const showStatesCode = ref(false)
     &lt;h3 class="card-title"&gt;Clickable Card&lt;/h3&gt;
     &lt;div class="card-body"&gt;
       &lt;p&gt;This card can be focused and clicked.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+        </CodeBlock>
+      </div>
+    </section>
+
+    <section class="docs-section">
+      <h2 class="docs-section-title">Rainbow Border</h2>
+      <p class="docs-section-text">
+        Create vibrant gradient borders by wrapping outlined cards with a rainbow wrapper. Customize with any CSS gradient colors.
+      </p>
+
+      <div class="demo-container">
+        <div class="demo-grid">
+          <div class="card-rainbow-wrapper" style="--rainbow-colors: var(--color-primary) 50%, var(--color-secondary) 50%;">
+            <div class="card card-outlined">
+              <div class="card-content">
+                <h3 class="card-title">Default Rainbow</h3>
+                <div class="card-body">
+                  <p>Primary and secondary colors with hard stop.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-rainbow-wrapper" style="--rainbow-colors: var(--color-success) 0%, var(--color-warning) 50%, var(--color-error) 100%;">
+            <div class="card card-outlined">
+              <div class="card-content">
+                <h3 class="card-title">Smooth Gradient</h3>
+                <div class="card-body">
+                  <p>Green to yellow to red smooth transition.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-rainbow-wrapper" style="--rainbow-colors: #FF6B9D, #C371F2, #4FACFE;">
+            <div class="card card-outlined">
+              <div class="card-content">
+                <h3 class="card-title">Custom Colors</h3>
+                <div class="card-body">
+                  <p>Pink to purple to blue gradient.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="code-toggle-btn" @click="showRainbowCode = !showRainbowCode">
+          {{ showRainbowCode ? 'Hide' : 'Show' }} Code
+        </button>
+
+        <CodeBlock v-if="showRainbowCode" language="html">
+&lt;div class="card-rainbow-wrapper" style="--rainbow-colors: var(--color-primary) 50%, var(--color-secondary) 50%;"&gt;
+  &lt;div class="card card-outlined"&gt;
+    &lt;div class="card-content"&gt;
+      &lt;h3 class="card-title"&gt;Default Rainbow&lt;/h3&gt;
+      &lt;div class="card-body"&gt;
+        &lt;p&gt;Primary and secondary colors with hard stop.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="card-rainbow-wrapper" style="--rainbow-colors: var(--color-success) 0%, var(--color-warning) 50%, var(--color-error) 100%;"&gt;
+  &lt;div class="card card-outlined"&gt;
+    &lt;div class="card-content"&gt;
+      &lt;h3 class="card-title"&gt;Smooth Gradient&lt;/h3&gt;
+      &lt;div class="card-body"&gt;
+        &lt;p&gt;Green to yellow to red smooth transition.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="card-rainbow-wrapper" style="--rainbow-colors: #FF6B9D, #C371F2, #4FACFE;"&gt;
+  &lt;div class="card card-outlined"&gt;
+    &lt;div class="card-content"&gt;
+      &lt;h3 class="card-title"&gt;Custom Colors&lt;/h3&gt;
+      &lt;div class="card-body"&gt;
+        &lt;p&gt;Pink to purple to blue gradient.&lt;/p&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;

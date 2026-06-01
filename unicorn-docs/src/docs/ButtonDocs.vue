@@ -5,6 +5,7 @@ import CodeBlock from '../components/CodeBlock.vue'
 const showVariantsCode = ref(false)
 const showColorsCode = ref(false)
 const showSizesCode = ref(false)
+const showRainbowCode = ref(false)
 </script>
 
 <template>
@@ -96,6 +97,45 @@ const showSizesCode = ref(false)
 &lt;button class="btn btn-primary btn-color-primary btn-sm"&gt;Small&lt;/button&gt;
 &lt;button class="btn btn-primary btn-color-primary btn-md"&gt;Medium&lt;/button&gt;
 &lt;button class="btn btn-primary btn-color-primary btn-lg"&gt;Large&lt;/button&gt;
+        </CodeBlock>
+      </div>
+    </section>
+
+    <section class="docs-section">
+      <h2 class="docs-section-title">Rainbow Border</h2>
+      <p class="docs-section-text">
+        Create vibrant gradient borders by wrapping buttons with a rainbow wrapper and customizing the gradient colors.
+      </p>
+
+      <div class="demo-container">
+        <div class="demo-buttons">
+          <div class="btn-rainbow-wrapper" style="--rainbow-colors: var(--color-primary) 50%, var(--color-secondary) 50%;">
+            <button class="btn btn-rainbow-border btn-md">Default Rainbow</button>
+          </div>
+          <div class="btn-rainbow-wrapper" style="--rainbow-colors: var(--color-success) 0%, var(--color-info) 50%, var(--color-warning) 100%;">
+            <button class="btn btn-rainbow-border btn-md">Custom Gradient</button>
+          </div>
+          <div class="btn-rainbow-wrapper" style="--rainbow-colors: #FF6B9D, #C371F2, #4FACFE;">
+            <button class="btn btn-rainbow-border btn-md">Pink to Blue</button>
+          </div>
+        </div>
+
+        <button class="code-toggle-btn" @click="showRainbowCode = !showRainbowCode">
+          {{ showRainbowCode ? 'Hide' : 'Show' }} Code
+        </button>
+
+        <CodeBlock v-if="showRainbowCode" language="html">
+&lt;div class="btn-rainbow-wrapper" style="--rainbow-colors: var(--color-primary) 50%, var(--color-secondary) 50%;"&gt;
+  &lt;button class="btn btn-rainbow-border btn-md"&gt;Default Rainbow&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class="btn-rainbow-wrapper" style="--rainbow-colors: var(--color-success) 0%, var(--color-info) 50%, var(--color-warning) 100%;"&gt;
+  &lt;button class="btn btn-rainbow-border btn-md"&gt;Custom Gradient&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;div class="btn-rainbow-wrapper" style="--rainbow-colors: #FF6B9D, #C371F2, #4FACFE;"&gt;
+  &lt;button class="btn btn-rainbow-border btn-md"&gt;Pink to Blue&lt;/button&gt;
+&lt;/div&gt;
         </CodeBlock>
       </div>
     </section>
