@@ -54,5 +54,6 @@
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0"
-  }
+  },
+  "packageManager": "pnpm@11.5.0"
 }

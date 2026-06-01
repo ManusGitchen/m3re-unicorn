@@ -10,3 +10,9 @@ body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
 }
+
+@media screen and (max-width: 756px) {
+  .mobile-hidden {
+    display: none;
+  }
+}

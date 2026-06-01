@@ -1,5 +1,4 @@
 <template>
-  <div class="score-display card">
     <div class="card-content">
       <h3 class="card-title">Scores</h3>
       <div class="score-display__grid">
@@ -9,7 +8,7 @@
           class="score-display__player"
           :class="{ 'score-display__player--active': playerScore.playerId === highlightPlayerId }"
         >
-          <div class="score-display__avatar">
+          <div class="score-display__avatar mobile-hidden">
             <img :src="playerScore.imageUrl" :alt="playerScore.name" />
           </div>
           <div class="score-display__info">
@@ -20,7 +19,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup lang="ts">
@@ -66,14 +64,15 @@ const playerScores = computed(() => {
 <style scoped>
 .score-display__grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-md);
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-sm);
   margin-top: var(--spacing-md);
 }
 
 .score-display__player {
   display: flex;
   align-items: center;
+  flex-direction: column;
   gap: var(--spacing-md);
   padding: var(--spacing-sm);
   border-radius: 8px;
@@ -101,6 +100,9 @@ const playerScores = computed(() => {
 
 .score-display__info {
   flex: 1;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .score-display__name {
@@ -122,11 +124,17 @@ const playerScores = computed(() => {
 /* 2x2 grid for tablets and larger screens */
 @media (min-width: 768px) {
   .score-display__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 
   .score-display__score {
     font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+   .mobile-hidden {
+    display: none;
   }
 }
 </style>

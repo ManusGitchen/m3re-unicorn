@@ -68,12 +68,12 @@ const emit = defineEmits<{
 }>()
 
 const availableImages = [
-  '/images/players/avatar1.svg',
-  '/images/players/avatar2.svg',
-  '/images/players/avatar3.svg',
-  '/images/players/avatar4.jpg',
+  '/images/players/avatar1.png',
+  '/images/players/avatar2.png',
+  '/images/players/avatar3.png',
+  '/images/players/avatar4.png',
   '/images/players/avatar5.png',
-  '/images/players/avatar6.jpg',
+  '/images/players/avatar6.png',
 ]
 
 const formData = reactive({

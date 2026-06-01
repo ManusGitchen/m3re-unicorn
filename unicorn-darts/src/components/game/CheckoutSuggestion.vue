@@ -1,5 +1,5 @@
 <template>
-  <div v-if="shouldShow" class="checkout-suggestion card card-color-info">
+  <div v-if="shouldShow" class="checkout-suggestion">
     <div class="card-content">
       <h4 class="card-title">💡 Checkout Suggestion</h4>
       <div v-if="isBogeyNumber" class="checkout-suggestion__bogey">

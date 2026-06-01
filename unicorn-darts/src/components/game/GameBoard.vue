@@ -20,11 +20,23 @@
           End Game
         </button>
       </div>
+      <div class="score-display card">
 
-      <ScoreDisplay
-        :game="currentGame"
-        :highlight-player-id="currentPlayer?.id"
-      />
+        <ScoreDisplay
+          :game="currentGame"
+          :highlight-player-id="currentPlayer?.id"
+        />
+      
+        <CheckoutSuggestion
+          v-if="currentPlayer"
+          :score="getPlayerScore(currentPlayer.id).value"
+        />
+        
+        <div class="mobile-hidden">
+          <TurnHistory :turns="getTurnHistory.slice(-10)" class="mobile-hidden"/>
+        </div>
+      </div>
+
 
       <ScoreEntry
         v-if="currentPlayer && currentGame.status === 'in-progress'"
@@ -34,12 +46,6 @@
         @undo="handleUndo"
       />
 
-      <CheckoutSuggestion
-        v-if="currentPlayer"
-        :score="getPlayerScore(currentPlayer.id).value"
-      />
-
-      <TurnHistory :turns="getTurnHistory.slice(-10)" />
 
       <!-- Win dialog -->
       <Teleport to="body">
@@ -198,6 +204,7 @@ function handleViewHistory() {
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
 }
 
 .game-board__content {
@@ -250,6 +257,12 @@ function handleViewHistory() {
   .game-board__winner-actions {
     flex-direction: row;
     justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+   .mobile-hidden {
+    display: none;
   }
 }
 

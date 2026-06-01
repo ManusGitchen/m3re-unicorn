@@ -11,7 +11,7 @@
       <div class="player-card__avatar">
         <img :src="player.imageUrl" :alt="player.name" />
       </div>
-      <div class="card-content flex justify-center">
+      <div class="card-content">
         <div class="player-card__header">
           <h3 class="card-title">{{ player.name }}</h3>
           <button
@@ -93,9 +93,8 @@ function handleClick() {
   cursor: pointer;
   transition: transform 0.2s;
 }
-
-.player-card--selectable:hover {
-  transform: translateY(-2px);
+.card-rainbow-wrapper:has(.player-card:hover)
+{  transform: translateY(-3px);
 }
 
 .card-rainbow-wrapper {
@@ -105,6 +104,11 @@ function handleClick() {
 
 .card-rainbow-wrapper:hover {
   transform: translateY(-2px);
+}
+
+.player-card--selectable .card-content {
+  display: flex;
+  justify-content: center;
 }
 
 .player-card__avatar {
@@ -137,9 +141,14 @@ function handleClick() {
 }
 
 /* Force white background and dark text for selected cards in both light and dark mode */
-.card-rainbow-wrapper .player-card {
+.card-rainbow-wrapper .player-card,
+.card-rainbow-wrapper .player-card .card-content p {
   background-color: #ffffff !important;
   color: #121212 !important;
+}
+
+.card-rainbow-wrapper .player-card .card-content {
+  flex-direction: column;
 }
 
 .card-rainbow-wrapper .player-card .card-title {

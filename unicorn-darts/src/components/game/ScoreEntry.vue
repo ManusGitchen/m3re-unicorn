@@ -21,30 +21,18 @@
         Enter a score between 0 and 180, or use slang shortcuts like ton or breakfast
       </p>
 
-      <!-- Slang shortcuts -->
-      <div class="score-entry__shortcuts">
-        <button
-          v-for="shortcut in slangShortcuts"
-          :key="shortcut.term"
-          class="btn btn-secondary btn-sm btn-color-secondary"
-          @click="applyShortcut(shortcut.value)"
-        >
-          {{ shortcut.label }}
-        </button>
-      </div>
-
       <!-- Validation feedback -->
       <div v-if="validationError" class="score-entry__error text-error">
         {{ validationError }}
       </div>
 
-      <!-- Bust warning -->
+      <!-- Bust warning 
       <div v-if="wouldBust && projectedScore !== 0" class="score-entry__warning text-error">
         ⚠️ This would BUST! Score would be {{ projectedScore }}
       </div>
       <div v-if="projectedScore === 0 && !lastIsDouble" class="score-entry__warning text-error">
         ⚠️ This will be marked as BUST! (No double checkout)
-      </div>
+      </div>-->
 
       <!-- Double checkout requirement -->
       <div v-if="projectedScore === 0" class="score-entry__double-required">
@@ -74,6 +62,17 @@
           @click="handleUndo"
         >
           Undo Last Turn
+        </button>
+      </div>
+      <!-- Slang shortcuts -->
+      <div class="score-entry__shortcuts mt-8">
+        <button
+          v-for="shortcut in slangShortcuts"
+          :key="shortcut.term"
+          class="btn btn-secondary btn-sm btn-color-secondary"
+          @click="applyShortcut(shortcut.value)"
+        >
+          {{ shortcut.label }}
         </button>
       </div>
     </div>
@@ -200,7 +199,7 @@ function handleUndo() {
 
 .score-entry__shortcuts {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
 }
@@ -256,11 +255,5 @@ function handleUndo() {
 
 .score-entry__actions .btn {
   min-height: 44px;
-}
-
-@media (min-width: 768px) {
-  .score-entry__actions {
-    flex-direction: row;
-  }
 }
 </style>

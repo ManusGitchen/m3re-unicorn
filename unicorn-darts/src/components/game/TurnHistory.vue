@@ -1,5 +1,5 @@
 <template>
-  <div class="turn-history card">
+  <div class="turn-history">
     <div class="card-content">
       <h4 class="card-title">Recent Turns</h4>
       <div v-if="turns.length === 0" class="turn-history__empty">
