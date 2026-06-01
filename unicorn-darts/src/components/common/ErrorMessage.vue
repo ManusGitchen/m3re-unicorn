@@ -4,7 +4,7 @@
     <div class="error-message__content">
       <h4 v-if="title" class="error-message__title">{{ title }}</h4>
       <p class="error-message__text">{{ message }}</p>
-      <button v-if="retry" class="btn btn-color-primary btn-sm" @click="$emit('retry')">
+      <button v-if="retry" class="btn btn-primary btn-color-primary btn-sm" @click="$emit('retry')">
         Try Again
       </button>
     </div>

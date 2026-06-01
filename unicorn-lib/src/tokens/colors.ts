@@ -47,10 +47,10 @@ export const primary = createColorVariation('#7B40F7', 20, 20)
 export const secondary = createColorVariation('#F740A4', 20, 20)
 
 // Semantic Colors
-export const success = createColorVariation('#4CAF50', 20, 20)
-export const error = createColorVariation('#F44336', 20, 20)
-export const warning = createColorVariation('#FF9800', 20, 20)
-export const info = createColorVariation('#08c9af', 20, 20)
+export const success = createColorVariation('#4CAF50', 70, 20)
+export const error = createColorVariation('#F44336', 70, 20)
+export const warning = createColorVariation('#FF9800', 70, 20)
+export const info = createColorVariation('#08c9af', 70, 20)
 
 // Neutral Colors
 export const neutral = {

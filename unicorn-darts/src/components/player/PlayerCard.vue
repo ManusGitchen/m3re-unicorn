@@ -1,19 +1,54 @@
 <template>
   <div
-    class="card player-card"
-    :class="{ 'player-card--selected': selected, 'player-card--selectable': selectable }"
+    v-if="selected || (rainbow && variant === 'detailed')"
+    class="card-rainbow-wrapper"
+    style="--rainbow-colors: var(--color-primary) 0%, var(--color-secondary) 20%, var(--color-info) 40%, var(--color-success) 60%, var(--color-warning) 80%, var(--color-error) 100%;"
+  >
+    <div
+      class="card player-card player-card--selectable"
+      @click="handleClick"
+    >
+      <div class="player-card__avatar">
+        <img :src="player.imageUrl" :alt="player.name" />
+      </div>
+      <div class="card-content flex justify-center">
+        <div class="player-card__header">
+          <h3 class="card-title">{{ player.name }}</h3>
+          <button
+            v-if="variant === 'detailed'"
+            class="btn btn-tertiary btn-icon-only btn-sm btn-color-secondary player-card__edit-btn"
+            @click.stop="emit('edit', player.id)"
+            title="Edit player"
+          >
+            ✏️
+          </button>
+        </div>
+        <div v-if="variant === 'detailed'" class="card-body">
+          <p>Games: {{ player.stats.gamesPlayed }}</p>
+          <p>Wins: {{ player.stats.gamesWon }}</p>
+          <p>Avg Score: {{ player.stats.averageScore.toFixed(1) }}</p>
+          <p>Best: {{ player.stats.highestScore }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    v-else
+    class="card card-glass-shiny player-card"
+    :class="{ 'player-card--selectable': selectable }"
     @click="handleClick"
   >
     <div class="player-card__avatar">
       <img :src="player.imageUrl" :alt="player.name" />
     </div>
-    <div class="card-content">
+    <div class="card-content flex justify-center">
       <div class="player-card__header">
         <h3 class="card-title">{{ player.name }}</h3>
         <button
           v-if="variant === 'detailed'"
-          class="btn btn-sm btn-color-secondary player-card__edit-btn"
+          class="btn btn-tertiary btn-icon-only btn-sm btn-color-secondary player-card__edit-btn"
           @click.stop="emit('edit', player.id)"
+          title="Edit player"
         >
           ✏️
         </button>
@@ -36,6 +71,7 @@ const props = defineProps<{
   variant?: 'compact' | 'detailed'
   selectable?: boolean
   selected?: boolean
+  rainbow?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -62,8 +98,13 @@ function handleClick() {
   transform: translateY(-2px);
 }
 
-.player-card--selected {
-  border: 2px solid var(--color-primary);
+.card-rainbow-wrapper {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.card-rainbow-wrapper:hover {
+  transform: translateY(-2px);
 }
 
 .player-card__avatar {
@@ -83,13 +124,25 @@ function handleClick() {
 .player-card__header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--spacing-xs);
+}
+
+.player-card__header .card-title {
+  margin: 0;
 }
 
 .player-card__edit-btn {
   flex-shrink: 0;
-  padding: var(--spacing-xs);
-  min-width: auto;
+}
+
+/* Force white background and dark text for selected cards in both light and dark mode */
+.card-rainbow-wrapper .player-card {
+  background-color: #ffffff !important;
+  color: #121212 !important;
+}
+
+.card-rainbow-wrapper .player-card .card-title {
+  color: #121212 !important;
 }
 </style>

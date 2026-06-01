@@ -11,7 +11,7 @@
     <div v-else-if="game" class="game-detail__content">
       <div class="game-detail__header">
         <h2>Game Details</h2>
-        <button class="btn btn-color-secondary btn-sm" @click="$emit('back')">
+        <button class="btn btn-secondary btn-color-secondary btn-sm" @click="$emit('back')">
           ← Back
         </button>
       </div>

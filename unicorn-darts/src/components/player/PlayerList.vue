@@ -8,6 +8,7 @@
         :variant="variant"
         :selectable="selectable"
         :selected="isSelected(player.id)"
+        :rainbow="rainbow"
         @select="handleSelect"
         @edit="emit('edit', $event)"
       />
@@ -28,6 +29,7 @@ const props = defineProps<{
   selectedIds?: string[]
   maxSelection?: number
   variant?: 'compact' | 'detailed'
+  rainbow?: boolean
 }>()
 
 const emit = defineEmits<{
@@ -52,13 +54,19 @@ function handleSelect(player: Player) {
 <style scoped>
 .player-list__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--spacing-md);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 600px) {
   .player-list__grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .player-list__grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
 

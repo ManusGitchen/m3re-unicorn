@@ -20,19 +20,19 @@
 
   /* Semantic Colors */
   --color-success: #4CAF50;
-  --color-success-light: #76c279;
+  --color-success-light: #c9e7cb;
   --color-success-dark: #3d8c40;
 
   --color-error: #F44336;
-  --color-error-light: #f7706a;
+  --color-error-light: #fac5c1;
   --color-error-dark: #c3362b;
 
   --color-warning: #FF9800;
-  --color-warning-light: #ffb333;
+  --color-warning-light: #ffd699;
   --color-warning-dark: #cc7a00;
 
   --color-info: #08c9af;
-  --color-info-light: #3dd5c2;
+  --color-info-light: #86e9dd;
   --color-info-dark: #06a18c;
 
   /* Neutral Colors */

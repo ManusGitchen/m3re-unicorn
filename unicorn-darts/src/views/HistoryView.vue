@@ -1,11 +1,11 @@
 <template>
   <div class="history-view">
-    <div class="history-view__container">
+    <div class="container">
       <div class="history-view__header">
         <h1 class="history-view__title">Game History</h1>
         <button
           v-if="!selectedGameId && games.length > 0"
-          class="btn btn-color-error btn-sm"
+          class="btn btn-primary btn-color-error btn-sm"
           @click="handleClearHistory"
         >
           Clear History
@@ -26,21 +26,21 @@
           <div class="history-view__filters">
             <button
               class="btn"
-              :class="filter === 'all' ? 'btn-color-primary' : 'btn-color-secondary'"
+              :class="filter === 'all' ? 'btn-primary btn-color-primary' : 'btn-secondary btn-color-secondary'"
               @click="filter = 'all'"
             >
               All
             </button>
             <button
               class="btn"
-              :class="filter === 'completed' ? 'btn-color-primary' : 'btn-color-secondary'"
+              :class="filter === 'completed' ? 'btn-primary btn-color-primary' : 'btn-secondary btn-color-secondary'"
               @click="filter = 'completed'"
             >
               Completed
             </button>
             <button
               class="btn"
-              :class="filter === 'abandoned' ? 'btn-color-primary' : 'btn-color-secondary'"
+              :class="filter === 'abandoned' ? 'btn-primary btn-color-primary' : 'btn-secondary btn-color-secondary'"
               @click="filter = 'abandoned'"
             >
               Abandoned
@@ -123,17 +123,12 @@ async function handleClearHistory() {
   min-height: calc(100vh - 60px);
 }
 
-.history-view__container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--spacing-xl) var(--spacing-md);
-}
-
 .history-view__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
 }
 
 .history-view__title {

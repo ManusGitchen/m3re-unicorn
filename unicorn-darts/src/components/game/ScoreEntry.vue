@@ -6,12 +6,14 @@
 
       <!-- Text input -->
       <input
+        ref="scoreInputRef"
         v-model="scoreInput"
         type="text"
         class="score-entry__input"
         placeholder="Enter score or slang"
         aria-label="Enter dart score"
         aria-describedby="score-help"
+        autofocus
         @input="handleInput"
         @keyup.enter="handleSubmit"
       />
@@ -24,7 +26,7 @@
         <button
           v-for="shortcut in slangShortcuts"
           :key="shortcut.term"
-          class="btn btn-sm btn-color-secondary"
+          class="btn btn-secondary btn-sm btn-color-secondary"
           @click="applyShortcut(shortcut.value)"
         >
           {{ shortcut.label }}
@@ -61,14 +63,14 @@
       <!-- Actions -->
       <div class="score-entry__actions">
         <button
-          class="btn btn-color-primary btn-lg"
+          class="btn btn-primary btn-color-primary btn-lg"
           :disabled="!isValid"
           @click="handleSubmit"
         >
           Submit Score
         </button>
         <button
-          class="btn btn-color-secondary"
+          class="btn btn-secondary btn-color-secondary"
           @click="handleUndo"
         >
           Undo Last Turn
@@ -79,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import { useSlang } from '@/composables/useSlang'
 import { useScoring } from '@/composables/useScoring'
 
@@ -92,6 +94,8 @@ const emit = defineEmits<{
   'score-entered': [score: number, lastIsDouble: boolean]
   undo: []
 }>()
+
+const scoreInputRef = ref<HTMLInputElement | null>(null)
 
 const { parseSlang, slangDictionary } = useSlang()
 const { isBust } = useScoring()
@@ -152,7 +156,7 @@ function applyShortcut(value: number) {
   parsedScore.value = value
 }
 
-function handleSubmit() {
+async function handleSubmit() {
   if (!isValid.value || parsedScore.value === null) return
 
   emit('score-entered', parsedScore.value, lastIsDouble.value)
@@ -161,6 +165,10 @@ function handleSubmit() {
   scoreInput.value = ''
   parsedScore.value = null
   lastIsDouble.value = false
+
+  // Refocus input after clearing so user can immediately enter next score
+  await nextTick()
+  scoreInputRef.value?.focus()
 }
 
 function handleUndo() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="card player-form">
+  <div class="card player-form mb-8">
     <div class="card-content">
       <h3 class="card-title">{{ mode === 'create' ? 'New Player' : 'Edit Player' }}</h3>
 
@@ -32,16 +32,16 @@
         </div>
 
         <div class="form-actions">
-          <button type="submit" class="btn btn-color-primary">
+          <button type="submit" class="btn btn-primary btn-color-primary">
             {{ mode === 'create' ? 'Create' : 'Save' }}
           </button>
-          <button type="button" class="btn btn-color-secondary" @click="emit('cancel')">
+          <button type="button" class="btn btn-secondary btn-color-secondary" @click="emit('cancel')">
             Cancel
           </button>
           <button
             v-if="mode === 'edit' && player"
             type="button"
-            class="btn btn-color-error"
+            class="btn btn-primary btn-color-error"
             @click="handleDelete"
           >
             Delete Player

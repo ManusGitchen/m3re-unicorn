@@ -66,6 +66,7 @@ const playerScores = computed(() => {
 <style scoped>
 .score-display__grid {
   display: grid;
+  grid-template-columns: 1fr;
   gap: var(--spacing-md);
   margin-top: var(--spacing-md);
 }
@@ -118,9 +119,10 @@ const playerScores = computed(() => {
   color: var(--color-text-secondary);
 }
 
+/* 2x2 grid for tablets and larger screens */
 @media (min-width: 768px) {
   .score-display__grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .score-display__score {

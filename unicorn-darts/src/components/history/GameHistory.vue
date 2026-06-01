@@ -2,7 +2,7 @@
   <div class="game-history">
     <div v-if="games.length === 0" class="game-history__empty">
       <p>No games in history yet</p>
-      <router-link to="/" class="btn btn-color-primary">
+      <router-link to="/" class="btn btn-primary btn-color-primary">
         Start Your First Game
       </router-link>
     </div>
@@ -111,8 +111,20 @@ function viewGame(gameId: string) {
 
 .game-history__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: 1fr;
   gap: var(--spacing-md);
+}
+
+@media (min-width: 600px) {
+  .game-history__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .game-history__grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
 }
 
 .game-history__card {

@@ -1,5 +1,5 @@
 <template>
-  <div class="game-board">
+  <div class="game-board container">
     <LoadingSpinner v-if="loading" message="Loading game..." />
 
     <ErrorMessage
@@ -14,7 +14,7 @@
       <div class="game-board__header">
         <h2>Round {{ getCurrentRound }}</h2>
         <button
-          class="btn btn-color-secondary btn-sm"
+          class="btn btn-secondary btn-color-secondary btn-sm"
           @click="handleEndGame"
         >
           End Game
@@ -42,28 +42,48 @@
       <TurnHistory :turns="getTurnHistory.slice(-10)" />
 
       <!-- Win dialog -->
-      <div v-if="currentGame.status === 'completed'" class="game-board__win-overlay">
-        <div class="game-board__confetti">
-          <div v-for="i in 30" :key="i" class="game-board__confetti-piece" :style="{ '--piece-index': i }"></div>
-        </div>
-        <div class="card game-board__win-card">
-          <div class="card-content">
-            <h2 class="card-title">🎯 Winner!</h2>
-            <div class="card-body">
-              <p class="game-board__winner-name">
-                {{ winnerName }}
-              </p>
-              <p>Finished in {{ currentGame.currentRound }} rounds</p>
-              <button class="btn btn-color-primary" @click="handleNewGame">
-                New Game
-              </button>
-              <button class="btn btn-color-secondary" @click="handleViewHistory">
-                View History
-              </button>
+      <Teleport to="body">
+        <Transition name="dialog">
+          <div
+            v-if="currentGame.status === 'completed'"
+            class="dialog-backdrop dialog-backdrop-unicorn"
+            @click.self="() => {}"
+          >
+            <div
+              class="dialog"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="winner-dialog-title"
+              style="width: 500px"
+            >
+              <div class="dialog-header">
+                <h2 id="winner-dialog-title" class="dialog-title">🎯 Winner!</h2>
+              </div>
+              <div class="dialog-content">
+                <div class="game-board__winner-content">
+                  <div v-if="winner?.imageUrl" class="game-board__winner-image">
+                    <img :src="winner.imageUrl" :alt="winnerName" />
+                  </div>
+                  <p class="game-board__winner-name">
+                    {{ winnerName }}
+                  </p>
+                  <p class="game-board__winner-rounds">
+                    Finished in {{ currentGame.currentRound }} rounds
+                  </p>
+                  <div class="game-board__winner-actions">
+                    <button class="btn btn-primary btn-color-primary btn-lg" @click="handleNewGame">
+                      New Game
+                    </button>
+                    <button class="btn btn-secondary btn-color-secondary" @click="handleViewHistory">
+                      View History
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        </Transition>
+      </Teleport>
     </div>
   </div>
 </template>
@@ -72,6 +92,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGame } from '@/composables/useGame'
+import Dialog from '@/components/common/Dialog.vue'
 import ScoreDisplay from './ScoreDisplay.vue'
 import ScoreEntry from './ScoreEntry.vue'
 import CheckoutSuggestion from './CheckoutSuggestion.vue'
@@ -102,10 +123,13 @@ const {
 const loading = ref(true)
 const error = ref<Error | null>(null)
 
+const winner = computed(() => {
+  if (!currentGame.value?.winnerId) return null
+  return players.value.find(p => p.id === currentGame.value?.winnerId) ?? null
+})
+
 const winnerName = computed(() => {
-  if (!currentGame.value?.winnerId) return ''
-  const winner = players.value.find(p => p.id === currentGame.value?.winnerId)
-  return winner?.name ?? 'Unknown'
+  return winner.value?.name ?? 'Unknown'
 })
 
 onMounted(async () => {
@@ -163,12 +187,6 @@ function handleViewHistory() {
 </script>
 
 <style scoped>
-.game-board {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: var(--spacing-md);
-}
-
 .game-board__loading,
 .game-board__error {
   text-align: center;
@@ -187,108 +205,52 @@ function handleViewHistory() {
   gap: var(--spacing-lg);
 }
 
-.game-board__win-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.game-board__confetti {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-
-.game-board__confetti-piece {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background: var(--color-primary);
-  top: -10px;
-  animation: confetti-fall 3s linear infinite;
-  opacity: 0.8;
-  animation-delay: calc(var(--piece-index) * 0.1s);
-}
-
-.game-board__confetti-piece:nth-child(2n) {
-  background: var(--color-success);
-}
-
-.game-board__confetti-piece:nth-child(3n) {
-  background: var(--color-secondary);
-}
-
-.game-board__confetti-piece:nth-child(4n) {
-  width: 8px;
-  height: 8px;
-}
-
-.game-board__confetti-piece:nth-child(5n) {
-  width: 12px;
-  height: 12px;
-}
-
-.game-board__confetti-piece:nth-child(1) { left: 5%; }
-.game-board__confetti-piece:nth-child(2) { left: 10%; }
-.game-board__confetti-piece:nth-child(3) { left: 15%; }
-.game-board__confetti-piece:nth-child(4) { left: 20%; }
-.game-board__confetti-piece:nth-child(5) { left: 25%; }
-.game-board__confetti-piece:nth-child(6) { left: 30%; }
-.game-board__confetti-piece:nth-child(7) { left: 35%; }
-.game-board__confetti-piece:nth-child(8) { left: 40%; }
-.game-board__confetti-piece:nth-child(9) { left: 45%; }
-.game-board__confetti-piece:nth-child(10) { left: 50%; }
-.game-board__confetti-piece:nth-child(11) { left: 55%; }
-.game-board__confetti-piece:nth-child(12) { left: 60%; }
-.game-board__confetti-piece:nth-child(13) { left: 65%; }
-.game-board__confetti-piece:nth-child(14) { left: 70%; }
-.game-board__confetti-piece:nth-child(15) { left: 75%; }
-.game-board__confetti-piece:nth-child(16) { left: 80%; }
-.game-board__confetti-piece:nth-child(17) { left: 85%; }
-.game-board__confetti-piece:nth-child(18) { left: 90%; }
-.game-board__confetti-piece:nth-child(19) { left: 95%; }
-.game-board__confetti-piece:nth-child(20) { left: 7%; }
-.game-board__confetti-piece:nth-child(21) { left: 12%; }
-.game-board__confetti-piece:nth-child(22) { left: 17%; }
-.game-board__confetti-piece:nth-child(23) { left: 22%; }
-.game-board__confetti-piece:nth-child(24) { left: 27%; }
-.game-board__confetti-piece:nth-child(25) { left: 32%; }
-.game-board__confetti-piece:nth-child(26) { left: 37%; }
-.game-board__confetti-piece:nth-child(27) { left: 42%; }
-.game-board__confetti-piece:nth-child(28) { left: 47%; }
-.game-board__confetti-piece:nth-child(29) { left: 52%; }
-.game-board__confetti-piece:nth-child(30) { left: 57%; }
-
-@keyframes confetti-fall {
-  to {
-    transform: translateY(100vh) rotate(360deg);
-  }
-}
-
-.game-board__win-card {
-  max-width: 400px;
-  margin: var(--spacing-md);
+/* Winner dialog content */
+.game-board__winner-content {
   text-align: center;
-  position: relative;
-  z-index: 1;
+  padding: var(--spacing-lg);
+}
+
+.game-board__winner-image {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto var(--spacing-md);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--color-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.game-board__winner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .game-board__winner-name {
-  font-size: var(--typography-base-headline-font-size);
+  font-size: 2rem;
   font-weight: var(--typography-font-weight-bold);
-  color: var(--color-success);
+  color: var(--color-primary);
   margin: var(--spacing-md) 0;
+}
+
+.game-board__winner-rounds {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.game-board__winner-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+@media (min-width: 600px) {
+  .game-board__winner-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
 }
 
 @media (min-width: 768px) {
