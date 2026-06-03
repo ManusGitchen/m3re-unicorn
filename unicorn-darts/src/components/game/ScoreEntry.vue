@@ -1,25 +1,90 @@
 <template>
   <div class="score-entry card">
     <div class="card-content">
-      <h3 class="card-title">Enter Score</h3>
+      <div class="score-entry__header">
+        <h3 class="card-title">Enter Score</h3>
+        <button
+          class="score-entry__toggle-btn"
+          :aria-pressed="perDartMode"
+          :aria-label="perDartMode ? 'Switch to single score entry' : 'Switch to per-dart entry'"
+          @click="toggleEntryMode"
+        >
+          {{ perDartMode ? '3 Darts' : '1 Total' }}
+        </button>
+      </div>
       <p class="score-entry__current">Current: {{ currentScore }}</p>
 
-      <!-- Text input -->
-      <input
-        ref="scoreInputRef"
-        v-model="scoreInput"
-        type="text"
-        class="score-entry__input"
-        placeholder="Enter score or slang"
-        aria-label="Enter dart score"
-        aria-describedby="score-help"
-        autofocus
-        @input="handleInput"
-        @keyup.enter="handleSubmit"
-      />
-      <p id="score-help" class="sr-only">
-        Enter a score between 0 and 180, or use slang shortcuts like ton or breakfast
-      </p>
+      <!-- Single score input -->
+      <div v-if="!perDartMode">
+        <input
+          ref="scoreInputRef"
+          v-model="scoreInput"
+          type="text"
+          class="score-entry__input"
+          placeholder="Enter score"
+          aria-label="Enter dart score"
+          aria-describedby="score-help"
+          autofocus
+          @input="handleInput"
+          @keyup.enter="handleSubmit"
+        />
+        <p id="score-help" class="sr-only">
+          Enter a score between 0 and 180, or use slang shortcuts like ton or breakfast
+        </p>
+      </div>
+
+      <!-- Per-dart inputs -->
+      <div v-else class="score-entry__per-dart">
+        <div class="score-entry__dart-inputs">
+          <div class="score-entry__dart-input-group">
+            <label for="dart1" class="score-entry__dart-label">Dart 1</label>
+            <input
+              id="dart1"
+              ref="dart1InputRef"
+              v-model="dart1Input"
+              type="text"
+              class="score-entry__input score-entry__input--small"
+              placeholder="0"
+              aria-label="First dart score"
+              aria-describedby="dart-help"
+              @input="handleDartInput(1)"
+              @keyup.enter="handleSubmit"
+            />
+          </div>
+          <div class="score-entry__dart-input-group">
+            <label for="dart2" class="score-entry__dart-label">Dart 2</label>
+            <input
+              id="dart2"
+              v-model="dart2Input"
+              type="text"
+              class="score-entry__input score-entry__input--small"
+              placeholder="0"
+              aria-label="Second dart score"
+              aria-describedby="dart-help"
+              @input="handleDartInput(2)"
+              @keyup.enter="handleSubmit"
+            />
+          </div>
+          <div class="score-entry__dart-input-group">
+            <label for="dart3" class="score-entry__dart-label">Dart 3</label>
+            <input
+              id="dart3"
+              v-model="dart3Input"
+              type="text"
+              class="score-entry__input score-entry__input--small"
+              placeholder="0"
+              aria-label="Third dart score"
+              aria-describedby="dart-help"
+              @input="handleDartInput(3)"
+              @keyup.enter="handleSubmit"
+            />
+          </div>
+        </div>
+        <p id="dart-help" class="sr-only">
+          Enter score for each dart between 0 and 60 (triple 20 is maximum)
+        </p>
+        <p class="score-entry__total">Total: {{ dartTotal }}</p>
+      </div>
 
       <!-- Validation feedback -->
       <div v-if="validationError" class="score-entry__error text-error">
@@ -95,12 +160,26 @@ const emit = defineEmits<{
 }>()
 
 const scoreInputRef = ref<HTMLInputElement | null>(null)
+const dart1InputRef = ref<HTMLInputElement | null>(null)
 
 const { parseSlang, slangDictionary } = useSlang()
 const { isBust } = useScoring()
 
+// Entry mode toggle
+const perDartMode = ref(false)
+
+// Single score input
 const scoreInput = ref('')
 const parsedScore = ref<number | null>(null)
+
+// Per-dart inputs
+const dart1Input = ref('')
+const dart2Input = ref('')
+const dart3Input = ref('')
+const parsedDart1 = ref<number | null>(null)
+const parsedDart2 = ref<number | null>(null)
+const parsedDart3 = ref<number | null>(null)
+
 const lastIsDouble = ref(false)
 
 const slangShortcuts = computed(() => {
@@ -111,20 +190,42 @@ const slangShortcuts = computed(() => {
   }))
 })
 
+const dartTotal = computed(() => {
+  const d1 = parsedDart1.value ?? 0
+  const d2 = parsedDart2.value ?? 0
+  const d3 = parsedDart3.value ?? 0
+  return d1 + d2 + d3
+})
+
 const validationError = computed(() => {
-  if (!scoreInput.value) return null
-  if (parsedScore.value === null) return 'Invalid input'
-  if (parsedScore.value < 0 || parsedScore.value > 180) {
-    return 'Score must be between 0 and 180'
+  if (perDartMode.value) {
+    // Validate each dart is between 0-60 (triple 20 is max single dart score)
+    const darts = [parsedDart1.value, parsedDart2.value, parsedDart3.value]
+    for (const dart of darts) {
+      if (dart !== null && (dart < 0 || dart > 60)) {
+        return 'Each dart must be between 0 and 60'
+      }
+    }
+    if (dartTotal.value > 180) {
+      return 'Total score cannot exceed 180'
+    }
+    return null
+  } else {
+    if (!scoreInput.value) return null
+    if (parsedScore.value === null) return 'Invalid input'
+    if (parsedScore.value < 0 || parsedScore.value > 180) {
+      return 'Score must be between 0 and 180'
+    }
+    return null
   }
-  return null
 })
 
 const wouldBust = computed(() => {
-  if (parsedScore.value === null) return false
+  const total = perDartMode.value ? dartTotal.value : parsedScore.value
+  if (total === null || total === 0) return false
 
   // Check regular bust conditions
-  if (isBust(props.currentScore, [parsedScore.value])) return true
+  if (isBust(props.currentScore, [total])) return true
 
   // Check if reaching 0 without double (which will be treated as bust)
   if (projectedScore.value === 0 && !lastIsDouble.value) return true
@@ -133,21 +234,64 @@ const wouldBust = computed(() => {
 })
 
 const projectedScore = computed(() => {
-  if (parsedScore.value === null) return props.currentScore
-  return props.currentScore - parsedScore.value
+  const total = perDartMode.value ? dartTotal.value : parsedScore.value
+  if (total === null) return props.currentScore
+  return props.currentScore - total
 })
 
 const isValid = computed(() => {
-  if (parsedScore.value === null || validationError.value) return false
+  if (validationError.value) return false
 
-  // If reaching exactly 0, must confirm it was a double (or accept bust)
-  // We allow submission either way - the game logic will handle it as win or bust
-  return true
+  if (perDartMode.value) {
+    // At least one dart must have a value
+    const hasValue = parsedDart1.value !== null || parsedDart2.value !== null || parsedDart3.value !== null
+    return hasValue
+  } else {
+    if (parsedScore.value === null) return false
+    return true
+  }
 })
+
+function toggleEntryMode() {
+  perDartMode.value = !perDartMode.value
+
+  // Clear all inputs when switching modes
+  scoreInput.value = ''
+  parsedScore.value = null
+  dart1Input.value = ''
+  dart2Input.value = ''
+  dart3Input.value = ''
+  parsedDart1.value = null
+  parsedDart2.value = null
+  parsedDart3.value = null
+  lastIsDouble.value = false
+
+  // Focus appropriate input
+  nextTick(() => {
+    if (perDartMode.value) {
+      dart1InputRef.value?.focus()
+    } else {
+      scoreInputRef.value?.focus()
+    }
+  })
+}
 
 function handleInput() {
   const result = parseSlang(scoreInput.value)
   parsedScore.value = result
+}
+
+function handleDartInput(dartNumber: 1 | 2 | 3) {
+  const inputValue = dartNumber === 1 ? dart1Input.value : dartNumber === 2 ? dart2Input.value : dart3Input.value
+  const result = parseSlang(inputValue)
+
+  if (dartNumber === 1) {
+    parsedDart1.value = result
+  } else if (dartNumber === 2) {
+    parsedDart2.value = result
+  } else {
+    parsedDart3.value = result
+  }
 }
 
 function applyShortcut(value: number) {
@@ -156,18 +300,31 @@ function applyShortcut(value: number) {
 }
 
 async function handleSubmit() {
-  if (!isValid.value || parsedScore.value === null) return
+  if (!isValid.value) return
 
-  emit('score-entered', parsedScore.value, lastIsDouble.value)
+  const totalScore = perDartMode.value ? dartTotal.value : parsedScore.value
+  if (totalScore === null) return
 
-  // Clear input
-  scoreInput.value = ''
-  parsedScore.value = null
+  emit('score-entered', totalScore, lastIsDouble.value)
+
+  // Clear inputs
+  if (perDartMode.value) {
+    dart1Input.value = ''
+    dart2Input.value = ''
+    dart3Input.value = ''
+    parsedDart1.value = null
+    parsedDart2.value = null
+    parsedDart3.value = null
+    await nextTick()
+    dart1InputRef.value?.focus()
+  } else {
+    scoreInput.value = ''
+    parsedScore.value = null
+    await nextTick()
+    scoreInputRef.value?.focus()
+  }
+
   lastIsDouble.value = false
-
-  // Refocus input after clearing so user can immediately enter next score
-  await nextTick()
-  scoreInputRef.value?.focus()
 }
 
 function handleUndo() {
@@ -176,6 +333,41 @@ function handleUndo() {
 </script>
 
 <style scoped>
+.score-entry__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.score-entry__toggle-btn {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: 0.875rem;
+  font-weight: var(--typography-font-weight-semibold);
+  border: 2px solid var(--color-primary);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 32px;
+  min-width: 80px;
+}
+
+.score-entry__toggle-btn:hover {
+  background: var(--color-primary-tint);
+}
+
+.score-entry__toggle-btn[aria-pressed="true"] {
+  background: var(--color-primary);
+  color: white;
+}
+
+.score-entry__toggle-btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
 .score-entry__current {
   font-size: 1.5rem;
   font-weight: var(--typography-font-weight-semibold);
@@ -247,6 +439,46 @@ function handleUndo() {
   margin: 0;
 }
 
+.score-entry__per-dart {
+  margin-bottom: var(--spacing-md);
+}
+
+.score-entry__dart-inputs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+}
+
+.score-entry__dart-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.score-entry__dart-label {
+  font-size: 0.875rem;
+  font-weight: var(--typography-font-weight-semibold);
+  color: var(--color-text-secondary);
+}
+
+.score-entry__input--small {
+  padding: var(--spacing-sm);
+  font-size: 1rem;
+  text-align: center;
+}
+
+.score-entry__total {
+  font-size: 1.25rem;
+  font-weight: var(--typography-font-weight-bold);
+  text-align: center;
+  color: var(--color-primary);
+  padding: var(--spacing-sm);
+  background: var(--color-primary-tint);
+  border-radius: 8px;
+  margin: 0;
+}
+
 .score-entry__actions {
   display: flex;
   flex-direction: column;
@@ -255,5 +487,20 @@ function handleUndo() {
 
 .score-entry__actions .btn {
   min-height: 44px;
+}
+
+@media (max-width: 480px) {
+  .score-entry__dart-inputs {
+    gap: var(--spacing-xs);
+  }
+
+  .score-entry__dart-label {
+    font-size: 0.75rem;
+  }
+
+  .score-entry__input--small {
+    padding: var(--spacing-xs);
+    font-size: 0.875rem;
+  }
 }
 </style>

@@ -349,7 +349,7 @@ async function handleAbandonGame() {
 
 .home-view__game-status--abandoned {
   background-color: var(--color-neutral-black20);
-  color: var(--color-text-secondary);
+  color: #121212;
 }
 
 .home-view__game-winner {
